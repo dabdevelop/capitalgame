@@ -78,7 +78,7 @@
                       </li>
                       <li><a href="https://nano.nebulas.io" target="_blank">NAS nano</a>
                       </li>
-                      <li><a href="#" target="_blank">项目GitHub源码</a>
+                      <li><a href="https://github.com/dabdevelop/capitalgame" target="_blank">项目GitHub源码</a>
                       </li>
                       <li><a href="#" target="_blank" id="contract">合约地址</a>
                       </li>
@@ -500,7 +500,7 @@
                     clearInterval(task);
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败!",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei!",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -540,14 +540,14 @@
         params.from = account;
         params.to = dappAddress;
         params.gasPrice = Utils.toBigNumber(1000000);
-        params.gasLimit = Utils.toBigNumber(2000000);
+        params.gasLimit = Utils.toBigNumber(20000000);
         params.value = value;
         // prepare contract
         params.contract = {
           "function": fun,
           "args": JSON.stringify(args)
         };
-        console.log(params.from.getAddressString() + ' call ' + params.to + ' @ ' + fun + ": " + JSON.stringify(args) + ' with value: ' + value);
+//        console.log(params.from.getAddressString() + ' call ' + params.to + ' @ ' + fun + ": " + JSON.stringify(args) + ' with value: ' + value);
         callback(params);
       }
 
@@ -616,7 +616,7 @@
       function callNebPay(fun, args, value, callback) {
         $.gritter.add({
           title: "新消息",
-          text: "正在调用钱包, 请确认!",
+          text: "正在调用钱包, 请将GasLimit手动设置为2M wei并确认操作!",
           time: "",
           class_name: "primary clean"
         });
@@ -625,10 +625,6 @@
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
               showQRCode: false
-            },
-            goods: {
-              name: "test",
-              desc: "test goods"
             },
             callback:"https://pay.nebulas.io/api/mainnet/pay",
             listener: function (resp) {
@@ -686,7 +682,7 @@
                 } else if(resp.status == 0){
                   $.gritter.add({
                     title: "新消息",
-                    text: "交易失败!",
+                    text: "交易失败, 请将GasLimit手动设置为2M wei!",
                     time: "",
                     class_name: "danger clean"
                   });
@@ -1163,6 +1159,15 @@
             time: "",
             class_name: "warning clean"
           });
+        } else if(cgtBalance > 0 && burnAmount > cgtBalance){
+          $("#form-burn").prop('hidden', true);
+          wait = setInterval(clearWait, 500);
+          $.gritter.add({
+            title: "新消息",
+            text: "您输入的销毁数量超过了您的余额, 您的CGT余额为" + cgtBalance,
+            time: "",
+            class_name: "warning clean"
+          });
         } else {
           var fun = 'burn';
           var args = [];
@@ -1205,6 +1210,15 @@
             time: "",
             class_name: "warning clean"
           })
+        } else if(nasBalance > 0 && value > nasBalance){
+          $("#form-buy").prop('hidden', true);
+          wait = setInterval(clearWait, 500);
+          $.gritter.add({
+            title: "新消息",
+            text: "您输入的买入金额超过了您的NAS余额, 您的NAS余额为" + nasBalance,
+            time: "",
+            class_name: "warning clean"
+          });
         } else {
           var fun = 'buy';
           var args = [];
@@ -1243,6 +1257,15 @@
           $.gritter.add({
             title: "新消息",
             text: "您输入的卖出数量有误, 最大卖出数量为1000",
+            time: "",
+            class_name: "warning clean"
+          });
+        } else if(cgtBalance > 0 && sellAmount > cgtBalance){
+          $("#form-sell").prop('hidden', true);
+          wait = setInterval(clearWait, 500);
+          $.gritter.add({
+            title: "新消息",
+            text: "您输入的卖出数量超过了您的余额, 您的CGT余额为" + cgtBalance,
             time: "",
             class_name: "warning clean"
           });
@@ -1420,6 +1443,8 @@
 
       var address = localStorage.getItem('address') || '';
       var addressWallet = '';
+      var nasBalance = -1;
+      var cgtBalance = -1;
 
       function loadPlayerAccount(){
         window.addEventListener('message', function (e) {
@@ -1429,7 +1454,8 @@
             localStorage.setItem('address', address);
             try {
               neb.api.getAccountState(address).then(function(accstate){
-                $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2)+ ' NAS');
+                $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
+                nasBalance = Unit.fromBasic(accstate.balance, "nas").toFixed(2);
                 var fun = 'balanceOf';
                 var args = [];
 
@@ -1443,6 +1469,7 @@
                     try{
                       var balance = JSON.parse(result);
                       $("#accountTokenBalance").html(' ' + Unit.fromBasic(balance, "nas").toFixed(2) + ' CGT');
+                      cgtBalance = Unit.fromBasic(balance, "nas").toFixed(2);
                       var fun = 'player';
                       var args = [];
                       args.push(address);
