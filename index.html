@@ -41,7 +41,7 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img src="assets/img/avatar.png" alt="Avatar"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img src="assets/img/avatar0.png" alt="Avatar" id="avatarImg"><span class="user-name">Player #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
                     <div class="user-name"> Player #</div>
@@ -1033,7 +1033,7 @@
 
         listNum = Math.min(20, sellOrder.length);
         for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
-          var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 6 + 1) +'.png';
+          var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 7) +'.png';
           var accountUrl;
           if(chainId == 1){
             accountUrl = 'https://explorer.nebulas.io/#/address/' +sellOrder[i].account;
@@ -1210,6 +1210,7 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
+                              $("#avatarImg").html("assets/img/avatar" + player.playerId % 7 + ".png");
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
