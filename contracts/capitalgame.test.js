@@ -19,9 +19,12 @@ var neb = new Nebulas.Neb();
 //neb.setRequest(new Nebulas.HttpRequest("http://localhost:8685"));
 neb.setRequest(new Nebulas.HttpRequest("https://testnet.nebulas.io"));
 var chainID = 1001;
-var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
 
-//var sourceAccount = new Account("badfe9a04d91b2656ca5ea22d70b05f2df07929ddebb788e6870b5a155665611");
+// n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2
+//var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
+
+// n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh
+var sourceAccount = new Account("badfe9a04d91b2656ca5ea22d70b05f2df07929ddebb788e6870b5a155665611");
 
 var globalParams = {
     account: sourceAccount,
@@ -57,7 +60,7 @@ var batch = false;
 var usePlayer = false;
 
 
-deploy();
+//deploy();
 //
 //testSell(10);
 //testBurn(0.01);
@@ -93,6 +96,11 @@ deploy();
 //testPlayer("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2");
 //testTransfer("n1HhV62oW2WNhWMA9gddgiR7Vuopjqh1onp", 1000 * Math.pow(10, 18));
 
+
+//testTransfer("n1N7RTHqYBysTeqNT85akGxk27QRvPz4ctu", 5.555 * Math.pow(10, 18));
+testTransferFrom("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2", "n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh", 1.555 * Math.pow(10, 18));
+//testApprove("n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh", 0, 5.555 * Math.pow(10, 18));
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -102,13 +110,31 @@ function usePlayerAccount(){
 }
 
 function testTransfer(to, amount){
-    batch = true;
     var fun = 'transfer';
     var args = [];
     args.push(to);
     args.push(amount);
     call(fun, args, 0, function(){});
 }
+
+function testTransferFrom(from, to, amount){
+    var fun = 'transferFrom';
+    var args = [];
+    args.push(from);
+    args.push(to);
+    args.push(amount);
+    call(fun, args, 0, function(){});
+}
+
+function testApprove(spender, currentValue, value){
+    var fun = 'approve';
+    var args = [];
+    args.push(spender);
+    args.push(currentValue);
+    args.push(value);
+    call(fun, args, 0, function(){});
+}
+
 
 function testBatchCombine(times){
     batch = true;
@@ -395,11 +421,14 @@ function innerCall(fun, args, value, callback) {
     if (!globalParams.account) {
         return;
     }
-    if(usePlayerAccount()){
-        params.from = new Account(players[getRandomInt(0, players.length - 1)]);
-    } else {
-        params.from = new Account(globalParams.accounts[getRandomInt(0, accounts.length - 1)]);
-    }
+
+    //if(usePlayerAccount()){
+    //    params.from = new Account(players[getRandomInt(0, players.length - 1)]);
+    //} else {
+    //    params.from = new Account(globalParams.accounts[getRandomInt(0, accounts.length - 1)]);
+    //}
+
+    params.from = globalParams.account;
 
     params.to = contract;
     params.gasPrice = Utils.toBigNumber(1000000);

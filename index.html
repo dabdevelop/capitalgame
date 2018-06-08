@@ -1087,7 +1087,7 @@
         var data;
         var listNum = Math.min(20, buyOrder.length);
         for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
-          var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 6 + 1) +'.png';
+          var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
           var accountUrl;
           if(chainId == 1){
             accountUrl = 'https://explorer.nebulas.io/#/address/' +buyOrder[i].account;
@@ -1486,7 +1486,7 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
-                              $("#avatarImg").html("assets/img/avatar" + player.playerId % 7 + ".png");
+                              $("#avatarImg").prop('src', "assets/img/avatar" + player.playerId % 7 + ".png");
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
