@@ -45,8 +45,11 @@
                     <div class="user-name"> Player #</div>
                     <div class="user-position online" id="showWalletStatus">已安装星云插件钱包</div>
                   </div>
-                  <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户余额<b id="accountBalance"></b></a>
-                  <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> CGT余额<b id="accountTokenBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约储备金<b id="contractBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约保证金<b id="contractInsureBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约CGT余额<b id="contractTokenBalance"></b></a>
                   <a class="dropdown-item" onclick="login()"><span class="icon mdi mdi-key"></span> 登录</a>
                 </div>
               </li>
@@ -970,6 +973,7 @@
             try{
               var balance = JSON.parse(result);
               $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+              $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
               getInsureBalance()
             }catch (err){
               //result is the error message
@@ -1049,10 +1053,6 @@
           });
 
         });
-
-
-
-
       }
 
       function getInsureBalance(){
@@ -1067,10 +1067,37 @@
             try{
               var balance = JSON.parse(result);
               $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+              $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
               setOrder();
               App.dashboard();
               var e = $(".main-content");
               e.removeClass("be-loading-active");
+              getContractTokenBalance();
+            }catch (err){
+              //result is the error message
+              console.log("error:" + err.message)
+            }
+          }).catch(function (err) {
+            console.log("error:" + err.message)
+          });
+
+        });
+      }
+
+      function getContractTokenBalance(){
+        var fun = 'balanceOf';
+        var args = [];
+        args.push(dappAddress);
+        innerCall(fun, args, 0, function(params){
+          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+            console.log(resp);
+            var result = resp.result;
+            if(result === 'null' || result === '""'){
+              return;
+            }
+            try{
+              var balance = JSON.parse(result);
+              $("#contractTokenBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' CGT');
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
