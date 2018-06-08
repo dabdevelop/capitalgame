@@ -622,6 +622,7 @@
           refresh();
         }
 
+        var inQuery = false;
 
         $.gritter.add({
           title: "新消息",
@@ -638,28 +639,31 @@
             callback:"https://pay.nebulas.io/api/mainnet/pay",
             listener: function (resp) {
               if(window.mobileAndTabletcheck()){
-                retryQueryTime = 10;
-                intervalQuery = setInterval(function () {
-                  recheckMobileTransactionReceipt(serialNumber, function(resp){
-                    if(resp.status == 1){
-                      $.gritter.add({
-                        title: "新消息",
-                        text: "交易成功!",
-                        time: "",
-                        class_name: "success clean"
-                      });
-                      callback && callback(resp);
-                    } else if(resp.status == 0){
-                      $.gritter.add({
-                        title: "新消息",
-                        text: "交易失败, 请将GasLimit手动设置为2M wei!",
-                        time: "",
-                        class_name: "danger clean"
-                      });
-                      wait = setInterval(clearWait, 2000);
-                    }
-                  });
-                }, 3500);
+                if(!inQuery){
+                  inQuery = true;
+                  retryQueryTime = 10;
+                  intervalQuery = setInterval(function () {
+                    recheckMobileTransactionReceipt(serialNumber, function(resp){
+                      if(resp.status == 1){
+                        $.gritter.add({
+                          title: "新消息",
+                          text: "交易成功!",
+                          time: "",
+                          class_name: "success clean"
+                        });
+                        callback && callback(resp);
+                      } else if(resp.status == 0){
+                        $.gritter.add({
+                          title: "新消息",
+                          text: "交易失败, 请将GasLimit手动设置为2M wei!",
+                          time: "",
+                          class_name: "danger clean"
+                        });
+                        wait = setInterval(clearWait, 2000);
+                      }
+                    });
+                  }, 3500);
+                }
                 return;
               }
               if (resp !== 'Error: Transaction rejected by user') {
@@ -694,7 +698,8 @@
           var wait2;
           function clearWait2() {
             clearInterval(wait2);
-            if(window.mobileAndTabletcheck()){
+            if(window.mobileAndTabletcheck() && !inQuery){
+              inQuery = true;
               retryQueryTime = 15;
               intervalQuery = setInterval(function () {
                 recheckMobileTransactionReceipt(serialNumber, function(resp){
@@ -720,8 +725,8 @@
             }
           }
 
-          wait2 = setInterval(clearWait2, 2000);
-          
+          wait2 = setInterval(clearWait2, 5000);
+
         });
       }
 
