@@ -43,7 +43,7 @@
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
                     <div class="user-name"> Player #</div>
-                    <div class="user-position online" id="showWalletStatus">已安装星云插件钱包</div>
+                    <div class="user-position offline" id="showWalletStatus">未检测到星云插件钱包</div>
                   </div>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
@@ -1504,6 +1504,7 @@
           });
           return false;
         }
+        $("#showWalletStatus").removeClass('offline').addClass('online').html('已安装星云插件钱包');
         return true;
       }
 
