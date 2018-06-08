@@ -117,7 +117,7 @@
                 <div id="spark1" class="chart sparkline"><canvas width="85" height="35" style="display: inline-block; width: 85px; height: 35px; vertical-align: top;"></canvas></div>
                 <div class="data-info">
                   <div class="desc">玩家数量</div>
-                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="0" class="number" id="playerNum">0</span>
+                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-start="0" data-end="0" class="number" id="playerNum">0</span>
                   </div>
                 </div>
               </div>
@@ -127,7 +127,7 @@
                 <div id="spark2" class="chart sparkline"><canvas width="81" height="35" style="display: inline-block; width: 81px; height: 35px; vertical-align: top;"></canvas></div>
                 <div class="data-info">
                   <div class="desc">CGT流通量</div>
-                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="0" class="number" id="circulation">0</span>
+                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-start="0" data-end="0" class="number" id="circulation">0</span>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@
                 <div id="spark3" class="chart sparkline"><canvas width="85" height="35" style="display: inline-block; width: 85px; height: 35px; vertical-align: top;"></canvas></div>
                 <div class="data-info">
                   <div class="desc">CGT成交量</div>
-                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="0" class="number" id="volume">0</span>
+                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-start="0" data-end="0" class="number" id="volume">0</span>
                   </div>
                 </div>
               </div>
@@ -147,7 +147,7 @@
                 <div id="spark4" class="chart sparkline"><canvas width="85" height="35" style="display: inline-block; width: 85px; height: 35px; vertical-align: top;"></canvas></div>
                 <div class="data-info">
                   <div class="desc">CGT总市值(NAS)</div>
-                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="0" class="number" id="marketCap">0</span>
+                  <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-start="0" data-end="0" class="number" id="marketCap">0</span>
                   </div>
                 </div>
               </div>
@@ -564,7 +564,13 @@
       };
 
       function refresh(){
-        window.location.reload()
+//        window.location.reload()
+        $.gritter.add({
+          title: "新消息",
+          text: "交易数据将在几秒内自动更新",
+          time: "",
+          class_name: "primary clean"
+        });
       }
 
 
@@ -726,7 +732,7 @@
         });
       }
 
-      function getPlayerNum(){
+      function getPlayerNum(callback){
         var fun = 'playerNum';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -737,8 +743,8 @@
             }
             try{
               result = JSON.parse(result);
-              $("#playerNum").attr('data-end', parseInt(result));
-              getCirculation();
+
+              callback(result);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -752,7 +758,7 @@
 
       }
 
-      function getCirculation(){
+      function getCirculation(callback){
         var fun = 'circulation';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -763,11 +769,7 @@
             }
             try{
               result = JSON.parse(result);
-              circulation = parseInt(Unit.fromBasic(result, 'nas'));
-              $("#circulation").attr('data-end', circulation);
-              $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
-              $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
-              getVolume();
+              callback(result);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -779,21 +781,6 @@
 
         });
       }
-
-      var circulation = 0;
-      var volume = 0;
-      var lastOrderId = 0;
-      var price = 0;
-      var priceLow = 0;
-      var priceHigh = 0;
-
-      var buyPriceTrend = [];
-      var sellPriceTrend = [];
-      var burnPriceTrend = [];
-      var buyOrder = [];
-      var sellOrder = [];
-      var burnOrder = [];
-
 
       function getBuyVolumeByIndex(index, callback){
         var fun = 'getBuyOrder';
@@ -839,7 +826,7 @@
         });
       }
 
-      function getVolume(){
+      function geteBuyVolume(callback){
         var fun = 'buyOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -856,7 +843,7 @@
                 if(i <= index){
                   getBuyVolumeByIndex(i, f);
                 } else {
-                  getSellVolume();
+                  callback()
                 }
               };
 
@@ -898,7 +885,7 @@
         });
       }
 
-      function getSellVolume(){
+      function getSellVolume(callback){
         var fun = 'sellOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -915,7 +902,7 @@
                 if(i <= index){
                   getSellVolumeByIndex(i, f);
                 } else {
-                  getBurnVolume();
+                  callback();
                 }
               };
               getSellVolumeByIndex(i, f);
@@ -955,7 +942,7 @@
         });
       }
 
-      function getBurnVolume(){
+      function getBurnVolume(callback){
         var fun = 'burnOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -973,9 +960,7 @@
                 if(i <= index){
                   getBurnVolumeByIndex(i, f);
                 } else {
-                  $("#volume").attr('data-end', parseInt(volume));
-                  $('#marketCap').attr('data-end', parseInt(price * $("#circulation").attr('data-end')));
-                  getBalance();
+                  callback();
                 }
               };
               getBurnVolumeByIndex(i, f);
@@ -990,7 +975,7 @@
         });
       }
 
-      function getBalance(){
+      function getBalance(callback){
         var fun = 'balance';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -1001,9 +986,7 @@
             }
             try{
               var balance = JSON.parse(result);
-              $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-              $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
-              getInsureBalance()
+              callback(balance);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1084,7 +1067,7 @@
         });
       }
 
-      function getInsureBalance(){
+      function getInsureBalance(callback){
         var fun = 'insureBalance';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -1095,13 +1078,7 @@
             }
             try{
               var balance = JSON.parse(result);
-              $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-              $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
-              setOrder();
-              App.dashboard();
-              var e = $(".main-content");
-              e.removeClass("be-loading-active");
-              getContractTokenBalance();
+              callback(balance);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1126,7 +1103,7 @@
             }
             try{
               var balance = JSON.parse(result);
-              $("#contractTokenBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' CGT');
+              $("#contractTokenBalance").html(' ' + parseFloat(Unit.fromBasic(balance, 'nas').toString(10)).toFixed(2) + ' CGT');
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1142,6 +1119,7 @@
         var skeleton;
         var data;
         var listNum = Math.min(20, buyOrder.length);
+        $("#buyOrder").html('');
         for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
           var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
           var accountUrl;
@@ -1157,6 +1135,7 @@
         }
 
         listNum = Math.min(20, sellOrder.length);
+        $("#sellOrder").html('');
         for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
           var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 7) +'.png';
           var accountUrl;
@@ -1616,15 +1595,122 @@
         }, "*");
       }
 
+      var playerNum = 0
+      var circulation = 0;
+      var volume = 0;
+      var lastOrderId = 0;
+      var price = 0;
+      var priceLow = 0;
+      var priceHigh = 0;
+
+      var buyPriceTrend = [];
+      var sellPriceTrend = [];
+      var burnPriceTrend = [];
+      var buyOrder = [];
+      var sellOrder = [];
+      var burnOrder = [];
+
       function load(){
         var e = $(".main-content");
         e.length && (e.addClass("be-loading-active"));
         getPrice();
         loadPlayerAccount();
-        getPlayerNum();
+        getContractTokenBalance();
+        getPlayerNum(function(result){
+          playerNum = parseInt(result);
+          $("#playerNum").attr('data-end', playerNum);
+          getCirculation(function(result){
+            circulation = parseInt(Unit.fromBasic(result, 'nas'));
+            $("#circulation").attr('data-end', circulation);
+            $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
+            $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
+            geteBuyVolume(function(){
+              getSellVolume(function(){
+                getBurnVolume(function(){
+                  $("#volume").attr('data-end', parseInt(volume));
+                  $('#marketCap').attr('data-end', parseInt(price * circulation));
+                  getBalance(function(balance){
+                    $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                    $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    getInsureBalance(function(balance){
+                      $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                      $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      setOrder();
+                      App.dashboard();
+                      var e = $(".main-content");
+                      e.removeClass("be-loading-active");
+                      setInterval(refreshData, 10000);
+                    })
+                  });
+                });
+              });
+            });
+          });
+        });
       }
 
       load();
+
+      function refreshData(){
+        // Wait
+        var prePlayerNum = parseInt(playerNum);
+        var preCirculation = parseInt(circulation);
+        var preVolume = parseInt(volume);
+        var preMarketCap = parseInt(price * circulation);
+
+        playerNum = 0;
+        circulation = 0;
+        volume = 0;
+        lastOrderId = 0;
+        price = 0;
+        priceLow = 0;
+        priceHigh = 0;
+
+        buyPriceTrend = [];
+        sellPriceTrend = [];
+        burnPriceTrend = [];
+        buyOrder = [];
+        sellOrder = [];
+        burnOrder = [];
+
+        getPrice();
+        loadPlayerAccount();
+        getContractTokenBalance();
+        getPlayerNum(function(result){
+          playerNum = parseInt(result);
+          $("#playerNum").attr('data-end', playerNum);
+          getCirculation(function(result){
+            circulation = parseInt(Unit.fromBasic(result, 'nas'));
+            $("#circulation").attr('data-end', circulation);
+            $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
+            $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
+            geteBuyVolume(function(){
+              getSellVolume(function(){
+                getBurnVolume(function(){
+                  $("#volume").attr('data-end', parseInt(volume));
+                  $('#marketCap').attr('data-end', parseInt(price * circulation));
+                  getBalance(function(balance){
+                    $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                    $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    getInsureBalance(function(balance){
+                      $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                      $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      setOrder();
+                      $('[data-toggle="counter"]').each(function (e, t) {
+                        var i = $(this), a = "", o = "", n = prePlayerNum, r = preCirculation, l = preVolume, s = preMarketCap;
+                        i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
+                          suffix: o,
+                          prefix: a
+                        }).start()});
+                    })
+                  });
+                });
+              });
+            });
+          });
+        });
+
+      };
 
       var isWx = Boolean(navigator.userAgent.match(/MicroMessenger/ig));
       if(isWx){
