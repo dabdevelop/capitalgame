@@ -1213,8 +1213,9 @@
       }
 
       function login(){
-        if(window.mobileAndTabletcheck()){
+        if(!checkWallet()){
           $("#form-login").modal('show');
+          $("#loginAccountAddress").val(address);
         } else {
           if (checkNASWallet()) {
             var fun = 'login';
@@ -1246,7 +1247,6 @@
             class_name: "success clean"
           })
         } else{
-          $("#loginAccountAddress").val('');
           $.gritter.add({
             title: "新消息",
             text: "您输入的账户地址有误, 请重新输入",
@@ -1646,7 +1646,6 @@
             }
 
           }
-
 
         });
 
