@@ -376,6 +376,7 @@
                 time: "",
                 class_name: "warning clean"
               });
+              return true;
             } else{
               $.gritter.add({
                 title: "新消息",
@@ -384,9 +385,8 @@
                 class_name: "warning clean"
               });
             }
-
+            return false;
           });
-          return false;
         }
         return true;
       }
@@ -621,8 +621,6 @@
               });
             }, 3500);
           }
-
-
         });
       }
 
