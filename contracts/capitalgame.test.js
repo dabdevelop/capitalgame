@@ -17,14 +17,16 @@ var BigNumber = require('bignumber.js');
 
 var neb = new Nebulas.Neb();
 //neb.setRequest(new Nebulas.HttpRequest("http://localhost:8685"));
-neb.setRequest(new Nebulas.HttpRequest("https://testnet.nebulas.io"));
-var chainID = 1001;
+neb.setRequest(new Nebulas.HttpRequest("https://mainnet.nebulas.io"));
+//neb.setRequest(new Nebulas.HttpRequest("https://testnet.nebulas.io"));
+var chainID = 1;
+//var chainID = 1001;
 
 // n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2
-//var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
+var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
 
 // n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh
-var sourceAccount = new Account("badfe9a04d91b2656ca5ea22d70b05f2df07929ddebb788e6870b5a155665611");
+//var sourceAccount = new Account("badfe9a04d91b2656ca5ea22d70b05f2df07929ddebb788e6870b5a155665611");
 
 var globalParams = {
     account: sourceAccount,
@@ -33,7 +35,8 @@ var globalParams = {
 
 var players = [];
 
-var contract = 'n235Bs9WMYYQAuo7w3F8XrhX5DCtWbSQ6cY';
+var contract = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
+//var contract = 'n235Bs9WMYYQAuo7w3F8XrhX5DCtWbSQ6cY';
 console.log(sourceAccount.getAddressString());
 
 function deploy(){
@@ -98,7 +101,7 @@ var usePlayer = false;
 
 
 //testTransfer("n1N7RTHqYBysTeqNT85akGxk27QRvPz4ctu", 5.555 * Math.pow(10, 18));
-testTransferFrom("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2", "n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh", 1.555 * Math.pow(10, 18));
+//testTransferFrom("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2", "n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh", 1.555 * Math.pow(10, 18));
 //testApprove("n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh", 0, 5.555 * Math.pow(10, 18));
 
 function getRandomInt(min, max) {

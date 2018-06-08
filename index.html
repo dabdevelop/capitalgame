@@ -420,10 +420,13 @@
       var Utils = Nebulas.Utils;
       var Unit = Nebulas.Unit;
 
-      var chainId = 1001;
-//      var rpcURL = "http://localhost:8685";
-      var rpcURL = "https://testnet.nebulas.io";
-      var dappAddress = 'n235Bs9WMYYQAuo7w3F8XrhX5DCtWbSQ6cY';
+      //      var rpcURL = "https://testnet.nebulas.io";
+      //      var dappAddress = 'n235Bs9WMYYQAuo7w3F8XrhX5DCtWbSQ6cY';
+      //      var chainId = 1001;
+      //      var rpcURL = "http://localhost:8685";
+      var rpcURL = "https://mainnet.nebulas.io";
+      var chainId = 1;
+      var dappAddress = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
 
       if(chainId == 1){
         $("#contract").prop('href','https://explorer.nebulas.io/#/address/'+ dappAddress +'#/').prop('target', '_blank_');
