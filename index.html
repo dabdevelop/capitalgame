@@ -580,13 +580,13 @@
         retryQueryTime --;
 
         getMobileTransactionReceipt(serialNumber, function (resp) {
-          $.gritter.add({
-            title: "新消息",
-            text: "正在查询交易状态!",
-            time: "",
-            class_name: "primary clean"
-          });
           if (resp instanceof Object) {
+            $.gritter.add({
+              title: "新消息",
+              text: "正在查询交易状态!",
+              time: "",
+              class_name: "primary clean"
+            });
             if(retryQueryTime <= 0){
               clearInterval(intervalQuery);
               if(resp.code == 1){
