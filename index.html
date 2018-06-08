@@ -50,7 +50,7 @@
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约储备金<b id="contractBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约保证金<b id="contractInsureBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约CGT余额<b id="contractTokenBalance"></b></a>
-                  <a class="dropdown-item" onclick="login()"><span class="icon mdi mdi-key"></span> 登录</a>
+                  <a class="dropdown-item" onclick="login()" id="loginbtn"><span class="icon mdi mdi-key"></span> 登陆</a>
                 </div>
               </li>
             </ul>
@@ -377,6 +377,46 @@
               </div>
             </div>
           </div>
+
+
+          <div id="form-login" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">请输入您的账户地址</h4>
+                </div>
+                <div class="modal-body">
+                  <label>账户地址</label>
+                  <input type="text" class="form-control input-group-sm" id="loginAccountAddress">
+                </div>
+                <div class="modal-footer"  style="padding-top: 10px">
+                  <br>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary" onclick="setLoginAccount()">确定</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+
+          <!--&lt;!&ndash; Nifty Modal&ndash;&gt;-->
+          <!--<div id="form-login2" class="modal fade" tabindex="-1" role="dialog">-->
+            <!--<div class="modal-content">-->
+              <!--<div class="modal-header modal-header-colored">-->
+                <!--<h3 class="modal-title">请输入您的账户地址</h3>-->
+                <!--<button type="button" data-dismiss="modal" aria-hidden="true" class="close modal-close"><span class="mdi mdi-close"></span></button>-->
+              <!--</div>-->
+              <!--<div class="modal-body form">-->
+                <!--<div class="form-group">-->
+                  <!--<label>账户地址</label>-->
+                  <!--<input type="text" class="form-control" id="loginAccountAddress">-->
+                <!--</div>-->
+              <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!--<button type="button" data-dismiss="modal" class="btn btn-success modal-close" onclick="setLoginAccount()">确定</button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
         </div>
       </div>
@@ -1172,20 +1212,47 @@
         }
       }
 
-
       function login(){
-        if (checkNASWallet()) {
-          var fun = 'login';
-          var args = [];
-          callNebPay(fun, args, 0, function (resp) {
-            localStorage.setItem('address', resp.from);
-            var wait;
-            function clearWait() {
-              clearInterval(wait);
-              refresh();
-            }
-            wait = setInterval(clearWait, 2000);
-          });
+        if(window.mobileAndTabletcheck()){
+          $("#form-login").modal('show');
+        } else {
+          if (checkNASWallet()) {
+            var fun = 'login';
+            var args = [];
+            callNebPay(fun, args, 0, function (resp) {
+              localStorage.setItem('address', resp.from);
+              var wait;
+              function clearWait() {
+                clearInterval(wait);
+                refresh();
+              }
+              wait = setInterval(clearWait, 2000);
+            });
+          }
+        }
+      }
+
+      function setLoginAccount(){
+
+        if(Account.isValidAddress($("#loginAccountAddress").val())){
+          loadPlayerAccount();
+          address = $("#loginAccountAddress").val();
+          localStorage.setItem('address', address);
+          $("#form-login").modal('hide');
+          $.gritter.add({
+            title: "新消息",
+            text: "您的账户登陆成功",
+            time: "",
+            class_name: "success clean"
+          })
+        } else{
+          $("#loginAccountAddress").val('');
+          $.gritter.add({
+            title: "新消息",
+            text: "您输入的账户地址有误, 请重新输入",
+            time: "",
+            class_name: "warning clean"
+          })
         }
       }
 
@@ -1507,11 +1574,17 @@
       var cgtBalance = -1;
 
       function loadPlayerAccount(){
+        console.log(address);
         window.addEventListener('message', function (e) {
           if (e.data.data && !!e.data.data.account) {
             addressWallet = e.data.data.account;
-            address = addressWallet;
-            localStorage.setItem('address', address);
+            if(checkWallet()){
+              address = addressWallet;
+              localStorage.setItem('address', address);
+            }
+          }
+
+          if(Account.isValidAddress(address)){
             try {
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
@@ -1557,7 +1630,6 @@
 
                       });
 
-
                     }catch (err){
                       //result is the error message
                       console.log("error:" + err.message)
@@ -1575,6 +1647,7 @@
 
           }
 
+
         });
 
         window.postMessage({
@@ -1588,9 +1661,7 @@
         var e = $(".main-content");
         e.length && (e.addClass("be-loading-active"));
         getPrice();
-        if(checkWallet()){
-          loadPlayerAccount();
-        }
+        loadPlayerAccount();
         getPlayerNum();
       }
 
