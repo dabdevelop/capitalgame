@@ -1933,14 +1933,14 @@ App = function () {
             canvasRender: !0,
             cColor: "#FFFFFF"
         }, {
-            data: [[1, 20], [2, 40], [3, 25], [4, 45], [5, 25], [6, 50], [7, 35], [8, 60], [9, 30]],
+            data: [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0]],
             showLabels: !0,
             label: "Plans",
             labelPlacement: "below",
             canvasRender: !0,
             cColor: "#FFFFFF"
         }, {
-            data: [[1, 35], [2, 15], [3, 20], [4, 30], [5, 15], [6, 18], [7, 28], [8, 10], [9, 30]],
+            data: [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0]],
             showLabels: !0,
             label: "Services",
             labelPlacement: "below",
@@ -1990,8 +1990,8 @@ App = function () {
             }).fadeIn(200) : $(".tooltip-chart").hide()
         }), $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
             label: "Services",
-            data: 33
-        }, {label: "Standard Plans", data: 33}, {label: "Services", data: 33}], {
+            data: balance
+        }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
             series: {
                 pie: {
                     radius: .75,

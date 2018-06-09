@@ -1598,10 +1598,9 @@
       var playerNum = 0;
       var circulation = 0;
       var volume = 0;
-      var lastOrderId = 0;
       var price = 0;
-      var priceLow = 0;
-      var priceHigh = 0;
+      var balance = 0;
+      var insureBalance = 0;
 
       var buyPriceTrend = [];
       var sellPriceTrend = [];
@@ -1629,17 +1628,19 @@
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
-                  getBalance(function(balance){
-                    $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                  getBalance(function(_balance){
+                    balance = parseInt(Unit.fromBasic(_balance, 'nas'));
+                    $("#balance").html(balance);
                     try{
-                      $("#contractBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + " NAS");
+                      $("#contractBalance").html(' ' + balance + " NAS");
                     } catch (e){
                       console.log(e)
                     }
                     getInsureBalance(function(balance){
                       try{
-                        $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                        $("#contractInsureBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + ' NAS');
+                        insureBalance = parseInt(Unit.fromBasic(balance, 'nas'));
+                        $("#insureBalance").html(insureBalance);
+                        $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
                       } catch (e){
                         console.log(e)
                       }
@@ -1695,18 +1696,19 @@
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
-                  getBalance(function(balance){
-                    $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
+                  getBalance(function(_balance){
+                    balance = parseInt(Unit.fromBasic(_balance, 'nas'));
+                    $("#balance").html(balance);
                     try{
-                      $("#contractBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + " NAS");
+                      $("#contractBalance").html(' ' + balance + " NAS");
                     } catch (e){
                       console.log(e)
                     }
                     getInsureBalance(function(balance){
                       try{
-                        $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                        $("#contractInsureBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber())+ ' NAS');
-                        setOrder();
+                        insureBalance = parseInt(Unit.fromBasic(balance, 'nas'));
+                        $("#insureBalance").html(insureBalance);
+                        $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
                       } catch (e){
                         console.log(e)
                       }
