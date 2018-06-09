@@ -1122,7 +1122,8 @@
         var skeleton;
         var data;
         var listNum = Math.min(20, buyOrder.length);
-        if(buyOrder.length > 0){
+        lastBuyOrderId = Math.max(buyOrder.length, lastBuyOrderId);
+        if(buyOrder.length >= lastOrderId){
           $("#buyOrder").html('');
           for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
             var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
@@ -1140,7 +1141,8 @@
         }
 
         listNum = Math.min(20, sellOrder.length);
-        if(sellOrder.length > 0){
+        lastSellOrderId = Math.max(sellOrder.length, lastSellOrderId);
+        if(sellOrder.length >= lastSellOrderId){
           $("#sellOrder").html('');
           for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
             var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 7) +'.png';
@@ -1616,6 +1618,8 @@
       var buyOrder = [];
       var sellOrder = [];
       var burnOrder = [];
+      var lastBuyOrderId = 0;
+      var lastSellOrderId = 0;
 
       function load(){
         var e = $(".main-content");
