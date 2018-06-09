@@ -802,24 +802,9 @@
             try{
               result = JSON.parse(result);
               buyOrder = buyOrder.concat(result);
-              if(result.length > 0){
-                priceLow = result[0].price.toFixed(8);
-                priceHigh = result[0].price.toFixed(8);
-              }
-
               for(var r in result){
                 volume += result[r].amount;
-                if(lastOrderId < result[r].orderId){
-                  lastOrderId = result[r].orderId;
-                  price = result[r].price.toFixed(8);
-                }
                 buyPriceTrend.push([result[r].orderId, result[r].price.toFixed(8) * 1000000]);
-                if(priceLow > result[r].price.toFixed(8)){
-                  priceLow = result[r].price.toFixed(8);
-                }
-                if(priceHigh < result[r].price.toFixed(8)){
-                  priceHigh = result[r].price.toFixed(8);
-                }
               }
               callback();
             }catch (err){
@@ -1036,10 +1021,11 @@
             if(result === 'null' || result === '""'){
               return;
             }
-            console.log(result);
+//            console.log(result);
             try{
               var order = JSON.parse(result);
               $("#sellPrice").html(order.price.toFixed(5));
+              price = order.price.toFixed(5);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1059,7 +1045,7 @@
             if(result === 'null' || result === '""'){
               return;
             }
-            console.log(result);
+//            console.log(result);
             try{
               var order = JSON.parse(result);
               $("#burnPrice").html(order.price.toFixed(5));
@@ -1103,7 +1089,7 @@
         args.push(dappAddress);
         innerCall(fun, args, 0, function(params){
           neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            console.log(resp);
+//            console.log(resp);
             var result = resp.result;
             if(result === 'null' || result === '""'){
               return;
@@ -1363,7 +1349,7 @@
 
       function confirmOrder(resp, callback){
         var result = resp.result;
-        console.log(result);
+//        console.log(result);
         if(result === 'null' || result === '""'){
           return;
         }
@@ -1379,7 +1365,7 @@
             $("#sellValueConfirm").val(order.value.toFixed(4));
             $("#sellBtnConfirm").prop('disabled', false);
           } else if(order.type == 0){
-            console.log(order);
+//            console.log(order);
             $("#buyAmountConfirm").val(order.amount.toFixed(4));
             $("#buyValueConfirm").val(order.value.toFixed(4));
             $("#buyBtnConfirm").prop('disabled', false);
@@ -1526,7 +1512,7 @@
       var cgtBalance = -1;
 
       function loadPlayerAccount(){
-        console.log(address);
+//        console.log(address);
         window.addEventListener('message', function (e) {
           if (e.data.data && !!e.data.data.account) {
             addressWallet = e.data.data.account;
@@ -1679,17 +1665,9 @@
         var preVolume = parseInt(volume);
         var preMarketCap = parseInt(price * circulation);
 
-        playerNum = 0;
-        circulation = 0;
         volume = 0;
-        lastOrderId = 0;
-        price = 0;
-        priceLow = 0;
-        priceHigh = 0;
 
         buyPriceTrend = [];
-        sellPriceTrend = [];
-        burnPriceTrend = [];
         buyOrder = [];
         sellOrder = [];
         burnOrder = [];
@@ -1721,12 +1699,16 @@
                       try{
                         $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                         $("#contractInsureBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber())+ ' NAS');
+                        setOrder();
                       } catch (e){
                         console.log(e)
                       }
-                      setOrder();
+                      $("#playerNum").attr('data-start', prePlayerNum);
+                      $("#circulation").attr('data-start', preCirculation);
+                      $("#volume").attr('data-start', parseInt(preVolume));
+                      $('#marketCap').attr('data-start', parseInt(preMarketCap));
                       $('[data-toggle="counter"]').each(function (e, t) {
-                        var i = $(this), a = "", o = "", n = prePlayerNum, r = preCirculation, l = preVolume, s = preMarketCap;
+                        var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
                         i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
                           suffix: o,
                           prefix: a
@@ -1762,6 +1744,8 @@
         App.init();
       });
     </script>
+
+
 
   </body>
 
