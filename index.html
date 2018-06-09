@@ -508,7 +508,7 @@
                     clearInterval(task);
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败, 请将GasLimit手动设置为2M wei!",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -670,7 +670,7 @@
                       } else if(resp.status == 0){
                         $.gritter.add({
                           title: "新消息",
-                          text: "交易失败, 请将GasLimit手动设置为2M wei!",
+                          text: "交易失败, 请将GasLimit手动设置为2M wei",
                           time: "",
                           class_name: "danger clean"
                         });
@@ -735,7 +735,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败, 请将GasLimit手动设置为2M wei!",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -828,7 +828,7 @@
         });
       }
 
-      function geteBuyVolume(callback){
+      function getBuyVolume(callback){
         var fun = 'buyOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -1292,6 +1292,14 @@
             class_name: "warning clean"
           });
         } else {
+          if(value > 2){
+            $.gritter.add({
+              title: "新消息",
+              text: "确认交易时请将GasLimit手动设置为2M wei",
+              time: "",
+              class_name: "warning clean"
+            });
+          }
           var fun = 'buy';
           var args = [];
           innerCall(fun, args, 0, function(params){
@@ -1342,6 +1350,14 @@
             class_name: "warning clean"
           });
         } else {
+          if(sellAmount > 100){
+            $.gritter.add({
+              title: "新消息",
+              text: "确认交易时请将GasLimit手动设置为2M wei",
+              time: "",
+              class_name: "warning clean"
+            });
+          }
           var fun = 'sellPrice';
           var args = [];
           args.push(sellAmount);
@@ -1636,7 +1652,7 @@
             $("#circulation").attr('data-end', circulation);
             $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
             $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
-            geteBuyVolume(function(){
+            getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
@@ -1712,7 +1728,7 @@
             $("#circulation").attr('data-end', circulation);
             $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
             $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
-            geteBuyVolume(function(){
+            getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
