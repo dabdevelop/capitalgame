@@ -1620,6 +1620,7 @@
       function load(){
         var e = $(".main-content");
         e.length && (e.addClass("be-loading-active"));
+        checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
