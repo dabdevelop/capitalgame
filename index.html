@@ -586,13 +586,6 @@
         retryQueryTime --;
 
         getMobileTransactionReceipt(serialNumber, function (resp) {
-          if (resp instanceof Object) {
-            $.gritter.add({
-              title: "新消息",
-              text: "正在查询交易状态!",
-              time: "",
-              class_name: "primary clean"
-            });
             if(retryQueryTime <= 0){
               clearInterval(intervalQuery);
               if(resp.code == 1){
@@ -646,6 +639,13 @@
                 if(!inQuery){
                   inQuery = true;
                   retryQueryTime = 10;
+                  if (resp instanceof Object) {
+                    $.gritter.add({
+                      title: "新消息",
+                      text: "正在查询交易状态!",
+                      time: "",
+                      class_name: "primary clean"
+                    });
                   intervalQuery = setInterval(function () {
                     recheckMobileTransactionReceipt(serialNumber, function(resp){
                       if(resp.status == 1){
@@ -705,6 +705,13 @@
             if(window.mobileAndTabletcheck() && !inQuery){
               inQuery = true;
               retryQueryTime = 15;
+              if (resp instanceof Object) {
+                $.gritter.add({
+                  title: "新消息",
+                  text: "正在查询交易状态!",
+                  time: "",
+                  class_name: "primary clean"
+                });
               intervalQuery = setInterval(function () {
                 recheckMobileTransactionReceipt(serialNumber, function(resp){
                   if(resp.status == 1){
