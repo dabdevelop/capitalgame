@@ -1644,8 +1644,8 @@
                       console.log()
                     }
                     getInsureBalance(function(balance){
-                      $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                       try{
+                        $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                         $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
                       } catch (e){
                         console.log()
@@ -1713,8 +1713,8 @@
                       console.log()
                     }
                     getInsureBalance(function(balance){
-                      $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                       try{
+                        $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                         $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
                       } catch (e){
                         console.log()
