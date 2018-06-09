@@ -1125,7 +1125,9 @@
         var skeleton;
         var data;
         var listNum = Math.min(20, buyOrder.length);
-        $("#buyOrder").html('');
+        if(buyOrder.length > 0){
+          $("#buyOrder").html('');
+        }
         for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
           var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
           var accountUrl;
@@ -1135,13 +1137,15 @@
             accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
           }
           skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-          data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, amount: buyOrder[i].amount.toFixed(2), price: buyOrder[i].price.toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000), url: accountUrl };
+          data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000), url: accountUrl };
           var html = Mustache.to_html(skeleton, data);
           $("#buyOrder").append(html);
         }
 
         listNum = Math.min(20, sellOrder.length);
-        $("#sellOrder").html('');
+        if(sellOrder.length > 0){
+          $("#sellOrder").html('');
+        }
         for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
           var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 7) +'.png';
           var accountUrl;
@@ -1151,7 +1155,7 @@
             accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
           }
           skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-          data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, amount: sellOrder[i].amount.toFixed(2), price: sellOrder[i].price.toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000), url: accountUrl };
+          data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000), url: accountUrl };
           var html = Mustache.to_html(skeleton, data);
           $("#sellOrder").append(html);
         }
@@ -1639,18 +1643,17 @@
                   getBalance(function(balance){
                     $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                     try{
-                      $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                      $("#contractBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + " NAS");
                     } catch (e){
-                      console.log()
+                      console.log(e)
                     }
                     getInsureBalance(function(balance){
                       try{
                         $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                        $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                        $("#contractInsureBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + ' NAS');
                       } catch (e){
-                        console.log()
+                        console.log(e)
                       }
-
                       setOrder();
                       App.dashboard();
                       var e = $(".main-content");
@@ -1708,16 +1711,16 @@
                   getBalance(function(balance){
                     $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
                     try{
-                      $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                      $("#contractBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber()) + " NAS");
                     } catch (e){
-                      console.log()
+                      console.log(e)
                     }
                     getInsureBalance(function(balance){
                       try{
                         $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                        $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                        $("#contractInsureBalance").html(' ' + parseInt(Unit.fromBasic(balance, 'nas').toNumber())+ ' NAS');
                       } catch (e){
-                        console.log()
+                        console.log(e)
                       }
                       setOrder();
                       $('[data-toggle="counter"]').each(function (e, t) {
