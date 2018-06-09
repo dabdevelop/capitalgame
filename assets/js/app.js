@@ -1926,7 +1926,7 @@ App = function () {
             maxSpotColor: !1,
             lineWidth: 1.15
         }), n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString(), $.plot($("#main-chart"), [{
-            data: [[1, 35], [2, 60], [3, 40], [4, 65], [5, 45], [6, 75], [7, 35], [8, 40], [9, 60]],
+            data: buyPriceTrend,
             showLabels: !0,
             label: "Purchases",
             labelPlacement: "below",

@@ -806,7 +806,7 @@
               buyOrder = buyOrder.concat(result);
               for(var r in result){
                 volume += result[r].amount;
-                buyPriceTrend.push([result[r].orderId, result[r].price.toFixed(8) * 1000000]);
+                buyPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
               }
               callback();
             }catch (err){
@@ -1645,6 +1645,14 @@
                         console.log(e)
                       }
                       setOrder();
+                      var _buyPriceTrend = buyPriceTrend;
+                      buyPriceTrend = [];
+                      if(_buyPriceTrend.length > 50){
+                        var sInterval = parseInt(_buyPriceTrend.length / 50);
+                        for(var i = 0; i < 50; i++){
+                          buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
+                        }
+                      }
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
                       var isSafari = window.safari !== undefined;
