@@ -189,8 +189,6 @@ var App = function () {
         }
     }
 }();
-
-
 function FastClick(e, t) {
     "use strict";
     var i;
@@ -1929,7 +1927,7 @@ App = function () {
             lineWidth: 1.15
         }), n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString(), $.plot($("#main-chart"), [{
             data: buyPriceTrend,
-            showLabels: 0,
+            showLabels: !0,
             label: "买入价格",
             labelPlacement: "below",
             canvasRender: !0,
@@ -1992,8 +1990,8 @@ App = function () {
             }).fadeIn(200) : $(".tooltip-chart").hide()
         }), $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
             label: "Services",
-            data: $("#balance").html()
-        }, {label: "Standard Plans", data: $("#insureBalance").html()}, {label: "Services", data: 0}], {
+            data: parseInt($("#balance").html())
+        }, {label: "Standard Plans", data: parseInt($("#insureBalance").html())}, {label: "Services", data: 0}], {
             series: {
                 pie: {
                     radius: .75,
