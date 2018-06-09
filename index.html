@@ -1638,10 +1638,19 @@
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(balance){
                     $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                    $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    try{
+                      $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    } catch (e){
+                      console.log()
+                    }
                     getInsureBalance(function(balance){
                       $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                      $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      try{
+                        $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      } catch (e){
+                        console.log()
+                      }
+
                       setOrder();
                       App.dashboard();
                       var e = $(".main-content");
@@ -1698,10 +1707,18 @@
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(balance){
                     $("#balance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                    $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    try{
+                      $("#contractBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + " NAS");
+                    } catch (e){
+                      console.log()
+                    }
                     getInsureBalance(function(balance){
                       $("#insureBalance").html(parseInt(Unit.fromBasic(balance, 'nas')));
-                      $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      try{
+                        $("#contractInsureBalance").html(' ' + Unit.fromBasic(balance, 'nas').toFixed(2) + ' NAS');
+                      } catch (e){
+                        console.log()
+                      }
                       setOrder();
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = prePlayerNum, r = preCirculation, l = preVolume, s = preMarketCap;
