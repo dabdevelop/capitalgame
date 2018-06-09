@@ -317,7 +317,7 @@
               </div>
               <div class="modal-body form">
                 <div class="form-group">
-                  <label>销毁CGT</label>
+                  <label id="burnLabel">销毁CGT</label>
                   <input type="number" class="form-control" disabled="disabled" id="burnAmountConfirm">
                 </div>
                 <div class="form-group">
@@ -341,7 +341,7 @@
               </div>
               <div class="modal-body form">
                 <div class="form-group">
-                  <label>卖出CGT</label>
+                  <label id="sellLabel">卖出CGT</label>
                   <input type="number" class="form-control" disabled="disabled" id="sellAmountConfirm">
                 </div>
                 <div class="form-group">
@@ -365,7 +365,7 @@
               </div>
               <div class="modal-body form">
                 <div class="form-group">
-                  <label>买入CGT</label>
+                  <label id="buyLabel">买入CGT</label>
                   <input type="number" class="form-control" disabled="disabled" id="buyAmountConfirm">
                 </div>
                 <div class="form-group">
@@ -1385,15 +1385,17 @@
           var order = JSON.parse(result);
           confirm = callback;
           if(order.type == 2){
+            $("#burnLabel").html("销毁CGT @ " + order.price.toFixed(6));
             $("#burnAmountConfirm").val(order.amount.toFixed(4));
             $("#burnValueConfirm").val(order.value.toFixed(4));
             $("#burnBtnConfirm").prop('disabled', false);
           } else if(order.type == 1){
+            $("#sellLabel").html("卖出CGT @ " + order.price.toFixed(6));
             $("#sellAmountConfirm").val(order.amount.toFixed(4));
             $("#sellValueConfirm").val(order.value.toFixed(4));
             $("#sellBtnConfirm").prop('disabled', false);
           } else if(order.type == 0){
-//            console.log(order);
+            $("#buyLabel").html("买入CGT @ " + order.price.toFixed(6));
             $("#buyAmountConfirm").val(order.amount.toFixed(4));
             $("#buyValueConfirm").val(order.value.toFixed(4));
             $("#buyBtnConfirm").prop('disabled', false);
