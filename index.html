@@ -1122,7 +1122,7 @@
         var skeleton;
         var data;
         var listNum = Math.min(20, buyOrder.length);
-        lastBuyOrderId = Math.max(buyOrder.length, lastBuyOrderId);
+        lastBuyOrderId = Math.max(buyOrder.length - 1, lastBuyOrderId);
         if(buyOrder.length >= lastBuyOrderId){
           $("#buyOrder").html('');
           for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
@@ -1141,7 +1141,7 @@
         }
 
         listNum = Math.min(20, sellOrder.length);
-        lastSellOrderId = Math.max(sellOrder.length, lastSellOrderId);
+        lastSellOrderId = Math.max(sellOrder.length - 1, lastSellOrderId);
         if(sellOrder.length >= lastSellOrderId){
           $("#sellOrder").html('');
           for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
