@@ -1646,7 +1646,7 @@
                       setOrder();
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
-                      var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                      var isSafari = window.safari !== undefined;
                       if (isSafari && window.mobileAndTabletcheck()) {
 //                        App.dashboard();
                       } else {
