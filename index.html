@@ -536,7 +536,7 @@
               callback && callback(resp.result);
             }
           })
-        }, 2500);
+        }, 4000);
       }
 
       function innerCall(fun, args, value, callback) {
@@ -571,6 +571,7 @@
           time: "",
           class_name: "primary clean"
         });
+        refreshData();
       }
 
 
@@ -666,7 +667,7 @@
                         wait = setInterval(clearWait, 2000);
                       }
                     });
-                  }, 3500);
+                  }, 4000);
                 }
                 return;
               }
@@ -1607,7 +1608,7 @@
         }, "*");
       }
 
-      var playerNum = 0
+      var playerNum = 0;
       var circulation = 0;
       var volume = 0;
       var lastOrderId = 0;
