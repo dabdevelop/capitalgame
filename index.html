@@ -1123,7 +1123,7 @@
         var data;
         var listNum = Math.min(20, buyOrder.length);
         lastBuyOrderId = Math.max(buyOrder.length, lastBuyOrderId);
-        if(buyOrder.length >= lastOrderId){
+        if(buyOrder.length >= lastBuyOrderId){
           $("#buyOrder").html('');
           for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
             var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
