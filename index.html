@@ -1502,7 +1502,7 @@
           $(document).ready(function () {
             if(window.mobileAndTabletcheck()){
               if(Account.isValidAddress(address)){
-                $("#showWalletStatus").html('已使用NAS nano登陆');
+                $("#showWalletStatus").removeClass('offline').addClass('online').html('已使用NAS nano登陆');
               } else{
                 $("#showWalletStatus").removeClass('online').addClass('offline').html('请安装NAS nano');
               }
