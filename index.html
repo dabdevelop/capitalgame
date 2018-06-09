@@ -617,6 +617,16 @@
 
       function callNebPay(fun, args, value, callback) {
 
+        if(isWx){
+          $.gritter.add({
+            title: "新消息",
+            text: "微信浏览器不支持NAS nano调用, 请点击右上方的三个小点, 并选择用浏览器打开!",
+            time: "",
+            class_name: "warning clean"
+          });
+          return;
+        }
+
         var wait;
         function clearWait() {
           clearInterval(wait);
