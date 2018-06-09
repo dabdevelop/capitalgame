@@ -566,14 +566,12 @@
       };
 
       function refresh(){
-//        window.location.reload()
         $.gritter.add({
           title: "新消息",
           text: "交易数据将在几秒内自动更新",
           time: "",
           class_name: "primary clean"
         });
-        refreshData();
       }
 
 
@@ -1672,7 +1670,7 @@
                         App.dashboard();
                       }
 
-                      setInterval(refreshData, 10000);
+                      setInterval(refreshData, 15000);
                     })
                   });
                 });
