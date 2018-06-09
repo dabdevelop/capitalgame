@@ -1407,16 +1407,19 @@
       }
 
       function burnCancel(){
+        $("#burnLabel").html("销毁CGT");
         $("#burnAmountConfirm").val('');
         $("#burnValueConfirm").val('');
         $("#burnBtnConfirm").prop('disabled', true);
       }
       function sellCancel(){
+        $("#sellLabel").html("卖出CGT");
         $("#sellAmountConfirm").val('');
         $("#sellValueConfirm").val('');
         $("#sellBtnConfirm").prop('disabled', true);
       }
       function buyCancel(){
+        $("#buyLabel").html("买入CGT");
         $("#buyAmountConfirm").val('');
         $("#buyValueConfirm").val('');
         $("#buyBtnConfirm").prop('disabled', true);
