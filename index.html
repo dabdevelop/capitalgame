@@ -1645,9 +1645,9 @@
                         console.log(e)
                       }
                       setOrder();
-                      App.dashboard();
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
+                      App.dashboard();
                       setInterval(refreshData, 10000);
                     })
                   });
