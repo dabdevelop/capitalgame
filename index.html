@@ -1514,7 +1514,6 @@
       var cgtBalance = -1;
 
       function loadPlayerAccount(){
-//        console.log(address);
         window.addEventListener('message', function (e) {
           if (e.data.data && !!e.data.data.account) {
             addressWallet = e.data.data.account;
@@ -1647,7 +1646,13 @@
                       setOrder();
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
-                      App.dashboard();
+
+                      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+                        App.dashboard();
+                      } else {
+                        App.dashboard();
+                      }
+
                       setInterval(refreshData, 10000);
                     })
                   });
