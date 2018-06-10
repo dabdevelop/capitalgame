@@ -486,6 +486,8 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
 
+      var receiptGot = [];
+
       function getTransactionReceipt(hash, callback){
         $.post(rpcURL + '/v1/user/getTransactionReceipt', JSON.stringify({
           "hash": hash
@@ -536,7 +538,10 @@
             var status = resp.result.status;
             if(status == 1){
               clearInterval(task);
-              callback && callback(resp.result);
+              if(!receiptGot.includes(resp.result.hash)){
+                receiptGot.push(resp.result.hash);
+                callback && callback(resp.result);
+              }
             }
           })
         }, 5000);
@@ -603,7 +608,10 @@
             }
             if (resp.code == 0 && (resp.data.status == 1 || resp.data.status == 0)) {
               clearInterval(intervalQuery);
-              callback && callback(resp.data)
+              if(!receiptGot.includes(resp.data.hash)){
+                receiptGot.push(resp.data.hash);
+                callback && callback(resp.data);
+              }
             }
           }
 
