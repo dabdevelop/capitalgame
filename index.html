@@ -1421,6 +1421,12 @@
           }
         }catch (err){
           //TODO handle error
+          $.gritter.add({
+            title: "新消息",
+            text: "星云主网开小差了",
+            time: "",
+            class_name: "warning clean"
+          });
         }
       }
 
