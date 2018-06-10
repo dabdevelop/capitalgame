@@ -370,7 +370,7 @@
                   <input type="number" class="form-control" disabled="disabled" id="buyAmountConfirm">
                 </div>
                 <div class="form-group">
-                  <label>花费NAS</label>
+                  <label>Pay NAS</label>
                   <input type="number" class="form-control" disabled="disabled" id="buyValueConfirm">
                 </div>
               </div>
@@ -454,7 +454,7 @@
             if(window.mobileAndTabletcheck()){
               $.gritter.add({
                 title: "New Notice",
-                text: "Please Install NAS nano on mobile phone.",
+                text: "Please Install NAS nano on mobile device.",
                 time: "",
                 class_name: "warning clean"
               });
@@ -463,7 +463,7 @@
             } else{
               $.gritter.add({
                 title: "New Notice",
-                text: "Not install NasExtWallet, please install it.",
+                text: "No NasExtWallet, please install it.",
                 time: "",
                 class_name: "warning clean"
               });
@@ -509,7 +509,7 @@
                     clearInterval(task);
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transaction fail, please set GasLimit to 2M wei",
+                      text: "Transaction fail, please set GasLimit to 2M wei.",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -519,7 +519,7 @@
                       clearInterval(task);
                       $.gritter.add({
                         title: "New Notice",
-                        text: "Query the transaction status failed, please check it manually",
+                        text: "Query the transaction status failed, please check it manually.",
                         time: "",
                         class_name: "warning clean"
                       });
@@ -569,7 +569,7 @@
       function refresh(){
         $.gritter.add({
           title: "New Notice",
-          text: "The transaction data will be refreshed in seconds",
+          text: "The transaction data will be refreshed in seconds.",
           time: "",
           class_name: "primary clean"
         });
@@ -594,7 +594,7 @@
               if(resp.code == 1){
                 $.gritter.add({
                   title: "New Notice",
-                  text: "Query the transaction status failed, please check it manually",
+                  text: "Query the transaction status failed, please check it manually.",
                   time: "",
                   class_name: "warning clean"
                 });
@@ -618,7 +618,7 @@
 
         if(isWx){
           $.gritter.add({
-            title: "New Notice",
+            title: "新消息",
             text: "微信浏览器不支持NAS nano调用, 请点击右上方的三个小点, 并选择用浏览器打开!",
             time: "",
             class_name: "warning clean"
@@ -636,7 +636,7 @@
 
         $.gritter.add({
           title: "New Notice",
-          text: "Invoke the wallet now, please set GasLimit to 2M wei and confirm.",
+          text: "Invoking the wallet now, please set GasLimit to 2M wei and confirm.",
           time: "",
           class_name: "primary clean"
         });
@@ -654,7 +654,7 @@
                   retryQueryTime = 10;
                   $.gritter.add({
                     title: "New Notice",
-                    text: "Querying transation status!",
+                    text: "Querying transaction status.",
                     time: "",
                     class_name: "primary clean"
                   });
@@ -663,7 +663,7 @@
                       if(resp.status == 1){
                         $.gritter.add({
                           title: "New Notice",
-                          text: "Transaction succeed!",
+                          text: "Transaction succeed.",
                           time: "",
                           class_name: "success clean"
                         });
@@ -671,7 +671,7 @@
                       } else if(resp.status == 0){
                         $.gritter.add({
                           title: "New Notice",
-                          text: "Transaction failed, please set GasLimit to 2M wei",
+                          text: "Transaction failed, please set GasLimit to 2M wei.",
                           time: "",
                           class_name: "danger clean"
                         });
@@ -685,7 +685,7 @@
               if (resp !== 'Error: Transaction rejected by user') {
                 $.gritter.add({
                   title: "New Notice",
-                  text: "Transaction submitted, querying the transation status, please wait for 15 seconds.",
+                  text: "Transaction submitted, querying the transaction status, please wait for 15 seconds.",
                   time: "",
                   class_name: "primary clean"
                 });
@@ -719,7 +719,7 @@
               retryQueryTime = 15;
               $.gritter.add({
                 title: "New Notice",
-                text: "Querying the transaction status!",
+                text: "Querying the transaction status.",
                 time: "",
                 class_name: "primary clean"
               });
@@ -728,7 +728,7 @@
                   if(resp.status == 1){
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transation succeed.",
+                      text: "Transaction succeed.",
                       time: "",
                       class_name: "success clean"
                     });
@@ -736,7 +736,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transaction failed, please set GasLimit to 2M wei",
+                      text: "Transaction failed, please set GasLimit to 2M wei.",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -1219,7 +1219,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The burn amount is out of range, the minimum burn amount is 0.01",
+            text: "The burn amount is out of range, the minimum burn amount is 0.01.",
             time: "",
             class_name: "warning clean"
           })
@@ -1228,7 +1228,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The burn amount is out of range, the maxmum burn amount is 1000",
+            text: "The burn amount is out of range, the maxmum burn amount is 1000.",
             time: "",
             class_name: "warning clean"
           });
@@ -1237,7 +1237,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The burn amount is over your balance, your CGT balance is " + cgtBalance,
+            text: "The burn amount is over your balance, your CGT balance is " + cgtBalance + '.',
             time: "",
             class_name: "warning clean"
           });
@@ -1270,7 +1270,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The buy value is out of range, the minimum buy value is 0.001",
+            text: "The buy value is out of range, the minimum buy value is 0.001.",
             time: "",
             class_name: "warning clean"
           });
@@ -1279,7 +1279,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The buy value is out of range, the maximum buy value is 10",
+            text: "The buy value is out of range, the maximum buy value is 10.",
             time: "",
             class_name: "warning clean"
           })
@@ -1288,7 +1288,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The buy value is over your NAS balance, your NAS balance is " + nasBalance,
+            text: "The buy value is over your NAS balance, your NAS balance is " + nasBalance + '.',
             time: "",
             class_name: "warning clean"
           });
@@ -1296,7 +1296,7 @@
           if(value > 2){
             $.gritter.add({
               title: "New Notice",
-              text: "Please set the GasLimit to 2M wei when you submit the transaction",
+              text: "Please set the GasLimit to 2M wei when you submit the transaction.",
               time: "",
               class_name: "warning clean"
             });
@@ -1328,7 +1328,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The sell amount is out of range, the minimum sell amount is 0.01",
+            text: "The sell amount is out of range, the minimum sell amount is 0.01.",
             time: "",
             class_name: "warning clean"
           });
@@ -1337,7 +1337,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The sell amount is out of range, the maximum sell amount is 1000",
+            text: "The sell amount is out of range, the maximum sell amount is 1000.",
             time: "",
             class_name: "warning clean"
           });
@@ -1346,7 +1346,7 @@
           wait = setInterval(clearWait, 500);
           $.gritter.add({
             title: "New Notice",
-            text: "The sell amount is over your CGT balance, your CGT balance is " + cgtBalance,
+            text: "The sell amount is over your CGT balance, your CGT balance is " + cgtBalance + '.',
             time: "",
             class_name: "warning clean"
           });
@@ -1354,7 +1354,7 @@
           if(sellAmount > 100){
             $.gritter.add({
               title: "New Notice",
-              text: "Please set GasLimit th 2M wei when you submit the transaction",
+              text: "Please set GasLimit th 2M wei when you submit the transaction.",
               time: "",
               class_name: "warning clean"
             });
@@ -1432,7 +1432,7 @@
           if(!burnAmount || burnAmount < 0.01){
             $.gritter.add({
               title: "New Notice",
-              text: "The burn amount is out of range, the maximum burn amount is 0.01",
+              text: "The burn amount is out of range, the maximum burn amount is 0.01.",
               time: "",
               class_name: "warning clean"
             })
@@ -1460,14 +1460,14 @@
           if(!value || value < 0.001){
             $.gritter.add({
               title: "New Notice",
-              text: "The buy value is out of range, the minimum buy value is 0.001",
+              text: "The buy value is out of range, the minimum buy value is 0.001.",
               time: "",
               class_name: "warning clean"
             });
           } else if(value > 10) {
             $.gritter.add({
               title: "New Notice",
-              text: "The buy value is out of range, the maximum buy value is 10",
+              text: "The buy value is out of range, the maximum buy value is 10.",
               time: "",
               class_name: "warning clean"
             })
@@ -1493,14 +1493,14 @@
           if(!sellAmount || sellAmount < 0.01){
             $.gritter.add({
               title: "New Notice",
-              text: "The sell amount is out of range, the minimum sell amount is 0.01",
+              text: "The sell amount is out of range, the minimum sell amount is 0.01.",
               time: "",
               class_name: "warning clean"
             });
           } else if(sellAmount > 1000){
             $.gritter.add({
               title: "New Notice",
-              text: "The sell amount is out of range, the maximum sell amount is 1000",
+              text: "The sell amount is out of range, the maximum sell amount is 1000.",
               time: "",
               class_name: "warning clean"
             });
