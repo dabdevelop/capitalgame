@@ -1395,10 +1395,6 @@
 
       function confirmOrder(resp, callback){
         var result = resp.result;
-//        console.log(result);
-        if(result === 'null' || result === '""'){
-          return;
-        }
         try{
           var order = JSON.parse(result);
           confirm = callback;
@@ -1420,7 +1416,6 @@
           } else {
           }
         }catch (err){
-          //TODO handle error
           $.gritter.add({
             title: "New Notice",
             text: "The nebulas main network is busy.",
