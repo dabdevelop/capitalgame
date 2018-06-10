@@ -1404,18 +1404,18 @@
           confirm = callback;
           if(order.type == 2){
             $("#burnLabel").html("Burn CGT @ " + order.price.toFixed(6));
-            $("#burnAmountConfirm").val(order.amount.toFixed(4));
-            $("#burnValueConfirm").val(order.value.toFixed(4));
+            $("#burnAmountConfirm").val(order.amount.toFixed(6));
+            $("#burnValueConfirm").val(order.value.toFixed(6));
             $("#burnBtnConfirm").prop('disabled', false);
           } else if(order.type == 1){
             $("#sellLabel").html("Sell CGT @ " + order.price.toFixed(6));
-            $("#sellAmountConfirm").val(order.amount.toFixed(4));
-            $("#sellValueConfirm").val(order.value.toFixed(4));
+            $("#sellAmountConfirm").val(order.amount.toFixed(6));
+            $("#sellValueConfirm").val(order.value.toFixed(6));
             $("#sellBtnConfirm").prop('disabled', false);
           } else if(order.type == 0){
             $("#buyLabel").html("Buy CGT @ " + order.price.toFixed(6));
-            $("#buyAmountConfirm").val(order.amount.toFixed(4));
-            $("#buyValueConfirm").val(order.value.toFixed(4));
+            $("#buyAmountConfirm").val(order.amount.toFixed(6));
+            $("#buyValueConfirm").val(order.value.toFixed(6));
             $("#buyBtnConfirm").prop('disabled', false);
           } else {
           }
