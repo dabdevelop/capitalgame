@@ -746,8 +746,25 @@
               }, 3500);
             }
           }
-          wait2 = setInterval(clearWait2, 20000);
+          wait2 = setInterval(clearWait2, 12500);
+
+          var wait3;
+
+          function clearWait3() {
+            clearInterval(wait3);
+            if (window.mobileAndTabletcheck() && inQuery) {
+              $.gritter.add({
+                title: "New Notice",
+                text: "Querying the transaction status.",
+                time: "",
+                class_name: "primary clean"
+              });
+            }
+          }
+
+          wait3 = setInterval(clearWait3, 20000);
         });
+
       }
 
       function getPlayerNum(callback){
