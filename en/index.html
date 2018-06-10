@@ -539,7 +539,7 @@
               callback && callback(resp.result);
             }
           })
-        }, 7500);
+        }, 5000);
       }
 
       function innerCall(fun, args, value, callback) {
@@ -678,7 +678,7 @@
                         wait = setInterval(clearWait, 2000);
                       }
                     });
-                  }, 7500);
+                  }, 5000);
                 }
                 return;
               }
@@ -743,10 +743,10 @@
                     wait = setInterval(clearWait, 2000);
                   }
                 });
-              }, 3500);
+              }, 5000);
             }
           }
-          wait2 = setInterval(clearWait2, 12500);
+          wait2 = setInterval(clearWait2, 15000);
 
           var wait3;
 
