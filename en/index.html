@@ -1526,7 +1526,7 @@
           $(document).ready(function () {
             if(window.mobileAndTabletcheck()){
               if(Account.isValidAddress(address)){
-                $("#showWalletStatus").removeClass('offline').addClass('online').html('Online with NAS nano');
+                $("#showWalletStatus").removeClass('offline').addClass('online').html('Online by NAS nano');
               } else{
                 $("#showWalletStatus").removeClass('online').addClass('offline').html('Please install NAS nano');
               }
@@ -1536,7 +1536,7 @@
           });
           return false;
         }
-        $("#showWalletStatus").removeClass('offline').addClass('online').html('Oneline with NasExtWallet');
+        $("#showWalletStatus").removeClass('offline').addClass('online').html('Online by NasExtWallet');
         return true;
       }
 
