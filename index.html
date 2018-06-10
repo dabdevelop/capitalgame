@@ -746,7 +746,7 @@
               }, 5000);
             }
           }
-          wait2 = setInterval(clearWait2, 15000);
+          wait2 = setInterval(clearWait2, 10000);
 
           var wait3;
 
@@ -755,14 +755,14 @@
             if (window.mobileAndTabletcheck() && inQuery) {
               $.gritter.add({
                 title: "新消息",
-                text: "交易失败, 请将GasLimit手动设置为2M wei",
+                text: "正在查询交易状态!",
                 time: "",
-                class_name: "danger clean"
+                class_name: "primary clean"
               });
             }
           }
 
-          wait3 = setInterval(clearWait3, 20000);
+          wait3 = setInterval(clearWait3, 18000);
 
         });
       }
