@@ -56,6 +56,7 @@
                     <div class="user-name"> Player #</div>
                     <div class="user-position offline" id="showWalletStatus">未检测到星云插件钱包</div>
                   </div>
+                  <a class="dropdown-item" id="playerData"><span class="icon mdi mdi-account"></span>账户游戏数据</a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约储备金<b id="contractBalance"></b></a>
@@ -1171,6 +1172,7 @@
 
 
       function getPlayerInfo(account){
+        console.log(account);
         $("#form-player").modal('show');
         var fun = 'player';
         var args = [];
@@ -1652,6 +1654,10 @@
 
           if(Account.isValidAddress(address)){
             try {
+
+              $('#playerData').click(function(){
+                getPlayerInfo(address);
+              });
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
                 nasBalance = Unit.fromBasic(accstate.balance, "nas").toFixed(2);
@@ -1777,9 +1783,9 @@
                       setOrder();
                       var _buyPriceTrend = buyPriceTrend;
                       buyPriceTrend = [];
-                      if(_buyPriceTrend.length > 50){
-                        var sInterval = parseInt(_buyPriceTrend.length / 50);
-                        for(var i = 0; i < 50; i++){
+                      if(_buyPriceTrend.length > 100){
+                        var sInterval = parseInt(_buyPriceTrend.length / 100);
+                        for(var i = 0; i < 100; i++){
                           buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
                         }
                       }
