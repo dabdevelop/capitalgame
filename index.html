@@ -56,12 +56,13 @@
                     <div class="user-name"> Player #</div>
                     <div class="user-position offline" id="showWalletStatus">未检测到星云插件钱包</div>
                   </div>
-                  <a class="dropdown-item" id="playerData"><span class="icon mdi mdi-account"></span>账户游戏数据</a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约储备金<b id="contractBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约保证金<b id="contractInsureBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约CGT余额<b id="contractTokenBalance"></b></a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" id="playerData"><span class="icon mdi mdi-account"></span>账户游戏数据</a>
                   <a class="dropdown-item" onclick="login()" id="loginbtn"><span class="icon mdi mdi-key"></span> 登陆</a>
                 </div>
               </li>
@@ -113,9 +114,15 @@
 
           <div class="progress-widget">
             <div class="progress-data"><span class="progress-value">0%</span><span class="name">游戏进度</span></div>
-            <div class="progress">
-              <div style="width: 0%;" class="progress-bar progress-bar-primary"></div>
+            <div class="progress mb-4">
+              <div role="progressbar" style="width: 0%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-primary progress-bar-striped progress-bar-animated" id="progressCirculation"></div>
+              <div role="progressbar" style="width: 0%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-danger progress-bar-striped" id="progressTotalSupply"></div>
             </div>
+
+
+            <!--<div class="progress">-->
+              <!--<div style="width: 0%;" class="progress-bar progress-bar-primary"></div>-->
+            <!--</div>-->
           </div>
         </div>
       </div>
@@ -1146,6 +1153,7 @@
             }
             try{
               var balance = JSON.parse(result);
+              contractTokenBalance = parseFloat(Unit.fromBasic(balance, 'nas').toString(10)).toFixed(2);
               $("#contractTokenBalance").html(' ' + parseFloat(Unit.fromBasic(balance, 'nas').toString(10)).toFixed(2) + ' CGT');
             }catch (err){
               //result is the error message
@@ -1730,6 +1738,7 @@
 
       var playerNum = 0;
       var circulation = 0;
+      var contractTokenBalance = 0;
       var volume = 0;
       var price = 0;
       var balance = 0;
@@ -1757,8 +1766,13 @@
           getCirculation(function(result){
             circulation = parseInt(Unit.fromBasic(result, 'nas'));
             $("#circulation").attr('data-end', circulation);
-            $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
-            $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
+            if(parseInt(contractTokenBalance) > 0){
+              $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%, ' + parseInt((circulation + parseInt(contractTokenBalance)) / 400000 * 100) + '%');
+            } else {
+              $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
+            }
+            $("#progressCirculation").css('width', parseInt(circulation / 400000 * 100) + '%');
+            $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
@@ -1833,8 +1847,13 @@
           getCirculation(function(result){
             circulation = parseInt(Unit.fromBasic(result, 'nas'));
             $("#circulation").attr('data-end', circulation);
-            $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
-            $(".progress-bar-primary").css('width', parseInt(circulation / 400000 * 100) + '%');
+            if(parseInt(contractTokenBalance) > 0){
+              $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%, ' + parseInt((circulation + parseInt(contractTokenBalance)) / 400000 * 100) + '%');
+            } else {
+              $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%');
+            }
+            $("#progressCirculation").css('width', parseInt(circulation / 400000 * 100) + '%');
+            $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
