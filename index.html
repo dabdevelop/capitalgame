@@ -1148,6 +1148,59 @@
         });
       }
 
+      function resetPlayerInfo(){
+        $("#playerId").html('');
+        $("#playerTokenBalance").html('');
+        $("#playerBuyAmount").html('');
+        $("#playerSellAmount").html('');
+        $("#playerBurnAmount").html('');
+        $("#playerBuyValue").html('');
+        $("#playerSellValue").html('');
+        $("#playerBurnValue").html('');
+        $("#playerAverageInPrice").html('');
+      }
+
+
+      function getPlayerInfo(account){
+        $("#form-player").modal('show');
+        var fun = 'player';
+        var args = [];
+        args.push(account);
+        innerCall(fun, args, 0, function(params){
+          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            console.log(resp);
+            var result = resp.result;
+            if(result === 'null' || result === '""'){
+              return;
+            }
+            try{
+              var player = JSON.parse(result);
+              console.log(player);
+              $("#playerId").html(player.playerId);
+              $("#playerTokenBalance").html(player.tokenBalance.toFixed(6));
+              $("#playerBuyAmount").html(player.buyAmount.toFixed(6));
+              $("#playerSellAmount").html(player.sellAmount.toFixed(6));
+              $("#playerBurnAmount").html(player.burnAmount.toFixed(6));
+              $("#playerBuyValue").html(player.buyValue.toFixed(6));
+              $("#playerSellValue").html(player.sellValue.toFixed(6));
+              $("#playerBurnValue").html(player.burnValue.toFixed(6));
+              if(player.tokenBalance > 0){
+                var playerAverageInPrice = (player.buyValue - player.sellValue - player.burnValue) / player.tokenBalance;
+                $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+              } else {
+                $("#playerAverageInPrice").html(0);
+              }
+            }catch (err){
+              //result is the error message
+              console.log("error:" + err.message)
+            }
+          }).catch(function (err) {
+            console.log("error:" + err.message)
+          });
+
+        });
+      }
+
       function setOrder(){
         var skeleton;
         var data;
@@ -1163,8 +1216,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000), url: accountUrl };
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
           }
@@ -1182,8 +1235,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000), url: accountUrl };
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
           }
@@ -1849,6 +1902,60 @@
           <br>
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           <button type="button" class="btn btn-primary" onclick="setLoginAccount()">确定</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <div id="form-player" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Player #<b id="playerId"></b> 游戏数据</h4>
+        </div>
+        <div class="modal-body text-left">
+          <div class="card-body table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+              <tr>
+                <th class="number">CGT余额</th>
+                <th class="number">CGT买入</th>
+                <th class="number">CGT卖出</th>
+                <th class="number">CGT销毁</th>
+              </tr>
+              </thead>
+              <tbody class="no-border-x">
+                <tr>
+                  <td class="number" id="playerTokenBalance"></td>
+                  <td class="number" id="playerBuyAmount"></td>
+                  <td class="number" id="playerSellAmount"></td>
+                  <td class="number" id="playerBurnAmount"></td>
+                </tr>
+              </tbody>
+
+              <thead>
+              <tr>
+                <th class="number">花费NAS</th>
+                <th class="number">卖出得到NAS</th>
+                <th class="number">销毁得到NAS</th>
+                <th class="number">平均入手价格</th>
+              </tr>
+              </thead>
+              <tbody class="no-border-x">
+              <tr>
+                <td class="number" id="playerBuyValue"></td>
+                <td class="number" id="playerSellValue"></td>
+                <td class="number" id="playerBurnValue"></td>
+                <td class="number" id="playerAverageInPrice"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" data-dismiss="modal" class="btn btn-success modal-close" onclick="resetPlayerInfo()">关闭</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
