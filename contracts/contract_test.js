@@ -342,7 +342,7 @@ Blockchain.transaction.value = new BigNumber(10).pow(18);
 
 var cg = new CapitalGame();
 cg.init();
-for(var i = 0; i<10000; i++){
+for(var i = 0; i<1350; i++){
     cg.buy();
     cg.sell(0.01)
     cg.burn(0.01)
