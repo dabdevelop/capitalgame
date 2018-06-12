@@ -1752,7 +1752,7 @@
                           prefix: a
                         }).start()});
 
-                      setInterval(refreshData, 30000);
+                      setInterval(refreshData, 25000);
                     })
                   });
                 });
@@ -1811,10 +1811,10 @@
                         console.log(e)
                       }
                       setOrder();
-                      $("#playerNum").attr('data-start', prePlayerNum);
-                      $("#circulation").attr('data-start', preCirculation);
-                      $("#volume").attr('data-start', parseInt(preVolume));
-                      $('#marketCap').attr('data-start', parseInt(preMarketCap));
+                      $("#playerNum").html(prePlayerNum);
+                      $("#circulation").html(preCirculation);
+                      $("#volume").html(preVolume);
+                      $('#marketCap').html(preMarketCap);
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
                         i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
