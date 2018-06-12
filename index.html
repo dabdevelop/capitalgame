@@ -1776,6 +1776,7 @@
       var circulation = 0;
       var contractTokenBalance = 0;
       var volume = 0;
+      var volumeLeast = 0;
       var price = 0;
       var balance = 0;
       var insureBalance = 0;
@@ -1817,7 +1818,7 @@
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
-//                  $("#volume").attr('data-end', parseInt(volume));
+                  $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(_balance){
                     balance = parseInt(Unit.fromBasic(_balance, 'nas'));
@@ -1853,11 +1854,14 @@
                         App.dashboard();
                       }
                       $("#volume").attr('data-end', parseInt(volume));
-                      $("#playerNum").html(playerNum);
-                      $("#circulation").html(circulation);
-                      $("#volume").html(parseInt(volume));
-                      $('#marketCap').html(parseInt(price * circulation));
+                      $('[data-toggle="counter"]').each(function (e, t) {
+                        var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
+                        i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
+                          suffix: o,
+                          prefix: a
+                        }).start()});
                       setInterval(refreshData, 45000);
+
                     })
                   });
                 });
@@ -1879,6 +1883,7 @@
         var prePlayerNum = parseInt(playerNum);
         var preCirculation = parseInt(circulation);
         var preVolume = parseInt(volume);
+        volumeLeast = Math.max(preVolume, volumeLeast);
         var preMarketCap = parseInt(price * circulation);
 
         volume = 0;
@@ -1929,11 +1934,11 @@
                         console.log(e)
                       }
                       setOrder();
-                      $("#playerNum").html(playerNum);
-                      $("#circulation").html(circulation);
-                      if(volume >= preVolume)
-                        $("#volume").html(parseInt(volume));
-                      $('#marketCap').html(parseInt(price * circulation));
+                      $("#playerNum").html(prePlayerNum);
+                      $("#circulation").html(preCirculation);
+                      if(volume >= volumeLeast)
+                        $("#volume").html(parseInt(preVolume));
+                      $('#marketCap').html(preMarketCap);
                       $("#playerNum").attr('data-start', prePlayerNum);
                       $("#circulation").attr('data-start', preCirculation);
                       $("#volume").attr('data-start', parseInt(preVolume));
