@@ -1733,18 +1733,63 @@
                           buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
                         }
                       }
+
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
+
+                      var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
+                      e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
+                      n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
+
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
                         i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
                           suffix: o,
                           prefix: a
-                        }).start()});
-
-                      var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-                      e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-                      n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
+                        }).start()
+                      }), $(".toggle-loading").on("click", function () {
+                        var e = $(this).parents(".widget, .panel");
+                        e.length && (e.addClass("be-loading-active"), setTimeout(function () {
+                          e.removeClass("be-loading-active")
+                        }, 3e3))
+                      }), e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger, $("#spark1").sparkline([0, 5, 3, 7, 5, 10, 3, 6, 5, 10], {
+                        width: "85",
+                        height: "35",
+                        lineColor: e,
+                        highlightSpotColor: e,
+                        highlightLineColor: e,
+                        fillColor: !1,
+                        spotColor: !1,
+                        minSpotColor: !1,
+                        maxSpotColor: !1,
+                        lineWidth: 1.15
+                      }), $("#spark2").sparkline([5, 8, 7, 10, 9, 10, 8, 6, 4, 6, 8, 7, 6, 8], {
+                        type: "bar",
+                        width: "85",
+                        height: "35",
+                        barWidth: 3,
+                        barSpacing: 3,
+                        chartRangeMin: 0,
+                        barColor: t
+                      }), $("#spark3").sparkline([2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 5, 4, 4, 5], {
+                        type: "discrete",
+                        width: "85",
+                        height: "35",
+                        lineHeight: 20,
+                        lineColor: i,
+                        xwidth: 18
+                      }), $("#spark4").sparkline([2, 5, 3, 7, 5, 10, 3, 6, 5, 7], {
+                        width: "85",
+                        height: "35",
+                        lineColor: a,
+                        highlightSpotColor: a,
+                        highlightLineColor: a,
+                        fillColor: !1,
+                        spotColor: !1,
+                        minSpotColor: !1,
+                        maxSpotColor: !1,
+                        lineWidth: 1.15
+                      });
 
                       $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
                         label: "Services",
@@ -1851,72 +1896,17 @@
       }
 
 
-      $(document).ready(function(){
-        $.fn.niftyModal('setDefaults',{
+      $(document).ready(function() {
+        $.fn.niftyModal('setDefaults', {
           overlaySelector: '.modal-overlay',
           contentSelector: '.modal-content',
           closeSelector: '.modal-close',
           classAddAfterOpen: 'modal-show'
         });
         App.init();
-
-        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-
-
-        $('[data-toggle="counter"]').each(function (e, t) {
-          var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
-          i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
-            suffix: o,
-            prefix: a
-          }).start()
-        }), $(".toggle-loading").on("click", function () {
-          var e = $(this).parents(".widget, .panel");
-          e.length && (e.addClass("be-loading-active"), setTimeout(function () {
-            e.removeClass("be-loading-active")
-          }, 3e3))
-        }), e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger, $("#spark1").sparkline([0, 5, 3, 7, 5, 10, 3, 6, 5, 10], {
-          width: "85",
-          height: "35",
-          lineColor: e,
-          highlightSpotColor: e,
-          highlightLineColor: e,
-          fillColor: !1,
-          spotColor: !1,
-          minSpotColor: !1,
-          maxSpotColor: !1,
-          lineWidth: 1.15
-        }), $("#spark2").sparkline([5, 8, 7, 10, 9, 10, 8, 6, 4, 6, 8, 7, 6, 8], {
-          type: "bar",
-          width: "85",
-          height: "35",
-          barWidth: 3,
-          barSpacing: 3,
-          chartRangeMin: 0,
-          barColor: t
-        }), $("#spark3").sparkline([2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 5, 4, 4, 5], {
-          type: "discrete",
-          width: "85",
-          height: "35",
-          lineHeight: 20,
-          lineColor: i,
-          xwidth: 18
-        }), $("#spark4").sparkline([2, 5, 3, 7, 5, 10, 3, 6, 5, 7], {
-          width: "85",
-          height: "35",
-          lineColor: a,
-          highlightSpotColor: a,
-          highlightLineColor: a,
-          fillColor: !1,
-          spotColor: !1,
-          minSpotColor: !1,
-          maxSpotColor: !1,
-          lineWidth: 1.15
-        })
-
       });
+
     </script>
-
-
 
   </body>
 
