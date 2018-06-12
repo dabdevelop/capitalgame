@@ -876,6 +876,10 @@
       }
 
       function getBuyVolume(callback){
+        //TODO
+        load --;
+        if(load > 0)
+        callback();
         var fun = 'buyOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -935,6 +939,10 @@
       }
 
       function getSellVolume(callback){
+        // TODO
+        load --;
+        if(load > 0)
+        callback();
         var fun = 'sellOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -992,6 +1000,10 @@
       }
 
       function getBurnVolume(callback){
+        // TODO
+        load --;
+        if(load > 0)
+        callback();
         var fun = 'burnOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -1785,6 +1797,7 @@
             }
             $("#progressCirculation").css('width', parseInt(circulation / 400000 * 100) + '%');
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
+
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
@@ -1830,11 +1843,14 @@
                 });
               });
             });
+
           });
         });
       }
 
       load();
+
+      var load = 3;
 
       function refreshData(){
         // Wait
@@ -1869,7 +1885,7 @@
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
-                  $("#volume").attr('data-end', parseInt(volume));
+//                  $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(_balance){
                     balance = parseInt(Unit.fromBasic(_balance, 'nas'));
