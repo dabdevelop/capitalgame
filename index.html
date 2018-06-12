@@ -173,7 +173,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
@@ -193,7 +193,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         <div class="row">
           <div class="col-12 col-lg-3">
@@ -848,7 +848,7 @@
 
       function getBuyVolumeByIndex(index, callback){
         var fun = 'getBuyOrder';
-        var args = [];
+        var args = [];   
         args.push(index);
         innerCall(fun, args, 0, function(params){
           neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
@@ -894,17 +894,16 @@
             }
             try{
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getBuyVolumeByIndex(i, f);
-                } else {
-                  callback()
-                }
-              };
-
-              getBuyVolumeByIndex(i, f);
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i < index){
+              //     getBuyVolumeByIndex(i, f);
+              //   } else {
+              //     callback()
+              //   }
+              // };
+              getBuyVolumeByIndex(i, callback());
 
             }catch (err){
               //result is the error message
@@ -962,16 +961,16 @@
             }
             try{
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getSellVolumeByIndex(i, f);
-                } else {
-                  callback();
-                }
-              };
-              getSellVolumeByIndex(i, f);
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i <= index){
+              //     getSellVolumeByIndex(i, f);
+              //   } else {
+              //     callback();
+              //   }
+              // };
+              getSellVolumeByIndex(i, callback());
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1029,16 +1028,16 @@
             try{
 
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getBurnVolumeByIndex(i, f);
-                } else {
-                  callback();
-                }
-              };
-              getBurnVolumeByIndex(i, f);
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i <= index){
+              //     getBurnVolumeByIndex(i, f);
+              //   } else {
+              //     callback();
+              //   }
+              // };
+              getBurnVolumeByIndex(i, callback());
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1832,6 +1831,7 @@
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
 
             getBuyVolume(function(){
+
               getSellVolume(function(){
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
@@ -1863,12 +1863,12 @@
                       }
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
-                      var isSafari = window.safari !== undefined;
-                      if (isSafari && window.mobileAndTabletcheck()) {
-                        App.dashboard();
-                      } else {
-                        App.dashboard();
-                      }
+                      // var isSafari = window.safari !== undefined;
+                      // if (isSafari && window.mobileAndTabletcheck()) {
+                      //   App.dashboard();
+                      // } else {
+                      //   App.dashboard();
+                      // }
                       if(volume > 0){
                         $("#volume").attr('data-end', parseInt(volume));
                         $("#volume").html(parseInt(volume));
@@ -1879,9 +1879,9 @@
                           suffix: o,
                           prefix: a
                         }).start()});
-                      if(interval == null)
+                      if(interval == null){
                         interval = setInterval(refreshData, 45000);
-
+                      }
                     })
                   });
                 });
