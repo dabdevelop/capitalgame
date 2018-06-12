@@ -69,7 +69,7 @@
             </ul>
             <div class="page-title"><span>头号玩家——资本游戏</span></div>
             <ul class="nav navbar-nav float-right be-icons-nav">
-              <li class="nav-item dropdown"><a href="en/index.html" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">English</a></li>
+              <li class="nav-item dropdown"><a href="en/index.html?lang=en" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">English</a></li>
             </ul>
           </div>
         </div>
@@ -2001,8 +2001,8 @@
           closeSelector: '.modal-close',
           classAddAfterOpen: 'modal-show'
         });
-        if(getBrowserLang() != 'zh'){
-          window.location = 'https://cgplayerone.com/en/index.html'
+        if(!window.location.search.match('lang=en') && getBrowserLang() != 'zh'){
+          window.location = 'en/index.html'
         }
         App.init();
       });
