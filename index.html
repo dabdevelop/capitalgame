@@ -1207,8 +1207,13 @@
               if(player.tokenBalance > 0){
                 var playerAverageInPrice = (player.buyValue - player.sellValue - player.burnValue) / player.tokenBalance;
                 if(playerAverageInPrice >= 0){
-                  $("#avgPriceTh").html('平均建仓价格');
-                  $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                  if(playerAverageInPrice < 0.1){
+                    $("#avgPriceTh").html('平均建仓价格');
+                    $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                  } else {
+                    $("#avgPriceTh").html('亏损率');
+                    $("#playerAverageInPrice").html(((player.sellValue + player.burnValue -player.buyValue ) / player.buyValue * 100).toFixed(2) + '%');
+                  }
                 } else {
                   $("#avgPriceTh").html('收益率');
                   $("#playerAverageInPrice").html(((player.sellValue + player.burnValue -player.buyValue ) / player.buyValue * 100).toFixed(2) + '%');
