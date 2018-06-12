@@ -876,14 +876,6 @@
       }
 
       function getBuyVolume(callback){
-        //TODO
-        load --;
-        if(load > 0){
-          callback();
-          if(buyLoaded)
-          return;
-          buyLoaded = true;
-        }
         var fun = 'buyOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -903,7 +895,7 @@
               //     callback()
               //   }
               // };
-              getBuyVolumeByIndex(i, callback());
+              getBuyVolumeByIndex(i, callback);
 
             }catch (err){
               //result is the error message
@@ -928,7 +920,9 @@
             }
             try{
               result = JSON.parse(result);
-              volume += result.amount;
+              for(var r in result){
+                volume += result[r].amount;
+              }
               sellOrder = sellOrder.concat(result);
               callback();
             }catch (err){
@@ -943,14 +937,6 @@
       }
 
       function getSellVolume(callback){
-        // TODO
-        load --;
-        if(load > 0){
-          callback();
-          if(sellLoaded)
-            return;
-          sellLoaded = true;
-        }
         var fun = 'sellOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -970,7 +956,7 @@
               //     callback();
               //   }
               // };
-              getSellVolumeByIndex(i, callback());
+              getSellVolumeByIndex(i, callback);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -994,7 +980,10 @@
             }
             try{
               result = JSON.parse(result);
-              volume += result.amount;
+              for(var r in result){
+                volume += result[r].amount;
+                buyPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
+              }
               burnOrder = burnOrder.concat(result);
               callback();
             }catch (err){
@@ -1009,14 +998,6 @@
       }
 
       function getBurnVolume(callback){
-        // TODO
-        load --;
-        if(load > 0){
-          callback();
-          if(burnLoaded)
-            return;
-          burnLoaded = true;
-        }
         var fun = 'burnOrderIndex';
         var args = [];
         innerCall(fun, args, 0, function(params){
@@ -1037,7 +1018,8 @@
               //     callback();
               //   }
               // };
-              getBurnVolumeByIndex(i, callback());
+//              getBurnVolumeByIndex(i, callback);
+              callback();
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1831,7 +1813,6 @@
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
 
             getBuyVolume(function(){
-
               getSellVolume(function(){
                 getBurnVolume(function(){
                   $("#volume").attr('data-end', parseInt(volume));
@@ -1870,16 +1851,13 @@
                       //   App.dashboard();
                       // }
 //                      App.dashboard();
-                      if(volume > 0){
-                        $("#volume").attr('data-end', parseInt(volume));
-                        $("#volume").html(parseInt(volume));
-                      }
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
                         i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
                           suffix: o,
                           prefix: a
                         }).start()});
+
                       if(interval == null){
                         interval = setInterval(refreshData, 30000);
                       }
@@ -1895,7 +1873,6 @@
 
       load();
 
-      var load = 3;
       var interval = null;
 
       function refreshData(){
@@ -1934,6 +1911,7 @@
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
+                  console.log(volume);
                   $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
 
@@ -1963,10 +1941,6 @@
                       $("#circulation").attr('data-start', preCirculation);
                       $('#marketCap').attr('data-start', parseInt(preMarketCap));
 
-                      if(volume){
-                        $("#volume").html(volume);
-                        $("#volume").attr('data-start', parseInt(preVolume));
-                      }
 
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;

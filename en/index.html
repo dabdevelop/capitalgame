@@ -799,7 +799,6 @@
             }
             try{
               result = JSON.parse(result);
-
               callback(result);
             }catch (err){
               //result is the error message
@@ -888,7 +887,7 @@
               //   }
               // };
 
-              getBuyVolumeByIndex(i, callback());
+              getBuyVolumeByIndex(i, callback);
 
             }catch (err){
               //result is the error message
@@ -913,6 +912,9 @@
             }
             try{
               result = JSON.parse(result);
+              for(var r in result){
+                volume += result[r].amount;
+              }
               sellOrder = sellOrder.concat(result);
               callback();
             }catch (err){
@@ -946,7 +948,7 @@
               //     callback();
               //   }
               // };
-              getSellVolumeByIndex(i, callback());
+              getSellVolumeByIndex(i, callback);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1004,7 +1006,8 @@
               //     callback();
               //   }
               // };
-              getBurnVolumeByIndex(i, callback());
+//              getBurnVolumeByIndex(i, callback);
+              callback();
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1703,7 +1706,7 @@
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
-                  $("#volume").attr('data-end', parseInt(volume));
+                  $("#volume").attr('data-end', volume);
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(_balance){
                     balance = parseInt(Unit.fromBasic(_balance, 'nas'));
