@@ -165,7 +165,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
@@ -185,7 +185,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         <div class="row">
           <div class="col-12 col-lg-3">
@@ -878,17 +878,17 @@
             }
             try{
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getBuyVolumeByIndex(i, f);
-                } else {
-                  callback()
-                }
-              };
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i <= index){
+              //     getBuyVolumeByIndex(i, f);
+              //   } else {
+              //     callback()
+              //   }
+              // };
 
-              getBuyVolumeByIndex(i, f);
+              getBuyVolumeByIndex(i, callback());
 
             }catch (err){
               //result is the error message
@@ -937,16 +937,16 @@
             }
             try{
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getSellVolumeByIndex(i, f);
-                } else {
-                  callback();
-                }
-              };
-              getSellVolumeByIndex(i, f);
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i <= index){
+              //     getSellVolumeByIndex(i, f);
+              //   } else {
+              //     callback();
+              //   }
+              // };
+              getSellVolumeByIndex(i, callback());
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -995,16 +995,16 @@
             try{
 
               var index = JSON.parse(result);
-              var i = 0;
-              var f = function(){
-                i ++;
-                if(i <= index){
-                  getBurnVolumeByIndex(i, f);
-                } else {
-                  callback();
-                }
-              };
-              getBurnVolumeByIndex(i, f);
+              var i = index;
+              // var f = function(){
+              //   i ++;
+              //   if(i <= index){
+              //     getBurnVolumeByIndex(i, f);
+              //   } else {
+              //     callback();
+              //   }
+              // };
+              getBurnVolumeByIndex(i, callback());
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1733,11 +1733,11 @@
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
                       var isSafari = window.safari !== undefined;
-                      if (isSafari && window.mobileAndTabletcheck()) {
-                        App.dashboard();
-                      } else {
-                        App.dashboard();
-                      }
+                      // if (isSafari && window.mobileAndTabletcheck()) {
+                      //   App.dashboard();
+                      // } else {
+                      //   App.dashboard();
+                      // }
 
                       setInterval(refreshData, 45000);
                     })
