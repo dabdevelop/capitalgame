@@ -1869,6 +1869,7 @@
                       // } else {
                       //   App.dashboard();
                       // }
+//                      App.dashboard();
                       if(volume > 0){
                         $("#volume").attr('data-end', parseInt(volume));
                         $("#volume").html(parseInt(volume));
@@ -1880,7 +1881,7 @@
                           prefix: a
                         }).start()});
                       if(interval == null){
-                        interval = setInterval(refreshData, 45000);
+                        interval = setInterval(refreshData, 30000);
                       }
                     })
                   });
