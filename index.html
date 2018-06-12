@@ -1176,6 +1176,7 @@
         $("#playerSellValue").html('');
         $("#playerBurnValue").html('');
         $("#playerAverageInPrice").html('');
+        $("#avgPriceTh").html('');
       }
 
 
@@ -1205,7 +1206,13 @@
               $("#playerBurnValue").html(player.burnValue.toFixed(6));
               if(player.tokenBalance > 0){
                 var playerAverageInPrice = (player.buyValue - player.sellValue - player.burnValue) / player.tokenBalance;
-                $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                if(playerAverageInPrice >= 0){
+                  $("#avgPriceTh").html('平均建仓价格');
+                  $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                } else {
+                  $("#avgPriceTh").html('收益率');
+                  $("#playerAverageInPrice").html(((player.sellValue + player.burnValue -player.buyValue ) / player.buyValue * 100).toFixed(2) + '%');
+                }
               } else {
                 $("#playerAverageInPrice").html(0);
               }
@@ -1973,7 +1980,7 @@
                 <th class="number">花费NAS</th>
                 <th class="number">卖出得到NAS</th>
                 <th class="number">销毁得到NAS</th>
-                <th class="number">平均入手价格</th>
+                <th class="number" id="avgPriceTh"></th>
               </tr>
               </thead>
               <tbody class="no-border-x">
