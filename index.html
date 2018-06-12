@@ -1825,9 +1825,9 @@
                     } catch (e){
                       console.log(e)
                     }
-                    getInsureBalance(function(balance){
+                    getInsureBalance(function(_balance){
                       try{
-                        insureBalance = parseInt(Unit.fromBasic(balance, 'nas'));
+                        insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
                         $("#insureBalance").html(insureBalance);
                         $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
                       } catch (e){
@@ -1857,6 +1857,25 @@
                           suffix: o,
                           prefix: a
                         }).start()});
+
+                      var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
+                      e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
+                      n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
+
+                      $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
+                        label: "Services",
+                        data: balance
+                      }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
+                        series: {
+                          pie: {
+                            radius: .75,
+                            innerRadius: .58,
+                            show: !0,
+                            highlight: {opacity: .1},
+                            label: {show: !1}
+                          }
+                        }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
+                      });
 
                       if(interval == null){
                         interval = setInterval(refreshData, 25000);
