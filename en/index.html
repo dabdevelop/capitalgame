@@ -1176,7 +1176,7 @@
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
             skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000), url: accountUrl };
+            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
           }
@@ -1195,7 +1195,7 @@
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
             skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><a href="{{url}}" class="icon" target="_blank"><i class="mdi mdi-link"></i></a></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000), url: accountUrl };
+            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
           }
