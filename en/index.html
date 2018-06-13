@@ -764,7 +764,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount or value, error message: " + receipt.execute_error,
+                      text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount or value, error message: " + resp.execute_error,
                       time: "",
                       class_name: "danger clean"
                     });
