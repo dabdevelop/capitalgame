@@ -520,7 +520,7 @@
                     clearInterval(task);
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transaction fail, please set GasLimit to 2M wei.",
+                      text: "Transaction fail, please set GasLimit to 2M wei or reduce the amount or value.",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -657,7 +657,7 @@
 
         $.gritter.add({
           title: "New Notice",
-          text: "Invoking the wallet now, please set GasLimit to 2M wei and confirm.",
+          text: "Invoking the wallet now, please set GasLimit to 2M wei or reduce the amount or value and confirm.",
           time: "",
           class_name: "primary clean"
         });
@@ -692,7 +692,7 @@
                       } else if(resp.status == 0){
                         $.gritter.add({
                           title: "New Notice",
-                          text: "Transaction failed, please set GasLimit to 2M wei.",
+                          text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount or value.",
                           time: "",
                           class_name: "danger clean"
                         });
@@ -757,7 +757,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "New Notice",
-                      text: "Transaction failed, please set GasLimit to 2M wei.",
+                      text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount or value.",
                       time: "",
                       class_name: "danger clean"
                     });

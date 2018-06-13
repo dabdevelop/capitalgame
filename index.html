@@ -528,7 +528,7 @@
                     clearInterval(task);
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败, 请将GasLimit手动设置为2M wei",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -665,7 +665,7 @@
 
         $.gritter.add({
           title: "新消息",
-          text: "正在调用钱包, 请将GasLimit手动设置为2M wei并确认操作!",
+          text: "正在调用钱包, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖并确认操作!",
           time: "",
           class_name: "primary clean"
         });
@@ -700,7 +700,7 @@
                       } else if(resp.status == 0){
                         $.gritter.add({
                           title: "新消息",
-                          text: "交易失败, 请将GasLimit手动设置为2M wei",
+                          text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
                           time: "",
                           class_name: "danger clean"
                         });
@@ -765,7 +765,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败, 请将GasLimit手动设置为2M wei",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
                       time: "",
                       class_name: "danger clean"
                     });
@@ -1416,7 +1416,7 @@
           if(value > 2){
             $.gritter.add({
               title: "新消息",
-              text: "确认交易时请将GasLimit手动设置为2M wei",
+              text: "确认交易时请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
               time: "",
               class_name: "warning clean"
             });
@@ -1474,7 +1474,7 @@
           if(sellAmount > 100){
             $.gritter.add({
               title: "新消息",
-              text: "确认交易时请将GasLimit手动设置为2M wei",
+              text: "确认交易时请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
               time: "",
               class_name: "warning clean"
             });
