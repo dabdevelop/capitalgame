@@ -765,7 +765,7 @@
                   } else if(resp.status == 0){
                     $.gritter.add({
                       title: "新消息",
-                      text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖",
+                      text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖, 错误提示: " + resp.execute_error,
                       time: "",
                       class_name: "danger clean"
                     });
