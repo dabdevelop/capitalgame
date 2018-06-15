@@ -619,6 +619,7 @@
             if(retryQueryTime <= 0){
               clearInterval(intervalQuery);
               if(resp.code == 1){
+                clearInterval(intervalQuery);
                 $.gritter.add({
                   title: "新消息",
                   text: "查询交易状态超时, 请您手动查询交易!",
@@ -1915,7 +1916,7 @@
                       });
 
                       if(interval == null){
-                        interval = setInterval(refreshData, 25000);
+                        interval = setInterval(refreshData, 45000);
                       }
                     })
                   });
