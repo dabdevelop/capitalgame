@@ -849,7 +849,7 @@
 
 
       function getBuyVolume(callback){
-        $.get('http://d.nasgo.top:100/cg/buy-list', function(result){
+        $.get('https://api.cgplayerone.com/cg/buy-list', function(result){
           buyOrder = buyOrder.concat(result);
           for(var r in result){
             volume += result[r].amount;
@@ -860,7 +860,7 @@
       }
 
       function getSellVolume(callback){
-        $.get('http://d.nasgo.top:100/cg/sell-list', function(result){
+        $.get('https://api.cgplayerone.com/cg/sell-list', function(result){
           sellOrder = sellOrder.concat(result);
           for(var r in result){
             volume += result[r].amount;
@@ -870,7 +870,7 @@
         })
       }
       function getBurnVolume(callback){
-        $.get('http://d.nasgo.top:100/cg/burn-list', function(result){
+        $.get('https://api.cgplayerone.com/cg/burn-list', function(result){
           burnOrder = burnOrder.concat(result);
           for(var r in result){
             volume += result[r].amount;
@@ -881,7 +881,7 @@
       }
 
       function getBalance(callback){
-        $.get('http://d.nasgo.top:100/cg/balance', function(result){
+        $.get('https://api.cgplayerone.com/cg/balance', function(result){
           callback(result)
         })
       }
@@ -957,7 +957,7 @@
       }
 
       function getInsureBalance(callback){
-        $.get('http://d.nasgo.top:100/cg/insure-balance', function(result){
+        $.get('https://api.cgplayerone.com/cg/insure-balance', function(result){
           callback(result)
         })
       }
