@@ -38,8 +38,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-119584347-3');
+
+    if(window.location.search.match('lang=en')){
+      localStorage.setItem('lang', 'en');
+    }
+
   </script>
   </head>
   <body>
@@ -430,6 +434,10 @@
     <script src="../assets/lib/jquery.niftymodals/dist/jquery.niftymodals.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+
+      $.ajaxSetup({
+        cache: false
+      });
 
       'use strict';
 
@@ -2040,8 +2048,6 @@
         });
       }
 
-      var lang = '';
-
       $(document).ready(function() {
         $.fn.niftyModal('setDefaults', {
           overlaySelector: '.modal-overlay',
@@ -2049,11 +2055,6 @@
           closeSelector: '.modal-close',
           classAddAfterOpen: 'modal-show'
         });
-
-        lang = localStorage.getItem('lang');
-        if(window.location.search.match('lang=en') || lang === 'en'){
-          localStorage.setItem('lang', 'en');
-        }
 
         App.init();
         $.gritter.add({
