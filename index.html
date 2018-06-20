@@ -1751,7 +1751,7 @@
                       });
 
                       if(interval == null){
-                        interval = setInterval(refreshData, 25000);
+                        interval = setInterval(refreshData, 20000);
                       }
                     })
                   });
@@ -1865,11 +1865,9 @@
         lang = localStorage.getItem('lang');
         if(window.location.search.match('lang=zh') || lang === 'zh'){
           localStorage.setItem('lang', 'zh');
-        } else {
-          localStorage.setItem('lang', 'en');
         }
         if(!window.location.search.match('lang=zh') && getBrowserLang() != 'zh' && lang != 'zh'){
-          window.location = 'en/index.html'
+          window.location = 'en/index.html?lang=en'
         }
         App.init();
         $.gritter.add({

@@ -1984,6 +1984,7 @@
         });
       }
 
+      var lang = '';
 
       $(document).ready(function() {
         $.fn.niftyModal('setDefaults', {
@@ -1992,6 +1993,12 @@
           closeSelector: '.modal-close',
           classAddAfterOpen: 'modal-show'
         });
+
+        lang = localStorage.getItem('lang');
+        if(window.location.search.match('lang=en') || lang === 'en'){
+          localStorage.setItem('lang', 'en');
+        }
+
         App.init();
         $.gritter.add({
           title: "New Notice",
