@@ -600,6 +600,14 @@
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+        
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+              setOrder();
+            });
+          });
+        });
       }
 
 
