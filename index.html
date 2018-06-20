@@ -1613,6 +1613,15 @@
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+            setOrder();
+            });
+          });
+        });
+
         getPlayerNum(function(result){
           playerNum = parseInt(result);
           $("#playerNum").attr('data-end', playerNum);
