@@ -844,210 +844,280 @@
         });
       }
 
-      function getBuyVolumeByIndex(index, callback){
-        var fun = 'getBuyOrder';
-        var args = [];
-        args.push(index);
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              result = JSON.parse(result);
-              buyOrder = buyOrder.concat(result);
-              for(var r in result){
-                volume += result[r].amount;
-                buyPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
-              }
-              callback();
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
 
-        });
-      }
 
       function getBuyVolume(callback){
-        var fun = 'buyOrderIndex';
-        var args = [];
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              var index = JSON.parse(result);
-              var i = index;
-              // var f = function(){
-              //   i ++;
-              //   if(i <= index){
-              //     getBuyVolumeByIndex(i, f);
-              //   } else {
-              //     callback()
-              //   }
-              // };
-
-              getBuyVolumeByIndex(i, callback);
-
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
-      }
-
-      function getSellVolumeByIndex(index, callback){
-        var fun = 'getSellOrder';
-        var args = [];
-        args.push(index);
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              result = JSON.parse(result);
-              for(var r in result){
-                volume += result[r].amount;
-              }
-              sellOrder = sellOrder.concat(result);
-              callback();
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
+        $.get('https://api.cgplayerone.com/cg/buy-list', function(result){
+          buyOrder = buyOrder.concat(result);
+          for(var r in result){
+            volume += result[r].amount;
+            buyPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
+          }
+          callback()
+        })
       }
 
       function getSellVolume(callback){
-        var fun = 'sellOrderIndex';
-        var args = [];
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              var index = JSON.parse(result);
-              var i = index;
-              // var f = function(){
-              //   i ++;
-              //   if(i <= index){
-              //     getSellVolumeByIndex(i, f);
-              //   } else {
-              //     callback();
-              //   }
-              // };
-              getSellVolumeByIndex(i, callback);
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
+        $.get('https://api.cgplayerone.com/cg/sell-list', function(result){
+          sellOrder = sellOrder.concat(result);
+          for(var r in result){
+            volume += result[r].amount;
+            sellPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
+          }
+          callback()
+        })
       }
-
-      function getBurnVolumeByIndex(index, callback){
-        var fun = 'getBurnOrder';
-        var args = [];
-        args.push(index);
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              result = JSON.parse(result);
-              burnOrder = burnOrder.concat(result);
-              callback();
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
-      }
-
       function getBurnVolume(callback){
-        var fun = 'burnOrderIndex';
-        var args = [];
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-
-              var index = JSON.parse(result);
-              var i = index;
-              // var f = function(){
-              //   i ++;
-              //   if(i <= index){
-              //     getBurnVolumeByIndex(i, f);
-              //   } else {
-              //     callback();
-              //   }
-              // };
-//              getBurnVolumeByIndex(i, callback);
-              callback();
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
+        $.get('https://api.cgplayerone.com/cg/burn-list', function(result){
+          burnOrder = burnOrder.concat(result);
+          for(var r in result){
+            volume += result[r].amount;
+            burnPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
+          }
+          callback()
+        })
       }
 
       function getBalance(callback){
-        var fun = 'balance';
-        var args = [];
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              var balance = JSON.parse(result);
-              callback(balance);
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
+        $.get('https://api.cgplayerone.com/cg/balance', function(result){
+          callback(result)
+        })
       }
+
+      function getInsureBalance(callback){
+        $.get('https://api.cgplayerone.com/cg/insure-balance', function(result){
+          callback(result)
+        })
+      }
+
+//
+//      function getBuyVolumeByIndex(index, callback){
+//        var fun = 'getBuyOrder';
+//        var args = [];
+//        args.push(index);
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              result = JSON.parse(result);
+//              buyOrder = buyOrder.concat(result);
+//              for(var r in result){
+//                volume += result[r].amount;
+//                buyPriceTrend.push([result[r].orderId, parseInt(result[r].price.toFixed(8) * 1000000)]);
+//              }
+//              callback();
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getBuyVolume(callback){
+//        var fun = 'buyOrderIndex';
+//        var args = [];
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              var index = JSON.parse(result);
+//              var i = index;
+//              // var f = function(){
+//              //   i ++;
+//              //   if(i <= index){
+//              //     getBuyVolumeByIndex(i, f);
+//              //   } else {
+//              //     callback()
+//              //   }
+//              // };
+//
+//              getBuyVolumeByIndex(i, callback);
+//
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getSellVolumeByIndex(index, callback){
+//        var fun = 'getSellOrder';
+//        var args = [];
+//        args.push(index);
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              result = JSON.parse(result);
+//              for(var r in result){
+//                volume += result[r].amount;
+//              }
+//              sellOrder = sellOrder.concat(result);
+//              callback();
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getSellVolume(callback){
+//        var fun = 'sellOrderIndex';
+//        var args = [];
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              var index = JSON.parse(result);
+//              var i = index;
+//              // var f = function(){
+//              //   i ++;
+//              //   if(i <= index){
+//              //     getSellVolumeByIndex(i, f);
+//              //   } else {
+//              //     callback();
+//              //   }
+//              // };
+//              getSellVolumeByIndex(i, callback);
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getBurnVolumeByIndex(index, callback){
+//        var fun = 'getBurnOrder';
+//        var args = [];
+//        args.push(index);
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              result = JSON.parse(result);
+//              burnOrder = burnOrder.concat(result);
+//              callback();
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getBurnVolume(callback){
+//        var fun = 'burnOrderIndex';
+//        var args = [];
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//
+//              var index = JSON.parse(result);
+//              var i = index;
+//              // var f = function(){
+//              //   i ++;
+//              //   if(i <= index){
+//              //     getBurnVolumeByIndex(i, f);
+//              //   } else {
+//              //     callback();
+//              //   }
+//              // };
+////              getBurnVolumeByIndex(i, callback);
+//              callback();
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getBalance(callback){
+//        var fun = 'balance';
+//        var args = [];
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              var balance = JSON.parse(result);
+//              callback(balance);
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
+//
+//      function getInsureBalance(callback){
+//        var fun = 'insureBalance';
+//        var args = [];
+//        innerCall(fun, args, 0, function(params){
+//          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+//            var result = resp.result;
+//            if(result === 'null' || result === '""'){
+//              return;
+//            }
+//            try{
+//              var balance = JSON.parse(result);
+//              callback(balance);
+//            }catch (err){
+//              //result is the error message
+//              console.log("error:" + err.message)
+//            }
+//          }).catch(function (err) {
+//            console.log("error:" + err.message)
+//          });
+//
+//        });
+//      }
 
       function getPrice(){
         var fun = 'buy';
@@ -1108,29 +1178,6 @@
             try{
               var order = JSON.parse(result);
               $("#burnPrice").html(order.price.toFixed(5));
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
-      }
-
-      function getInsureBalance(callback){
-        var fun = 'insureBalance';
-        var args = [];
-        innerCall(fun, args, 0, function(params){
-          neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              var balance = JSON.parse(result);
-              callback(balance);
             }catch (err){
               //result is the error message
               console.log("error:" + err.message)
@@ -1774,6 +1821,15 @@
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+              setOrder();
+            });
+          });
+        });
+
         getPlayerNum(function(result){
           playerNum = parseInt(result);
           $("#playerNum").attr('data-end', playerNum);

@@ -898,6 +898,12 @@
         })
       }
 
+      function getInsureBalance(callback){
+        $.get('https://api.cgplayerone.com/cg/insure-balance', function(result){
+          callback(result)
+        })
+      }
+
       function getPrice(){
         var fun = 'buy';
         var args = [];
@@ -966,12 +972,6 @@
           });
 
         });
-      }
-
-      function getInsureBalance(callback){
-        $.get('https://api.cgplayerone.com/cg/insure-balance', function(result){
-          callback(result)
-        })
       }
 
       function getContractTokenBalance(){
