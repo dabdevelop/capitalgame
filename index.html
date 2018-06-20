@@ -1792,6 +1792,15 @@
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+              setOrder();
+            });
+          });
+        });
+
         getPlayerNum(function(result){
           playerNum = parseInt(result);
           $("#playerNum").attr('data-end', playerNum);
@@ -1809,11 +1818,10 @@
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
             getBuyVolume(function(){
               getSellVolume(function(){
+                setOrder();
                 getBurnVolume(function(){
-                  console.log(volume);
                   $("#volume").attr('data-end', parseInt(volume));
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
-
                   getBalance(function(_balance){
                     balance = parseInt(Unit.fromBasic(_balance, 'nas'));
                     $("#balance").html(balance);
@@ -1830,7 +1838,7 @@
                       } catch (e){
                         console.log(e)
                       }
-                      setOrder();
+
                       $("#playerNum").html(prePlayerNum);
                       $("#circulation").html(preCirculation);
                       $("#volume").html(preVolume);
