@@ -1065,7 +1065,7 @@
                 if(playerAverageInPrice >= 0){
                   if(playerAverageInPrice < 0.1){
                     $("#avgPriceTh").html('平均建仓价格');
-                    $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                    $("#playerAverageInPrice").html((player.buyValue / player.buyAmount).toFixed(6));
                   } else {
                     $("#avgPriceTh").html('亏损率');
                     $("#playerAverageInPrice").html(((player.sellValue + player.burnValue -player.buyValue ) / player.buyValue * 100).toFixed(2) + '%');

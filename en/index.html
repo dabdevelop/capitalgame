@@ -1267,7 +1267,7 @@
                 if(playerAverageInPrice >= 0){
                   if(playerAverageInPrice < 0.1){
                     $("#avgPriceTh").html('Average CGT Price');
-                    $("#playerAverageInPrice").html(playerAverageInPrice.toFixed(6));
+                    $("#playerAverageInPrice").html((player.buyValue / player.buyAmount).toFixed(6));
                   } else {
                     $("#avgPriceTh").html('Lose Rate');
                     $("#playerAverageInPrice").html(((player.sellValue + player.burnValue -player.buyValue ) / player.buyValue * 100).toFixed(2) + '%');
