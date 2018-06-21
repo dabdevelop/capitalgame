@@ -1465,13 +1465,29 @@
           });
         } else {
           if(value > 2){
-            $.gritter.add({
-              title: "New Notice",
-              text: "Please set the GasLimit to 2M wei when you submit the transaction.",
-              time: "",
-              class_name: "warning clean"
-            });
+
           }
+
+          if(value > 1){
+            if(window.mobileAndTabletcheck()){
+              $.gritter.add({
+                title: "New Notice",
+                text: "Mobile buy value should less than 1 NAS ( <= 1NAS)",
+                time: "",
+                class_name: "warning clean"
+              });
+            } else {
+              $.gritter.add({
+                title: "New Notice",
+                text: "Please set the GasLimit to 2M wei when you submit the transaction.",
+                time: "",
+                class_name: "warning clean"
+              });
+            }
+          }
+
+          if(window.mobileAndTabletcheck() && value > 1) return;
+
           var fun = 'buy';
           var args = [];
           innerCall(fun, args, 0, function(params){
