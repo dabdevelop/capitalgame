@@ -1486,7 +1486,11 @@
             }
           }
 
-          if(window.mobileAndTabletcheck() && value > 1) return;
+          if(window.mobileAndTabletcheck() && value > 1){
+            $("#form-buy").prop('hidden', true);
+            wait = setInterval(clearWait, 500);
+            return;
+          }
 
           var fun = 'buy';
           var args = [];
