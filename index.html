@@ -680,6 +680,7 @@
       var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
       var nebPay = new NebPay();
       var intervalQuery;
+      var stop = true;
 
       function callNebPay(fun, args, value, callback) {
 
@@ -690,6 +691,16 @@
             time: "",
             class_name: "warning clean"
           });
+        }
+
+        if(stop){
+          $.gritter.add({
+            title: "新消息",
+            text: "目前网站正在维护!",
+            time: "",
+            class_name: "primary clean"
+          });
+          return;
         }
 
         var wait;
