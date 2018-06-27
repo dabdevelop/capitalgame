@@ -26,12 +26,12 @@
 
 
            function getPlayers(callback){
-//               $.get("https://cgplayerone.com/data/players.json", function (resp) {
-//                   callback && callback(resp)
-//               })
-               $.get("http://localhost:63342/capitalgame/data/players.json", function (resp) {
+               $.get("https://cgplayerone.com/data/players.json", function (resp) {
                    callback && callback(resp)
                })
+//               $.get("http://localhost:63342/capitalgame/data/players.json", function (resp) {
+//                   callback && callback(resp)
+//               })
            }
 
             var dom = document.getElementById("container");
