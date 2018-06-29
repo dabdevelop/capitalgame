@@ -23,7 +23,9 @@
        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
        <script type="text/javascript">
-
+           $.ajaxSetup({
+               cache: false
+           });
 
            function getPlayers(callback){
                $.get("https://cgplayerone.com/data/players.json", function (resp) {
@@ -66,7 +68,7 @@
                     option = {
                         title : {
                             text: '头号玩家排名',
-                            subtext: '2018-6-27',
+                            subtext: '按CGT持有量',
                             x:'center'
                         },
                         tooltip : {
