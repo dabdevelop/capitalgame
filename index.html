@@ -63,6 +63,16 @@
         window.location = 'en/index.html?lang=en'
       }
     </script>
+
+    <style>
+      .highcharts-axis-resizer {
+        stroke: #eee;
+      }
+      .highcharts-axis-resizer:hover {
+        stroke: #ccc;
+      }
+    </style>
+
   </head>
   <body>
     <div class="be-wrapper be-offcanvas-menu be-fixed-sidebar">
@@ -198,18 +208,19 @@
               </div>
             </div>
           </div>
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
               <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
                 </div>
                 <div class="widget-chart-container">
-                  <div class="widget-chart-info">
-                    <ul class="chart-legend-horizontal">
-                      <li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>买入价格(10 ^ -6 NAS)</li>
-                    </ul>
-                  </div>
-                  <div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>
+                  <!--<div class="widget-chart-info">-->
+                    <!--<ul class="chart-legend-horizontal">-->
+                      <!--<li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>买入价格(10 ^ -6 NAS)</li>-->
+                    <!--</ul>-->
+                  <!--</div>-->
+                  <!--<div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>-->
+                  <div id="container" style="min-width:400px;height:400px"></div>
                 </div>
                 <div class="be-spinner">
                   <svg width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -218,7 +229,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
         <div class="row">
           <div class="col-12 col-lg-3">
@@ -428,6 +439,10 @@
     </div>
 
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/js/highstock.js"></script>
+    <script src="assets/js/exporting.js"></script>
+    <script src="assets/js/highcharts-zh_CN.js"></script>
+    <script src="assets/js/drag-panes.js"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -454,6 +469,8 @@
     <script src="assets/lib/prettify/prettify.js" type="text/javascript"></script>
     <script src="assets/lib/jquery.gritter/js/jquery.gritter.js" type="text/javascript"></script>
     <script src="assets/lib/jquery.niftymodals/dist/jquery.niftymodals.js" type="text/javascript"></script>
+
+
 
     <script type="text/javascript">
 
@@ -1635,6 +1652,119 @@
         }, "*");
       }
 
+      function loadKL(){
+        Highcharts.setOptions({
+          lang: {
+            rangeSelectorZoom: ''
+          }
+        });
+        $.getJSON('https://cgplayerone.com/data/kl.json', function (data) {
+          var ohlc = [],
+                  volume = [],
+                  dataLength = data.length,
+          // set the allowed units for data grouping
+                  groupingUnits = [[
+                    'week',                         // unit name
+                    [1]                             // allowed multiples
+                  ], [
+                    'month',
+                    [1, 2, 3, 4, 6]
+                  ]],
+                  i = 0;
+          for (i; i < dataLength; i += 1) {
+            ohlc.push([
+              data[i][0], // the date
+              data[i][1], // open
+              data[i][2], // high
+              data[i][3], // low
+              data[i][4] // close
+            ]);
+            volume.push([
+              data[i][0], // the date
+              data[i][5] // the volume
+            ]);
+          }
+          // create the chart
+          var chart = Highcharts.stockChart('container', {
+            rangeSelector: {
+              selected: 1,
+              inputDateFormat: '%Y-%m-%d'
+            },
+            title: {
+              text: 'CGT历史价格'
+            },
+            xAxis: {
+              dateTimeLabelFormats: {
+                millisecond: '%H:%M:%S.%L',
+                second: '%H:%M:%S',
+                minute: '%H:%M',
+                hour: '%H:%M',
+                day: '%m-%d',
+                week: '%m-%d',
+                month: '%y-%m',
+                year: '%Y'
+              }
+            },
+            tooltip: {
+              split: false,
+              shared: true
+            },
+            yAxis: [{
+              labels: {
+                align: 'right',
+                x: -3
+              },
+              title: {
+                text: '价格'
+              },
+              height: '65%',
+              resize: {
+                enabled: true
+              },
+              lineWidth: 2
+            }, {
+              labels: {
+                align: 'right',
+                x: -3
+              },
+              title: {
+                text: '成交量'
+              },
+              top: '65%',
+              height: '35%',
+              offset: 0,
+              lineWidth: 2
+            }],
+            series: [{
+              type: 'candlestick',
+              name: 'CGT价格',
+              color: 'red',
+              lineColor: 'red',
+              upColor: 'green',
+              upLineColor: 'green',
+              tooltip: {
+              },
+              navigatorOptions: {
+                color: Highcharts.getOptions().colors[0]
+              },
+              data: ohlc,
+              dataGrouping: {
+                units: groupingUnits
+              },
+              id: 'sz'
+            },{
+              type: 'column',
+              name: 'CGT交易量',
+              data: volume,
+              yAxis: 1,
+              dataGrouping: {
+                units: groupingUnits
+              }
+            }]
+          });
+        });
+      }
+
       var playerNum = 0;
       var circulation = 0;
       var contractTokenBalance = 0;
@@ -1660,6 +1790,7 @@
       function load(){
         var e = $(".main-content");
         e.length && (e.addClass("be-loading-active"));
+        loadKL();
         checkWallet();
         getPrice();
         loadPlayerAccount();
