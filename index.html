@@ -208,7 +208,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="klchart">
             <div class="col-md-12">
               <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
@@ -1762,6 +1762,8 @@
               }
             }]
           });
+          var e = $("#klchart");
+          e.length && e.removeClass("be-loading-active");
         });
       }
 
@@ -1849,7 +1851,7 @@
                         }
                       }
                       var e = $(".main-content");
-                      e.removeClass("be-loading-active");
+                      e.length && e.removeClass("be-loading-active");
 
                       var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
                       e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
