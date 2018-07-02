@@ -237,6 +237,8 @@
             <div class="card card-border-color card-border-color-infor">
             <div class="widget be-loading">
               <div class="widget-head">
+                  <div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(0)"></span>
+                  </div>
                 <div class="title">合约金额构成</div>
               </div>
               <div class="widget-chart-container">
@@ -269,7 +271,8 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider">销毁<span class="card-subtitle" id="burnPrice">销毁价格</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(1)"></span>
+              </div>销毁<span class="card-subtitle" id="burnPrice">销毁价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="burnAmount" class="col-form-label text-right">销毁数量</label><br><br>
@@ -284,7 +287,8 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-success">
-              <div class="card-header card-header-divider">买入<span class="card-subtitle" id="buyPrice">买入价格</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(2)"></span>
+              </div>买入<span class="card-subtitle" id="buyPrice">买入价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="buyValue" class="col-form-label text-right">买入金额</label><br><br>
@@ -299,7 +303,8 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider">卖出<span class="card-subtitle" id="sellPrice">卖出价格</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(3)"></span>
+              </div>卖出<span class="card-subtitle" id="sellPrice">卖出价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="sellAmount" class="col-form-label text-right">卖出数量</label><br><br>
@@ -2051,6 +2056,21 @@
           });
         }
       });
+
+
+      function help(index){
+          if(index == 0){
+            $("#help-0").modal('show');
+          } else if(index == 1){
+            $("#help-1").modal('show');
+          } else if (index == 2){
+            $("#help-2").modal('show');
+          } else if(index == 3){
+            $("#help-3").modal('show');
+          }
+      }
+
+
     </script>
 
 
@@ -2151,6 +2171,75 @@
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
           <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closePop()">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="help-0" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">合约金额构成</h4>
+        </div>
+        <div class="modal-body">
+          <p>合约中的NAS分为两个部分: 储备金和保证金。储备金用于与玩家间进行CGT交易，保证金用于补偿玩家销毁的CGT以保证CGT的价格底线，保证CGT不会归零。</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="help-1" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">销毁</h4>
+        </div>
+        <div class="modal-body">
+          <p>"销毁"是指玩家将CGT销毁并且从合约中获取一部分的保证金。当玩家挤兑合约的时候，卖出价格不断下降，销毁价格不断上涨，最终销毁价格形成一个支撑价格，防止价格继续下跌。销毁获得的NAS来自合约保证金。</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="help-2" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">买入</h4>
+        </div>
+        <div class="modal-body">
+          <p>"买入"是指玩家通过支付一定数量的NAS从合约中购买等值的CGT。当合约中拥有剩余的CGT时将优先购买剩余的CGT；当合约中CGT被玩家买完时，合约将按照市场价格发行新的CGT。玩家用于购买合约中剩余的CGT的NAS将全部进入储备金。玩家用于购买新发行的CGT的NAS将一部分进入储备金一部分进入保证金，比例是依据当前的储备金率。</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <div id="help-3" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">卖出</h4>
+        </div>
+        <div class="modal-body">
+          <p>"卖出"是指玩家通过卖出一定数量的CGT给合约并获得等值的NAS。玩家通过卖出可以获利退出，或者等待合适的价格再次买入。卖出获得的NAS来自合约储备金。</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
