@@ -205,6 +205,7 @@
             <div class="card card-border-color card-border-color-infor">
             <div class="widget be-loading">
               <div class="widget-head">
+                <div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(0)"></span></div>
                 <div class="title">Partitions of Contract NAS</div>
               </div>
               <div class="widget-chart-container">
@@ -237,7 +238,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider">Burn<span class="card-subtitle" id="burnPrice">Burn Price</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(1)"></span></div>Burn<span class="card-subtitle" id="burnPrice">Burn Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="burnAmount" class="col-form-label text-right">Burn Amount</label><br><br>
@@ -252,7 +253,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-success">
-              <div class="card-header card-header-divider">Buy<span class="card-subtitle" id="buyPrice">Buy Price</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(2)"></span></div>Buy<span class="card-subtitle" id="buyPrice">Buy Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="buyValue" class="col-form-label text-right">Buy Value</label><br><br>
@@ -267,7 +268,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider">Sell<span class="card-subtitle" id="sellPrice">Sell Price</span></div>
+              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(3)"></span></div>Sell<span class="card-subtitle" id="sellPrice">Sell Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="sellAmount" class="col-form-label text-right">Sell Amount</label><br><br>
@@ -2227,6 +2228,20 @@
         });
       });
 
+
+
+      function help(index){
+        if(index == 0){
+          $("#help-0").modal('show');
+        } else if(index == 1){
+          $("#help-1").modal('show');
+        } else if (index == 2){
+          $("#help-2").modal('show');
+        } else if(index == 3){
+          $("#help-3").modal('show');
+        }
+      }
+
     </script>
 
   </body>
@@ -2300,6 +2315,77 @@
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
           <button type="button" data-dismiss="modal" class="btn btn-success modal-close" onclick="resetPlayerInfo()">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <div id="help-0" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Partitions of Contract NAS</h4>
+        </div>
+        <div class="modal-body">
+          <p>The NAS in the contract is divided into two parts: Reserve NAS and Guarantee NAS. The Reserve NAS is used for CGT trades with players. The Guarantee NAS is used to compensate the players' burned CGT to ensure the floor of the CGT price and ensure that the price of CGT will not turn to zero.</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="help-1" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Burn</h4>
+        </div>
+        <div class="modal-body">
+          <p>"Burn" refers to destroying CGT and obtaining a share of the Guarantee NAS from the contract. When the player sell CGT in corwd, the selling price continues to decline, the burn price continues to rise, and burn price finally forms a supporting price to prevent the price from falling. The NAS obtained from burning CGT comes from the Guarantee NAS.</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="help-2" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Buy</h4>
+        </div>
+        <div class="modal-body">
+          <p>"Buy" refers to buying CGT from contract by paying a certain amount of NAS. When there is CGT remains in the contract, the remaining CGT will be offered priority. When the contract's CGT is sold out, the contract will issue new CGT according to the market price. The NAS used by players to purchase the remaining CGT of the contract will go to the reserves. The NAS used by players to purchase the newly issued CGT will partly enter the Reserve NAS and else enter the Guarantee NAS, which is according to current Reserve Ratio.</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <div id="help-3" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Sell</h4>
+        </div>
+        <div class="modal-body">
+          <p>"Selling" refers to selling a certain amount of CGT to the contract and get NAS. Players can earn profits by selling, or wait for a cheaper price to buy again. The NAS comes from the Contract Reserve NAS.</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
