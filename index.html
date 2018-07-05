@@ -1872,7 +1872,8 @@
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
-            setOrder();
+              $("#volume").attr('data-end', volume);
+              setOrder();
               getBalance(function(_balance){
                 balance = parseInt(Unit.fromBasic(_balance, 'nas'));
                 $("#balance").html(balance);
@@ -1919,6 +1920,7 @@
           getCirculation(function(result){
             circulation = parseInt(Unit.fromBasic(result, 'nas'));
             $("#circulation").attr('data-end', circulation);
+            $('#marketCap').attr('data-end', parseInt(price * circulation));
             if(parseInt(contractTokenBalance) > 0){
               $(".progress-value").html(parseInt(circulation / 400000 * 100) + '%, ' + parseInt((circulation + parseInt(contractTokenBalance)) / 400000 * 100) + '%');
             } else {
