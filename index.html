@@ -1869,7 +1869,6 @@
         e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
         n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
 
-
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
@@ -1928,96 +1927,59 @@
             $("#progressCirculation").css('width', parseInt(circulation / 400000 * 100) + '%');
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
 
-            getBuyVolume(function(){
-              getSellVolume(function(){
-                getBurnVolume(function(){
-                  $("#volume").attr('data-end', parseInt(volume));
-                  $('#marketCap').attr('data-end', parseInt(price * circulation));
-                  getBalance(function(_balance){
-                    balance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                    $("#balance").html(balance);
-                    try{
-                      $("#contractBalance").html(' ' + balance + " NAS");
-                    } catch (e){
-                      console.log(e)
-                    }
-                    getInsureBalance(function(_balance){
-                      try{
-                        insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                        $("#insureBalance").html(insureBalance);
-                        $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
-                      } catch (e){
-                        console.log(e)
-                      }
-                      setOrder();
-                      var _buyPriceTrend = buyPriceTrend;
-                      buyPriceTrend = [];
-                      if(_buyPriceTrend.length > 100){
-                        var sInterval = parseInt(_buyPriceTrend.length / 100);
-                        for(var i = 0; i < 100; i++){
-                          buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
-                        }
-                      }
-
-                      $('[data-toggle="counter"]').each(function (e, t) {
-                        var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
-                        i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
-                          suffix: o,
-                          prefix: a
-                        }).start()
-                      }), $(".toggle-loading").on("click", function () {
-                        var e = $(this).parents(".widget, .panel");
-                        e.length && (e.addClass("be-loading-active"), setTimeout(function () {
-                          e.removeClass("be-loading-active")
-                        }, 3e3))
-                      }), e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger, $("#spark1").sparkline([0, 5, 3, 7, 5, 10, 3, 6, 5, 10], {
-                        width: "85",
-                        height: "35",
-                        lineColor: e,
-                        highlightSpotColor: e,
-                        highlightLineColor: e,
-                        fillColor: !1,
-                        spotColor: !1,
-                        minSpotColor: !1,
-                        maxSpotColor: !1,
-                        lineWidth: 1.15
-                      }), $("#spark2").sparkline([5, 8, 7, 10, 9, 10, 8, 6, 4, 6, 8, 7, 6, 8], {
-                        type: "bar",
-                        width: "85",
-                        height: "35",
-                        barWidth: 3,
-                        barSpacing: 3,
-                        chartRangeMin: 0,
-                        barColor: t
-                      }), $("#spark3").sparkline([2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 5, 4, 4, 5], {
-                        type: "discrete",
-                        width: "85",
-                        height: "35",
-                        lineHeight: 20,
-                        lineColor: i,
-                        xwidth: 18
-                      }), $("#spark4").sparkline([2, 5, 3, 7, 5, 10, 3, 6, 5, 7], {
-                        width: "85",
-                        height: "35",
-                        lineColor: a,
-                        highlightSpotColor: a,
-                        highlightLineColor: a,
-                        fillColor: !1,
-                        spotColor: !1,
-                        minSpotColor: !1,
-                        maxSpotColor: !1,
-                        lineWidth: 1.15
-                      });
-
-                      if(interval == null){
-                        interval = setInterval(refreshData, 35000);
-                      }
-                    })
-                  });
-                });
-              });
+            $('[data-toggle="counter"]').each(function (e, t) {
+              var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
+              i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
+                suffix: o,
+                prefix: a
+              }).start()
+            }), $(".toggle-loading").on("click", function () {
+              var e = $(this).parents(".widget, .panel");
+              e.length && (e.addClass("be-loading-active"), setTimeout(function () {
+                e.removeClass("be-loading-active")
+              }, 3e3))
+            }), e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger, $("#spark1").sparkline([0, 5, 3, 7, 5, 10, 3, 6, 5, 10], {
+              width: "85",
+              height: "35",
+              lineColor: e,
+              highlightSpotColor: e,
+              highlightLineColor: e,
+              fillColor: !1,
+              spotColor: !1,
+              minSpotColor: !1,
+              maxSpotColor: !1,
+              lineWidth: 1.15
+            }), $("#spark2").sparkline([5, 8, 7, 10, 9, 10, 8, 6, 4, 6, 8, 7, 6, 8], {
+              type: "bar",
+              width: "85",
+              height: "35",
+              barWidth: 3,
+              barSpacing: 3,
+              chartRangeMin: 0,
+              barColor: t
+            }), $("#spark3").sparkline([2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 5, 4, 4, 5], {
+              type: "discrete",
+              width: "85",
+              height: "35",
+              lineHeight: 20,
+              lineColor: i,
+              xwidth: 18
+            }), $("#spark4").sparkline([2, 5, 3, 7, 5, 10, 3, 6, 5, 7], {
+              width: "85",
+              height: "35",
+              lineColor: a,
+              highlightSpotColor: a,
+              highlightLineColor: a,
+              fillColor: !1,
+              spotColor: !1,
+              minSpotColor: !1,
+              maxSpotColor: !1,
+              lineWidth: 1.15
             });
 
+            if(interval == null){
+              interval = setInterval(refreshData, 35000);
+            }
           });
         });
       }
@@ -2044,14 +2006,6 @@
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
-
-        getBuyVolume(function(){
-          getSellVolume(function(){
-            getBurnVolume(function(){
-              setOrder();
-            });
-          });
-        });
 
         getPlayerNum(function(result){
           playerNum = parseInt(result);
