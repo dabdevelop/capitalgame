@@ -1857,18 +1857,59 @@
       var lastSellOrderId = 0;
 
       function load(){
-        var e = $(".main-content");
-        e.length && (e.addClass("be-loading-active"));
+        var el = $(".main-content");
+        el.length && (el.addClass("be-loading-active"));
         loadKL();
         checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
 
+        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
+        e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
+        n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
+
+
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
             setOrder();
+              getBalance(function(_balance){
+                balance = parseInt(Unit.fromBasic(_balance, 'nas'));
+                $("#balance").html(balance);
+                try{
+                  $("#contractBalance").html(' ' + balance + " NAS");
+                } catch (e){
+                  console.log(e)
+                }
+                getInsureBalance(function(_balance) {
+                  try {
+                    insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
+                    $("#insureBalance").html(insureBalance);
+                    $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
+                    var el = $(".main-content");
+                    el.length && el.removeClass("be-loading-active");
+
+                    $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
+                      label: "Services",
+                      data: balance
+                    }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
+                      series: {
+                        pie: {
+                          radius: .75,
+                          innerRadius: .58,
+                          show: !0,
+                          highlight: {opacity: .1},
+                          label: {show: !1}
+                        }
+                      }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
+                    });
+
+                  } catch (e) {
+                    console.log(e)
+                  }
+                });
+              });
             });
           });
         });
@@ -1917,12 +1958,6 @@
                           buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
                         }
                       }
-                      var e = $(".main-content");
-                      e.length && e.removeClass("be-loading-active");
-
-                      var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-                      e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-                      n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
 
                       $('[data-toggle="counter"]').each(function (e, t) {
                         var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
@@ -1972,21 +2007,6 @@
                         minSpotColor: !1,
                         maxSpotColor: !1,
                         lineWidth: 1.15
-                      });
-
-                      $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
-                        label: "Services",
-                        data: balance
-                      }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
-                        series: {
-                          pie: {
-                            radius: .75,
-                            innerRadius: .58,
-                            show: !0,
-                            highlight: {opacity: .1},
-                            label: {show: !1}
-                          }
-                        }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
                       });
 
                       if(interval == null){
