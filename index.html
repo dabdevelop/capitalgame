@@ -1874,7 +1874,7 @@
             getBurnVolume(function(){
               console.log(volume);
               $("#volume").attr('data-end', parseInt(volume));
-
+              $('#marketCap').attr('data-end', parseInt(price * circulation));
               $('[data-toggle="counter"]').each(function (e, t) {
                 var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
                 i.data("prefix") && (a = i.data("prefix")), i.data("suffix") && (o = i.data("suffix")), i.data("start") && (n = i.data("start")), i.data("end") && (r = i.data("end")), i.data("decimals") && (l = i.data("decimals")), i.data("duration") && (s = i.data("duration")), new CountUp(i.get(0), n, r, l, s, {
