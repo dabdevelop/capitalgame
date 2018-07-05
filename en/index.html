@@ -2297,12 +2297,14 @@
         });
 
         App.init();
-        $.gritter.add({
-          title: "New Notice",
-          text: "Take part in the game，share 20% of winner bounty，the exciting experience and huge bounty is waiting for you！",
-          time: "",
-          class_name: "clean"
-        });
+        if(leaded) {
+          $.gritter.add({
+            title: "New Notice",
+            text: "Take part in the game，share 20% of winner bounty，the exciting experience and huge bounty is waiting for you！",
+            time: "",
+            class_name: "clean"
+          });
+        }
       });
 
 
@@ -2404,7 +2406,22 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-
+  <div id="help-lead" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Introduction</h4>
+        </div>
+        <div class="modal-body">
+          <p>The Ready Player One: the Capital Game, is a stable and incremental currency issuance model based on an anchored mother currency, and the Capital Game is a Decentralized Autonomous Bank constructed by the community. You are welcome to participate in the game to conduct a small-scale experiment on the economic model. Participating in the game is expected to share 20% bounty awarded in Nebulas Incentive Program and lots of candy. The exciting experience and generous rewards are waiting for you!</p>
+        </div>
+        <div class="modal-footer"  style="padding-top: 10px">
+          <br>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closePop()">关闭</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <div id="help-0" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -2430,7 +2447,7 @@
           <h4 class="modal-title">Burn</h4>
         </div>
         <div class="modal-body">
-          <p>"Burn" refers to destroying CGT and obtaining a share of the Guarantee NAS from the contract. When the player sell CGT in corwd, the selling price continues to decline, the burn price continues to rise, and burn price finally forms a supporting price to prevent the price from falling. The NAS obtained from burning CGT comes from the Guarantee NAS.</p>
+          <p>"Burn" refers to destroying CGT and obtaining a share of the Guarantee NAS from the contract. When the player sell CGT in crowd, the selling price continues to decline, the burn price continues to rise, and burn price finally forms a supporting price to prevent the price from falling. The NAS obtained from burning CGT comes from the Guarantee NAS.</p>
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
@@ -2483,4 +2500,17 @@
       </svg>
     </div>
   </div>
+
+
+  <script>
+    var leaded = localStorage.getItem('leaded') || "0";
+    leaded = parseInt(leaded);
+    function lead(){
+      if(!leaded){
+        localStorage.setItem('leaded', 1);
+        $("#help-lead").modal('show');
+      }
+    }
+    lead();
+  </script>
 </html>
