@@ -1872,7 +1872,7 @@
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
-              $("#volume").attr('data-end', volume);
+              $("#volume").attr('data-end', parseInt(volume));
 
               $('[data-toggle="counter"]').each(function (e, t) {
                 var i = $(this), a = "", o = "", n = 0, r = 0, l = 0, s = 2.5;
