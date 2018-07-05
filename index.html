@@ -134,6 +134,8 @@
                       </li>
                       <li><a href="#" target="_blank" id="contract">合约地址</a>
                       </li>
+                      <li><a href="http://nasid.pro/" target="_blank">Nasid</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="parent"><a href="http://foxythemes.net/preview/products/beagle/charts.html"><i class="icon mdi mdi-email"></i><span>联系我们</span></a>
@@ -497,6 +499,7 @@
       var rpcURL = "https://mainnet.nebulas.io";
       var chainId = 1;
       var dappAddress = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
+      var nasidAddress = 'n1g3dNR43HN62cT8i72wGt747Z55dBYv1im';
 
       if(chainId == 1){
         $("#contract").prop('href','https://explorer.nebulas.io/#/address/'+ dappAddress +'#/').prop('target', '_blank_');
@@ -621,6 +624,22 @@
         account.setPrivateKey(faucets[getRandomInt(0, 100)]);
         params.from = account;
         params.to = dappAddress;
+        params.gasPrice = Utils.toBigNumber(1000000);
+        params.gasLimit = Utils.toBigNumber(20000000);
+        params.value = value;
+        // prepare contract
+        params.contract = {
+          "function": fun,
+          "args": JSON.stringify(args)
+        };
+//        console.log(params.from.getAddressString() + ' call ' + params.to + ' @ ' + fun + ": " + JSON.stringify(args) + ' with value: ' + value);
+        callback(params);
+      }
+
+      function nasidCall(from, fun, args, value, callback){
+        let params = {};
+        params.from = from;
+        params.to = nasidAddress;
         params.gasPrice = Utils.toBigNumber(1000000);
         params.gasLimit = Utils.toBigNumber(20000000);
         params.value = value;
@@ -917,7 +936,30 @@
         });
       }
 
+      function getPlayerPic(from, callback){
+        var fun = 'get';
+        var args = [];
+        nasidCall(from, fun, args, 0, function(params){
+          neb.api.call(params.from, params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
+            // console.log(params.from)
+            var result = resp.result;
+            if(result === 'null' || result === '""'){
+              return;
+            }
+            try{
+              result = JSON.parse(result);
+              callback(result);
+            }catch (err){
+              //result is the error message
+              console.log("error:" + err.message)
+            }
 
+          }).catch(function (err) {
+            console.log("error:" + err.message)
+          });
+
+        });
+      }
       function getBuyVolume(callback){
         $.get('https://api.cgplayerone.com/cg/buy-list', function(result){
           buyOrder = buyOrder.concat(result);
@@ -1582,10 +1624,13 @@
 
           if(Account.isValidAddress(address)){
             try {
-
               $('#playerData').click(function(){
                 getPlayerInfo(address);
               });
+              getPlayerPic(address, function(result){
+                // $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
+                $("#avatarImg").prop('src', result.avatar);
+              })
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
                 nasBalance = Unit.fromBasic(accstate.balance, "nas").toFixed(2);
