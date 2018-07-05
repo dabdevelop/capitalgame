@@ -29,6 +29,8 @@
     <!-- <script src="assets/js/nebPay.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/nebulas@0.5.0/dist/nebulas.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@60c65f8a7e26015bb31c56d56f3a638a33ea3c8e/dist/nebPay.min.js"></script>
+    <script src="../assets/js/blockies.min.js"></script>
+    <script src="../assets/js/hqx.js"></script>
     <script src="../assets/js/mustache.min.js"></script>
     <script src="../assets/js/bignumber.min.js"></script>
     <script src="../assets/js/config.js"></script>
@@ -45,6 +47,36 @@
     }
 
   </script>
+
+  <style>
+    .highcharts-axis-resizer {
+      stroke: #eee;
+    }
+    .highcharts-axis-resizer:hover {
+      stroke: #ccc;
+    }
+
+    .identicon {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 12px;
+      margin-left: auto;
+      margin-right: auto;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+      box-shadow: inset rgba(255, 255, 255, 0.6) 0 2px 2px, inset rgba(0, 0, 0, 0.3) 0 -2px 6px;
+      transition: border-radius 2.5s;
+      transition-delay: 3s;
+    }
+
+    .identicon:hover {
+      border-radius: 6.25%;
+      transition-delay: 1s;
+    }
+  </style>
+
   </head>
   <body>
     <div class="be-wrapper be-offcanvas-menu be-fixed-sidebar">
@@ -54,7 +86,7 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img src="../assets/img/avatar0.png" alt="Avatar" id="avatarImg"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">Player #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
                     <div class="user-name"> Player #</div>
@@ -1365,8 +1397,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
+            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:buyOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
           }
@@ -1384,8 +1416,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
+            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:sellOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
           }
@@ -1844,10 +1876,10 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
-                              getPlayerPic(address, function(result){
-                                // $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
-                                $("#avatarImg").prop('src', result.avatar);
-                              });
+                               $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
+//                              getPlayerPic(address, function(result){
+//                                $("#avatarImg").prop('src', result.avatar);
+//                              });
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
@@ -2285,6 +2317,13 @@
         } else if(index == 3){
           $("#help-3").modal('show');
         }
+      }
+
+      var roundIcon = document.getElementById('roundIcon');
+      if(Account.isValidAddress(address)){
+        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:address ,size: 8,scale: 1}),4).toDataURL()+')';
+      } else {
+        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:dappAddress ,size: 8,scale: 1}),4).toDataURL()+')';
       }
 
     </script>
