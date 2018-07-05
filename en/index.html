@@ -100,11 +100,11 @@
                       </li>
                       <li><a href="https://nano.nebulas.io" target="_blank">NAS nano</a>
                       </li>
+                      <li><a href="http://nasid.pro/" target="_blank">NasId</a>
+                      </li>
                       <li><a href="https://github.com/dabdevelop/capitalgame" target="_blank">GitHub Source</a>
                       </li>
                       <li><a href="#" target="_blank" id="contract">Contract Address</a>
-                      </li>
-                      <li><a href="http://nasid.pro/" target="_blank">Nasid</a>
                       </li>
                     </ul>
                   </li>
@@ -1814,10 +1814,6 @@
             $('#playerData').click(function(){
               getPlayerInfo(address);
             });
-            getPlayerPic(address, function(result){
-              // $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
-              $("#avatarImg").prop('src', result.avatar);
-            })
             try {
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
@@ -1848,6 +1844,10 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
+                              getPlayerPic(address, function(result){
+                                // $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
+                                $("#avatarImg").prop('src', result.avatar);
+                              });
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');

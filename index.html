@@ -130,12 +130,13 @@
                       </li>
                       <li><a href="http://nasticker.com" target="_blank">星图</a>
                       </li>
+                      <li><a href="http://nasid.pro/" target="_blank">NasId</a>
+                      </li>
                       <li><a href="https://github.com/dabdevelop/capitalgame" target="_blank">项目GitHub源码</a>
                       </li>
                       <li><a href="#" target="_blank" id="contract">合约地址</a>
                       </li>
-                      <li><a href="http://nasid.pro/" target="_blank">Nasid</a>
-                      </li>
+
                     </ul>
                   </li>
                   <li class="parent"><a href="http://foxythemes.net/preview/products/beagle/charts.html"><i class="icon mdi mdi-email"></i><span>联系我们</span></a>
@@ -1627,10 +1628,7 @@
               $('#playerData').click(function(){
                 getPlayerInfo(address);
               });
-              getPlayerPic(address, function(result){
-                // $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
-                $("#avatarImg").prop('src', result.avatar);
-              })
+
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
                 nasBalance = Unit.fromBasic(accstate.balance, "nas").toFixed(2);
@@ -1660,7 +1658,10 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
-                              $("#avatarImg").prop('src', "assets/img/avatar" + player.playerId % 7 + ".png");
+//                              $("#avatarImg").prop('src', "assets/img/avatar" + player.playerId % 7 + ".png");
+                              getPlayerPic(address, function(result){
+                                $("#avatarImg").prop('src', result.avatar);
+                              });
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
