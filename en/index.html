@@ -798,7 +798,7 @@
         innerCall(fun, args, value, function (params) {
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
-              showQRCode: false,      //是否显示二维码信息
+              showQRCode: !checkWallet(),      //是否显示二维码信息
               container: undefined,    //指定显示二维码的canvas容器，不指定则生成一个默认canvas
               completeTip: undefined, // 完成支付提示
               cancelTip: undefined // 取消支付提示
