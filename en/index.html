@@ -509,6 +509,8 @@
 
       var needCheckNASWallet = localStorage.getItem('needCheckNASWallet') || '1';
       needCheckNASWallet = parseInt(needCheckNASWallet);
+      var hasNASNano = localStorage.getItem('hasNASNano') || '0';
+      hasNASNano = parseInt(hasNASNano);
       var invoker = null;
 
       function checkNASWallet(_invoker) {
@@ -661,6 +663,8 @@
           class_name: "primary clean"
         });
         address = localStorage.getItem('address') || '';
+        hasNASNano = localStorage.getItem('hasNASNano') || '0';
+        hasNASNano = parseInt(hasNASNano);
         checkWallet();
         getPrice();
         loadPlayerAccount();
@@ -804,7 +808,7 @@
               cancelTip: undefined // 取消支付提示
             },
             mobile: {
-              showInstallTip: true, //是否支持手机钱包安装提示
+              showInstallTip: !hasNASNano, //是否支持手机钱包安装提示
               installTip: undefined // 手机钱包安装提示
             },
             gasLimit: 2000000, //2000000
@@ -1491,6 +1495,7 @@
             var args = [];
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
+              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1782,6 +1787,7 @@
             args.push(burnAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
+              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1817,6 +1823,7 @@
             var args = [];
             callNebPay(fun, args, value, function (resp) {
               localStorage.setItem('address', resp.from);
+              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1852,6 +1859,7 @@
             args.push(sellAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
+              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
