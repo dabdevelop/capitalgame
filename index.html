@@ -856,6 +856,7 @@
                       time: "",
                       class_name: "primary clean"
                     });
+                    wait3 = setInterval(clearWait3, 18000);
                     intervalQuery = setInterval(function () {
                       recheckMobileTransactionReceipt(serialNumber, function(resp){
                         if(resp.status == 1){
@@ -935,7 +936,7 @@
               }, 5000);
             }
           }
-          wait2 = setInterval(clearWait2, 10000);
+
 
           var wait3;
 
@@ -950,7 +951,7 @@
               });
             }
           }
-
+//          wait2 = setInterval(clearWait2, 10000);
           wait3 = setInterval(clearWait3, 18000);
 
         });
