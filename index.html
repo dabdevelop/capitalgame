@@ -28,7 +28,7 @@
     <!-- <script src="assets/js/nebulas.js"></script> -->
     <!-- <script src="assets/js/nebPay.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/nebulas@0.5.0/dist/nebulas.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@60c65f8a7e26015bb31c56d56f3a638a33ea3c8e/dist/nebPay.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nebpay.js@0.2.1/dist/nebPay.min.js"></script>
     <script src="assets/js/blockies.min.js"></script>
     <script src="assets/js/hqx.js"></script>
     <script src="assets/js/mustache.min.js"></script>
@@ -826,10 +826,23 @@
         innerCall(fun, args, value, function (params) {
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
-              showQRCode: false
+              showQRCode: false,      //是否显示二维码信息
+              container: undefined,    //指定显示二维码的canvas容器，不指定则生成一个默认canvas
+              completeTip: undefined, // 完成支付提示
+              cancelTip: undefined // 取消支付提示
             },
+            mobile: {
+              showInstallTip: true, //是否支持手机钱包安装提示
+              installTip: undefined // 手机钱包安装提示
+            },
+            mobile: {
+              showInstallTip: true, //是否支持手机钱包安装提示
+              installTip: undefined // 手机钱包安装提示
+            },
+            callback: NebPay.config.mainnetUrl, //主网
+            gasLimit: 2000000, //2000000
             callback:"https://pay.nebulas.io/api/mainnet/pay",
-            listener: function (resp) {
+            listener: function (serialNumber, resp) {
               if(window.mobileAndTabletcheck()){
                 if(!inQuery){
                   inQuery = true;
