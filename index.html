@@ -826,7 +826,7 @@
         innerCall(fun, args, value, function (params) {
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
-              showQRCode: !checkWallet(),      //是否显示二维码信息
+              showQRCode: !checkWallet() && !window.mobileAndTabletcheck(),      //是否显示二维码信息
               container: undefined,    //指定显示二维码的canvas容器，不指定则生成一个默认canvas
               completeTip: undefined, // 完成支付提示
               cancelTip: undefined // 取消支付提示
@@ -856,7 +856,6 @@
                       time: "",
                       class_name: "primary clean"
                     });
-                    wait3 = setInterval(clearWait3, 18000);
                     intervalQuery = setInterval(function () {
                       recheckMobileTransactionReceipt(serialNumber, function(resp){
                         if(resp.status == 1){
@@ -936,7 +935,7 @@
               }, 5000);
             }
           }
-
+          wait2 = setInterval(clearWait2, 10000);
 
           var wait3;
 
@@ -951,8 +950,8 @@
               });
             }
           }
-//          wait2 = setInterval(clearWait2, 10000);
-//          wait3 = setInterval(clearWait3, 18000);
+
+          wait3 = setInterval(clearWait3, 18000);
 
         });
       }
