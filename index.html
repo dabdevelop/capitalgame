@@ -835,13 +835,8 @@
               showInstallTip: true, //是否支持手机钱包安装提示
               installTip: undefined // 手机钱包安装提示
             },
-            mobile: {
-              showInstallTip: true, //是否支持手机钱包安装提示
-              installTip: undefined // 手机钱包安装提示
-            },
-            callback: NebPay.config.mainnetUrl, //主网
             gasLimit: 2000000, //2000000
-            callback:"https://pay.nebulas.io/api/mainnet/pay",
+            callback: NebPay.config.mainnetUrl, //主网
             listener: function (serialNumber, resp) {
               if(window.mobileAndTabletcheck()){
                 if(!inQuery){
