@@ -838,41 +838,48 @@
             gasLimit: 2000000, //2000000
             callback: NebPay.config.mainnetUrl, //主网
             listener: function (serialNumber, resp) {
-              if(window.mobileAndTabletcheck()){
-                if(!inQuery){
-                  inQuery = true;
-                  retryQueryTime = 10;
-                  $.gritter.add({
-                    title: "新消息",
-                    text: "正在查询交易状态!",
-                    time: "",
-                    class_name: "primary clean"
-                  });
-                  intervalQuery = setInterval(function () {
-                    recheckMobileTransactionReceipt(serialNumber, function(resp){
-                      if(resp.status == 1){
-                        $.gritter.add({
-                          title: "新消息",
-                          text: "交易成功!",
-                          time: "",
-                          class_name: "success clean"
-                        });
-                        callback && callback(resp);
-                      } else if(resp.status == 0){
-                        $.gritter.add({
-                          title: "新消息",
-                          text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖(小于1NAS), 错误提示: " + resp.execute_error,
-                          time: "",
-                          class_name: "danger clean"
-                        });
-                        wait = setInterval(clearWait, 2000);
-                      }
+              if (resp === 'Error: Transaction rejected by user' || resp == false) {
+                $.gritter.add({
+                  title: "新消息",
+                  text: "您已取消!",
+                  time: "",
+                  class_name: "warning clean"
+                });
+              } else {
+                if(window.mobileAndTabletcheck() || !checkWallet()){
+                  if(!inQuery){
+                    inQuery = true;
+                    retryQueryTime = 10;
+                    $.gritter.add({
+                      title: "新消息",
+                      text: "正在查询交易状态, 请等待约15秒钟!",
+                      time: "",
+                      class_name: "primary clean"
                     });
-                  }, 5000);
+                    intervalQuery = setInterval(function () {
+                      recheckMobileTransactionReceipt(serialNumber, function(resp){
+                        if(resp.status == 1){
+                          $.gritter.add({
+                            title: "新消息",
+                            text: "交易成功!",
+                            time: "",
+                            class_name: "success clean"
+                          });
+                          callback && callback(resp);
+                        } else if(resp.status == 0){
+                          $.gritter.add({
+                            title: "新消息",
+                            text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖(小于1NAS), 错误提示: " + resp.execute_error,
+                            time: "",
+                            class_name: "danger clean"
+                          });
+                          wait = setInterval(clearWait, 2000);
+                        }
+                      });
+                    }, 5000);
+                  }
+                  return;
                 }
-                return;
-              }
-              if (resp !== 'Error: Transaction rejected by user') {
                 $.gritter.add({
                   title: "新消息",
                   text: "交易已提交, 正在为您查询交易状态, 请等待约15秒钟!",
@@ -889,15 +896,7 @@
                   });
                   callback && callback(resp);
                 })
-              } else {
-                $.gritter.add({
-                  title: "新消息",
-                  text: "您已取消!",
-                  time: "",
-                  class_name: "warning clean"
-                });
               }
-
             }
           });
 
@@ -909,7 +908,7 @@
               retryQueryTime = 15;
               $.gritter.add({
                 title: "新消息",
-                text: "正在查询交易状态!",
+                text: "正在查询交易状态, 请等待约15秒钟!",
                 time: "",
                 class_name: "primary clean"
               });
