@@ -47,7 +47,7 @@
         if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
           return undefined;
         }
-        let browserLang = window.navigator.languages ? window.navigator.languages[0] : null;
+        var browserLang = window.navigator.languages ? window.navigator.languages[0] : null;
         browserLang = browserLang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
         if (browserLang.indexOf('-') !== -1) {
           browserLang = browserLang.split('-')[0];
@@ -645,7 +645,7 @@
       }
 
       function innerCall(fun, args, value, callback) {
-        let params = {};
+        var params = {};
         var account = Account.NewAccount();
         account.setPrivateKey(faucets[getRandomInt(0, 100)]);
         params.from = account;
@@ -663,7 +663,7 @@
       }
 
       function nasidCall(from, fun, args, value, callback){
-        let params = {};
+        var params = {};
         params.from = from;
         params.to = nasidAddress;
         params.gasPrice = Utils.toBigNumber(1000000);

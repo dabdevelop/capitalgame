@@ -617,7 +617,7 @@
       }
 
       function innerCall(fun, args, value, callback) {
-        let params = {};
+        var params = {};
         var account = Account.NewAccount();
         account.setPrivateKey(faucets[getRandomInt(0, 100)]);
         params.from = account;
@@ -635,7 +635,7 @@
       }
 
       function nasidCall(from, fun, args, value, callback){
-        let params = {};
+        var params = {};
         params.from = from;
         params.to = nasidAddress;
         params.gasPrice = Utils.toBigNumber(1000000);
