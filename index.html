@@ -1082,7 +1082,7 @@
       function getPrice(){
         var fun = 'buy';
         var args = [];
-        innerCall(fun, args, Math.pow(10, 18), function(params){
+        innerCall(fun, args, Math.pow(10, 16), function(params){
           neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
             var result = resp.result;
             if(result === 'null' || result === '""'){
