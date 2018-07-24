@@ -28,10 +28,7 @@
     <!-- <script src="assets/js/nebulas.js"></script> -->
     <!-- <script src="assets/js/nebPay.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/nebulas@0.5.0/dist/nebulas.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/nebpay.js@0.2.1/dist/nebPay.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@fca3cdd31fc56029daa733e369274b5d6c24f3ed/dist/nebPay.min.js"></script>
-    <script src="assets/js/blockies.min.js"></script>
-    <script src="assets/js/hqx.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@60c65f8a7e26015bb31c56d56f3a638a33ea3c8e/dist/nebPay.min.js"></script>
     <script src="assets/js/mustache.min.js"></script>
     <script src="assets/js/bignumber.min.js"></script>
     <script src="assets/js/config.js"></script>
@@ -47,7 +44,7 @@
         if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
           return undefined;
         }
-        var browserLang = window.navigator.languages ? window.navigator.languages[0] : null;
+        let browserLang = window.navigator.languages ? window.navigator.languages[0] : null;
         browserLang = browserLang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
         if (browserLang.indexOf('-') !== -1) {
           browserLang = browserLang.split('-')[0];
@@ -66,36 +63,6 @@
         window.location = 'en/index.html?lang=en'
       }
     </script>
-
-    <style>
-      .highcharts-axis-resizer {
-        stroke: #eee;
-      }
-      .highcharts-axis-resizer:hover {
-        stroke: #ccc;
-      }
-
-      .identicon {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        margin: 12px;
-        margin-left: auto;
-        margin-right: auto;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 50%;
-        box-shadow: inset rgba(255, 255, 255, 0.6) 0 2px 2px, inset rgba(0, 0, 0, 0.3) 0 -2px 6px;
-        transition: border-radius 2.5s;
-        transition-delay: 3s;
-      }
-
-      .identicon:hover {
-        border-radius: 6.25%;
-        transition-delay: 1s;
-      }
-    </style>
-
   </head>
   <body>
     <div class="be-wrapper be-offcanvas-menu be-fixed-sidebar">
@@ -105,14 +72,14 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img src="assets/img/avatar0.png" alt="Avatar" id="avatarImg"><span class="user-name">Player #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
                     <div class="user-name"> Player #</div>
                     <div class="user-position offline" id="showWalletStatus">未检测到星云插件钱包</div>
                   </div>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
-                  <a href="http://nasticker.com" target="_blank" class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
+                  <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户CGT余额<b id="accountTokenBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约储备金<b id="contractBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约保证金<b id="contractInsureBalance"></b></a>
                   <a class="dropdown-item"><span class="icon mdi mdi-money-box"></span> 合约CGT余额<b id="contractTokenBalance"></b></a>
@@ -124,7 +91,6 @@
             </ul>
             <div class="page-title"><span>头号玩家——资本游戏</span></div>
             <ul class="nav navbar-nav float-right be-icons-nav">
-              <li class="nav-item dropdown"><a href="rank.html" target="_blank" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">玩家排名</a></li>
               <li class="nav-item dropdown"><a href="en/index.html?lang=en" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">English</a></li>
             </ul>
           </div>
@@ -151,15 +117,10 @@
                       </li>
                       <li><a href="https://nano.nebulas.io" target="_blank">NAS nano</a>
                       </li>
-                      <li><a href="http://nasticker.com" target="_blank">星图</a>
-                      </li>
-                      <li><a href="http://nasid.pro/" target="_blank">NasId</a>
-                      </li>
                       <li><a href="https://github.com/dabdevelop/capitalgame" target="_blank">项目GitHub源码</a>
                       </li>
                       <li><a href="#" target="_blank" id="contract">合约地址</a>
                       </li>
-
                     </ul>
                   </li>
                   <li class="parent"><a href="http://foxythemes.net/preview/products/beagle/charts.html"><i class="icon mdi mdi-email"></i><span>联系我们</span></a>
@@ -233,19 +194,18 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
-              <div class="widget widget-fullwidth be-loading" id="klchart">
+              <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
                 </div>
                 <div class="widget-chart-container">
-                  <!--<div class="widget-chart-info">-->
-                    <!--<ul class="chart-legend-horizontal">-->
-                      <!--<li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>买入价格(10 ^ -6 NAS)</li>-->
-                    <!--</ul>-->
-                  <!--</div>-->
-                  <!--<div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>-->
-                  <div id="container" style="min-width:300px;height:400px"></div>
+                  <div class="widget-chart-info">
+                    <ul class="chart-legend-horizontal">
+                      <li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>买入价格(10 ^ -6 NAS)</li>
+                    </ul>
+                  </div>
+                  <div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>
                 </div>
                 <div class="be-spinner">
                   <svg width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -254,15 +214,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="card card-border-color card-border-color-infor">
             <div class="widget be-loading">
               <div class="widget-head">
-                  <div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(0)"></span>
-                  </div>
                 <div class="title">合约金额构成</div>
               </div>
               <div class="widget-chart-container">
@@ -295,8 +253,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(1)"></span>
-              </div>销毁<span class="card-subtitle" id="burnPrice">销毁价格</span></div>
+              <div class="card-header card-header-divider">销毁<span class="card-subtitle" id="burnPrice">销毁价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="burnAmount" class="col-form-label text-right">销毁数量</label><br><br>
@@ -311,8 +268,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-success">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(2)"></span>
-              </div>买入<span class="card-subtitle" id="buyPrice">买入价格</span></div>
+              <div class="card-header card-header-divider">买入<span class="card-subtitle" id="buyPrice">买入价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="buyValue" class="col-form-label text-right">买入金额</label><br><br>
@@ -327,8 +283,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(3)"></span>
-              </div>卖出<span class="card-subtitle" id="sellPrice">卖出价格</span></div>
+              <div class="card-header card-header-divider">卖出<span class="card-subtitle" id="sellPrice">卖出价格</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="sellAmount" class="col-form-label text-right">卖出数量</label><br><br>
@@ -411,7 +366,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="burnCancel()" id="burnBtnCancel">取消</button>
-                <button type="button" data-dismiss="modal" class="btn btn-danger modal-close" disabled="disabled" onclick="burn()" id="burnBtnConfirm">销毁</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="burn()" id="burnBtnConfirm">确定</button>
               </div>
             </div>
           </div>
@@ -435,7 +390,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="sellCancel()" id="sellBtnCancel">取消</button>
-                <button type="button" data-dismiss="modal" class="btn btn-danger modal-close" disabled="disabled" onclick="sell()" id="sellBtnConfirm">卖出</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="sell()" id="sellBtnConfirm">确定</button>
               </div>
             </div>
           </div>
@@ -459,7 +414,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="buyCancel()" id="buyBtnCancel">取消</button>
-                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="buy()" id="buyBtnConfirm">买入</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="buy()" id="buyBtnConfirm">确定</button>
               </div>
             </div>
           </div>
@@ -469,10 +424,6 @@
     </div>
 
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/js/highstock.js"></script>
-    <script src="assets/js/exporting.js"></script>
-    <script src="assets/js/highcharts-zh_CN.js"></script>
-    <script src="assets/js/drag-panes.js"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -500,8 +451,6 @@
     <script src="assets/lib/jquery.gritter/js/jquery.gritter.js" type="text/javascript"></script>
     <script src="assets/lib/jquery.niftymodals/dist/jquery.niftymodals.js" type="text/javascript"></script>
 
-
-
     <script type="text/javascript">
 
       $.ajaxSetup({
@@ -523,7 +472,6 @@
       var rpcURL = "https://mainnet.nebulas.io";
       var chainId = 1;
       var dappAddress = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
-      var nasidAddress = 'n1g3dNR43HN62cT8i72wGt747Z55dBYv1im';
 
       if(chainId == 1){
         $("#contract").prop('href','https://explorer.nebulas.io/#/address/'+ dappAddress +'#/').prop('target', '_blank_');
@@ -537,8 +485,6 @@
 
       var needCheckNASWallet = localStorage.getItem('needCheckNASWallet') || '1';
       needCheckNASWallet = parseInt(needCheckNASWallet);
-      var hasNASNano = localStorage.getItem('hasNASNano') || '0';
-      hasNASNano = parseInt(hasNASNano);
       var invoker = null;
 
       function checkNASWallet(_invoker) {
@@ -645,27 +591,11 @@
       }
 
       function innerCall(fun, args, value, callback) {
-        var params = {};
+        let params = {};
         var account = Account.NewAccount();
         account.setPrivateKey(faucets[getRandomInt(0, 100)]);
         params.from = account;
         params.to = dappAddress;
-        params.gasPrice = Utils.toBigNumber(1000000);
-        params.gasLimit = Utils.toBigNumber(20000000);
-        params.value = value;
-        // prepare contract
-        params.contract = {
-          "function": fun,
-          "args": JSON.stringify(args)
-        };
-//        console.log(params.from.getAddressString() + ' call ' + params.to + ' @ ' + fun + ": " + JSON.stringify(args) + ' with value: ' + value);
-        callback(params);
-      }
-
-      function nasidCall(from, fun, args, value, callback){
-        var params = {};
-        params.from = from;
-        params.to = nasidAddress;
         params.gasPrice = Utils.toBigNumber(1000000);
         params.gasLimit = Utils.toBigNumber(20000000);
         params.value = value;
@@ -692,57 +622,15 @@
           class_name: "primary clean"
         });
         address = localStorage.getItem('address') || '';
-        hasNASNano = localStorage.getItem('hasNASNano') || '0';
-        hasNASNano = parseInt(hasNASNano);
         checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
-
-        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-        e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-        n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
-
+        
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
               setOrder();
-              getBalance(function(_balance){
-                balance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                $("#balance").html(balance);
-                try{
-                  $("#contractBalance").html(' ' + balance + " NAS");
-                } catch (e){
-                  console.log(e)
-                }
-                getInsureBalance(function(_balance) {
-                  try {
-                    insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                    $("#insureBalance").html(insureBalance);
-                    $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
-                    var el = $(".main-content");
-                    el.length && el.removeClass("be-loading-active");
-
-                    $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
-                      label: "Services",
-                      data: balance
-                    }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
-                      series: {
-                        pie: {
-                          radius: .75,
-                          innerRadius: .58,
-                          show: !0,
-                          highlight: {opacity: .1},
-                          label: {show: !1}
-                        }
-                      }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
-                    });
-
-                  } catch (e) {
-                    console.log(e)
-                  }
-                });
-              });
             });
           });
         });
@@ -790,7 +678,6 @@
       var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
       var nebPay = new NebPay();
       var intervalQuery;
-      var stop = false;
 
       function callNebPay(fun, args, value, callback) {
 
@@ -801,16 +688,6 @@
             time: "",
             class_name: "warning clean"
           });
-        }
-
-        if(stop){
-          $.gritter.add({
-            title: "新消息",
-            text: "目前网站正在维护!",
-            time: "",
-            class_name: "primary clean"
-          });
-          return;
         }
 
         var wait;
@@ -831,60 +708,45 @@
         innerCall(fun, args, value, function (params) {
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
-              showQRCode: !checkWallet() && !window.mobileAndTabletcheck(),      //是否显示二维码信息
-              container: undefined,    //指定显示二维码的canvas容器，不指定则生成一个默认canvas
-              completeTip: undefined, // 完成支付提示
-              cancelTip: undefined // 取消支付提示
+              showQRCode: false
             },
-            mobile: {
-              showInstallTip: !hasNASNano, //是否支持手机钱包安装提示
-              installTip: undefined // 手机钱包安装提示
-            },
-            gasLimit: 2000000, //2000000
-            callback: NebPay.config.mainnetUrl, //主网
-            listener: function (serialNumber, resp) {
-              if (resp === 'Error: Transaction rejected by user' || resp == false) {
-                $.gritter.add({
-                  title: "新消息",
-                  text: "您已取消!",
-                  time: "",
-                  class_name: "warning clean"
-                });
-              } else {
-                if(window.mobileAndTabletcheck() || !checkWallet()){
-                  if(!inQuery){
-                    inQuery = true;
-                    retryQueryTime = 10;
-                    $.gritter.add({
-                      title: "新消息",
-                      text: "正在查询交易状态, 请等待约15秒钟!",
-                      time: "",
-                      class_name: "primary clean"
+            callback:"https://pay.nebulas.io/api/mainnet/pay",
+            listener: function (resp) {
+              if(window.mobileAndTabletcheck()){
+                if(!inQuery){
+                  inQuery = true;
+                  retryQueryTime = 10;
+                  $.gritter.add({
+                    title: "新消息",
+                    text: "正在查询交易状态!",
+                    time: "",
+                    class_name: "primary clean"
+                  });
+                  intervalQuery = setInterval(function () {
+                    recheckMobileTransactionReceipt(serialNumber, function(resp){
+                      if(resp.status == 1){
+                        $.gritter.add({
+                          title: "新消息",
+                          text: "交易成功!",
+                          time: "",
+                          class_name: "success clean"
+                        });
+                        callback && callback(resp);
+                      } else if(resp.status == 0){
+                        $.gritter.add({
+                          title: "新消息",
+                          text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖(小于1NAS), 错误提示: " + resp.execute_error,
+                          time: "",
+                          class_name: "danger clean"
+                        });
+                        wait = setInterval(clearWait, 2000);
+                      }
                     });
-                    intervalQuery = setInterval(function () {
-                      recheckMobileTransactionReceipt(serialNumber, function(resp){
-                        if(resp.status == 1){
-                          $.gritter.add({
-                            title: "新消息",
-                            text: "交易成功!",
-                            time: "",
-                            class_name: "success clean"
-                          });
-                          callback && callback(resp);
-                        } else if(resp.status == 0){
-                          $.gritter.add({
-                            title: "新消息",
-                            text: "交易失败, 请将GasLimit手动设置为2M wei 或者进行小额度的买卖(小于1NAS), 错误提示: " + resp.execute_error,
-                            time: "",
-                            class_name: "danger clean"
-                          });
-                          wait = setInterval(clearWait, 2000);
-                        }
-                      });
-                    }, 5000);
-                  }
-                  return;
+                  }, 5000);
                 }
+                return;
+              }
+              if (resp !== 'Error: Transaction rejected by user') {
                 $.gritter.add({
                   title: "新消息",
                   text: "交易已提交, 正在为您查询交易状态, 请等待约15秒钟!",
@@ -901,7 +763,15 @@
                   });
                   callback && callback(resp);
                 })
+              } else {
+                $.gritter.add({
+                  title: "新消息",
+                  text: "您已取消!",
+                  time: "",
+                  class_name: "warning clean"
+                });
               }
+
             }
           });
 
@@ -913,7 +783,7 @@
               retryQueryTime = 15;
               $.gritter.add({
                 title: "新消息",
-                text: "正在查询交易状态, 请等待约15秒钟!",
+                text: "正在查询交易状态!",
                 time: "",
                 class_name: "primary clean"
               });
@@ -1011,30 +881,7 @@
         });
       }
 
-      function getPlayerPic(from, callback){
-        var fun = 'get';
-        var args = [];
-        nasidCall(from, fun, args, 0, function(params){
-          neb.api.call(params.from, params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            // console.log(params.from)
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              result = JSON.parse(result);
-              callback(result);
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
 
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
-
-        });
-      }
       function getBuyVolume(callback){
         $.get('https://api.cgplayerone.com/cg/buy-list', function(result){
           buyOrder = buyOrder.concat(result);
@@ -1082,7 +929,7 @@
       function getPrice(){
         var fun = 'buy';
         var args = [];
-        innerCall(fun, args, Math.pow(10, 16), function(params){
+        innerCall(fun, args, Math.pow(10, 18), function(params){
           neb.api.call(params.from.getAddressString(), params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
             var result = resp.result;
             if(result === 'null' || result === '""'){
@@ -1249,14 +1096,15 @@
           lastBuyOrderId = buyOrder[buyOrder.length - 1].orderId;
           $("#buyOrder").html('');
           for(var i = buyOrder.length - 1; i >= buyOrder.length - listNum; i-- ){
+            var avatarUrl = 'assets/img/avatar'+ (parseInt(buyOrder[i].playerId) % 7) +'.png';
             var accountUrl;
             if(chainId == 1){
               accountUrl = 'https://explorer.nebulas.io/#/address/' +buyOrder[i].account;
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:buyOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL()};
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
           }
@@ -1267,18 +1115,20 @@
           lastSellOrderId = sellOrder[sellOrder.length - 1].orderId;
           $("#sellOrder").html('');
           for(var i = sellOrder.length - 1; i >= sellOrder.length - listNum; i-- ){
+            var avatarUrl = 'assets/img/avatar'+ (parseInt(sellOrder[i].playerId) % 7) +'.png';
             var accountUrl;
             if(chainId == 1){
               accountUrl = 'https://explorer.nebulas.io/#/address/' +sellOrder[i].account;
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:sellOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
           }
         }
+
       }
 
       function login(){
@@ -1291,7 +1141,6 @@
             var args = [];
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1422,12 +1271,12 @@
                 class_name: "warning clean"
               });
             } else {
-//              $.gritter.add({
-//                title: "新消息",
-//                text: "确认交易时请将GasLimit手动设置为2M wei 或者进行小额度的买卖(不多于 1NAS)",
-//                time: "",
-//                class_name: "warning clean"
-//              });
+              $.gritter.add({
+                title: "新消息",
+                text: "确认交易时请将GasLimit手动设置为2M wei 或者进行小额度的买卖(不多于 1NAS)",
+                time: "",
+                class_name: "warning clean"
+              });
             }
           }
 
@@ -1579,7 +1428,6 @@
             args.push(burnAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1615,7 +1463,6 @@
             var args = [];
             callNebPay(fun, args, value, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1651,7 +1498,6 @@
             args.push(sellAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1700,10 +1546,10 @@
 
           if(Account.isValidAddress(address)){
             try {
+
               $('#playerData').click(function(){
                 getPlayerInfo(address);
               });
-
               neb.api.getAccountState(address).then(function(accstate){
                 $("#accountBalance").html(' ' + Unit.fromBasic(accstate.balance, "nas").toFixed(2) + ' NAS');
                 nasBalance = Unit.fromBasic(accstate.balance, "nas").toFixed(2);
@@ -1733,10 +1579,7 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
-//                              $("#avatarImg").prop('src', "assets/img/avatar" + player.playerId % 7 + ".png");
-//                              getPlayerPic(address, function(result){
-//                                $("#avatarImg").prop('src', result.avatar);
-//                              });
+                              $("#avatarImg").prop('src', "assets/img/avatar" + player.playerId % 7 + ".png");
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
@@ -1777,119 +1620,6 @@
         }, "*");
       }
 
-      function loadKL(){
-        Highcharts.setOptions({
-          lang: {
-            rangeSelectorZoom: ''
-          }
-        });
-        $.getJSON('https://cgplayerone.com/data/kl.json', function (data) {
-          var ohlc = [],
-                  volume = [],
-                  dataLength = data.length,
-          // set the allowed units for data grouping
-                  groupingUnits = [[
-                    'week',                         // unit name
-                    [1]                             // allowed multiples
-                  ], [
-                    'month',
-                    [1, 2, 3, 4, 6]
-                  ]],
-                  i = 0;
-          for (i; i < dataLength; i += 1) {
-            ohlc.push([
-              data[i][0], // the date
-              data[i][1], // open
-              data[i][2], // high
-              data[i][3], // low
-              data[i][4] // close
-            ]);
-            volume.push([
-              data[i][0], // the date
-              data[i][5] // the volume
-            ]);
-          }
-          // create the chart
-          var chart = Highcharts.stockChart('container', {
-            rangeSelector: {
-              selected: 1,
-              inputDateFormat: '%Y-%m-%d'
-            },
-            title: {
-              text: 'CGT历史价格'
-            },
-            xAxis: {
-              dateTimeLabelFormats: {
-                millisecond: '%H:%M:%S.%L',
-                second: '%H:%M:%S',
-                minute: '%H:%M',
-                hour: '%H:%M',
-                day: '%m-%d',
-                week: '%m-%d',
-                month: '%y-%m',
-                year: '%Y'
-              }
-            },
-            tooltip: {
-              split: false,
-              shared: true
-            },
-            yAxis: [{
-              labels: {
-                align: 'right',
-                x: -3
-              },
-              title: {
-                text: '价格'
-              },
-              height: '65%',
-              resize: {
-                enabled: true
-              },
-              lineWidth: 2
-            }, {
-              labels: {
-                align: 'right',
-                x: -3
-              },
-              title: {
-                text: '成交量'
-              },
-              top: '65%',
-              height: '35%',
-              offset: 0,
-              lineWidth: 2
-            }],
-            series: [{
-              type: 'candlestick',
-              name: 'CGT价格',
-              color: 'red',
-              lineColor: 'red',
-              upColor: 'green',
-              upLineColor: 'green',
-              tooltip: {
-              },
-              navigatorOptions: {
-                color: Highcharts.getOptions().colors[0]
-              },
-              data: ohlc,
-              dataGrouping: {
-                units: groupingUnits
-              },
-              id: 'sz'
-            },{
-              type: 'column',
-              name: 'CGT交易量',
-              data: volume,
-              yAxis: 1,
-              dataGrouping: {
-                units: groupingUnits
-              }
-            }]
-          });
-        });
-      }
-
       var playerNum = 0;
       var circulation = 0;
       var contractTokenBalance = 0;
@@ -1913,58 +1643,17 @@
       var lastSellOrderId = 0;
 
       function load(){
-        var el = $(".main-content");
-        el.length && (el.addClass("be-loading-active"));
-        loadKL();
+        var e = $(".main-content");
+        e.length && (e.addClass("be-loading-active"));
         checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
 
-        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-        e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-        n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
-
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
-              setOrder();
-              getBalance(function(_balance){
-                balance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                $("#balance").html(balance);
-                try{
-                  $("#contractBalance").html(' ' + balance + " NAS");
-                } catch (e){
-                  console.log(e)
-                }
-                getInsureBalance(function(_balance) {
-                  try {
-                    insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                    $("#insureBalance").html(insureBalance);
-                    $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
-                    var el = $(".main-content");
-                    el.length && el.removeClass("be-loading-active");
-
-                    $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
-                      label: "Services",
-                      data: balance
-                    }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
-                      series: {
-                        pie: {
-                          radius: .75,
-                          innerRadius: .58,
-                          show: !0,
-                          highlight: {opacity: .1},
-                          label: {show: !1}
-                        }
-                      }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
-                    });
-
-                  } catch (e) {
-                    console.log(e)
-                  }
-                });
-              });
+            setOrder();
             });
           });
         });
@@ -1982,6 +1671,7 @@
             }
             $("#progressCirculation").css('width', parseInt(circulation / 400000 * 100) + '%');
             $("#progressTotalSupply").css('width', parseInt(contractTokenBalance / 400000 * 100) + '%');
+
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
@@ -2006,13 +1696,12 @@
                       setOrder();
                       var _buyPriceTrend = buyPriceTrend;
                       buyPriceTrend = [];
-                      if(_buyPriceTrend.length > 50){
-                        var sInterval = parseInt(_buyPriceTrend.length / 50);
-                        for(var i = 0; i < 50; i++){
+                      if(_buyPriceTrend.length > 100){
+                        var sInterval = parseInt(_buyPriceTrend.length / 100);
+                        for(var i = 0; i < 100; i++){
                           buyPriceTrend[i] = _buyPriceTrend[i * sInterval];
                         }
                       }
-
                       var e = $(".main-content");
                       e.removeClass("be-loading-active");
 
@@ -2085,12 +1774,15 @@
                         }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
                       });
 
-                      setInterval(refreshData, 35000);
+                      if(interval == null){
+                        interval = setInterval(refreshData, 35000);
+                      }
                     })
                   });
                 });
               });
             });
+
           });
         });
       }
@@ -2113,10 +1805,17 @@
         sellOrder = [];
         burnOrder = [];
 
-        loadKL();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+              setOrder();
+            });
+          });
+        });
 
         getPlayerNum(function(result){
           playerNum = parseInt(result);
@@ -2195,35 +1894,13 @@
         });
 
         App.init();
-        if(leaded){
-//          $.gritter.add({
-//            title: "新消息",
-//            text: "参与头号玩家，有望分享20%星云月冠军奖金和丰厚糖果，头号玩家的刺激体验和丰厚奖励在等你！",
-//            time: "",
-//            class_name: "clean"
-//          });
-        }
+        $.gritter.add({
+          title: "新消息",
+          text: "参与头号玩家，有望分享20%星云月冠军奖金和丰厚糖果，头号玩家的刺激体验和丰厚奖励在等你！",
+          time: "",
+          class_name: "clean"
+        });
       });
-
-      function help(index){
-          if(index == 0){
-            $("#help-0").modal('show');
-          } else if(index == 1){
-            $("#help-1").modal('show');
-          } else if (index == 2){
-            $("#help-2").modal('show');
-          } else if(index == 3){
-            $("#help-3").modal('show');
-          }
-      }
-
-      var roundIcon = document.getElementById('roundIcon');
-      if(Account.isValidAddress(address)){
-        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:address ,size: 8,scale: 1}),4).toDataURL()+')';
-      } else {
-        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:dappAddress ,size: 8,scale: 1}),4).toDataURL()+')';
-      }
-
     </script>
 
 
@@ -2242,7 +1919,7 @@
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           <button type="button" class="btn btn-primary" onclick="setLoginAccount()">确定</button>
         </div>
       </div><!-- /.modal-content -->
@@ -2297,7 +1974,7 @@
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
-          <button type="button" data-dismiss="modal" class="btn btn-primary modal-close" onclick="resetPlayerInfo()">关闭</button>
+          <button type="button" data-dismiss="modal" class="btn btn-success modal-close" onclick="resetPlayerInfo()">关闭</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -2311,102 +1988,4 @@
       </svg>
     </div>
   </div>
-
-  <div id="help-lead" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">介绍</h4>
-        </div>
-        <div class="modal-body">
-          <p>【头号玩家——资本游戏】是一个基于锚定母币稳定增值的货币发行模型，由社区自发构建去中心化自治”银行”的资本游戏。欢迎大家参与游戏的博弈对该经济模型进行一次小规模试验。</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-0" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">合约金额构成</h4>
-        </div>
-        <div class="modal-body">
-          <p>合约中的NAS分为两个部分: 储备金和保证金。储备金用于与玩家间进行CGT交易，保证金用于补偿玩家销毁的CGT以保证CGT的价格底线，保证CGT不会归零。</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-1" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">销毁</h4>
-        </div>
-        <div class="modal-body">
-          <p>"销毁"是指玩家将CGT销毁并且从合约中获取一部分的保证金。当玩家挤兑合约的时候，卖出价格不断下降，销毁价格不断上涨，最终销毁价格形成一个支撑价格，防止价格继续下跌。销毁获得的NAS来自合约保证金。</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-2" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">买入</h4>
-        </div>
-        <div class="modal-body">
-          <p>"买入"是指玩家通过支付一定数量的NAS从合约中购买等值的CGT。当合约中拥有剩余的CGT时将优先购买剩余的CGT；当合约中CGT被玩家买完时，合约将按照市场价格发行新的CGT。玩家用于购买合约中剩余的CGT的NAS将全部进入储备金。玩家用于购买新发行的CGT的NAS将一部分进入储备金一部分进入保证金，比例是依据当前的储备金率。</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-  <div id="help-3" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">卖出</h4>
-        </div>
-        <div class="modal-body">
-          <p>"卖出"是指玩家通过卖出一定数量的CGT给合约并获得等值的NAS。玩家通过卖出可以获利退出，或者等待合适的价格再次买入。卖出获得的NAS来自合约储备金。</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <script>
-    var leaded = localStorage.getItem('leaded') || "0";
-    leaded = parseInt(leaded);
-    function lead(){
-      if(!leaded){
-        localStorage.setItem('leaded', 1);
-        $("#help-lead").modal('show');
-      }
-    }
-    lead();
-  </script>
 </html>

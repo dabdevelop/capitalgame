@@ -327,11 +327,7 @@ CapitalGame.prototype = {
         //    this.burnEvent(true, from, contractAddress, amount, transferValue);
         //}
 
-        //console.log('burn: ', 'token:', parseFloat(amount.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'price:', parseFloat(tokenPrice.div(new BigNumber(10).pow(18)).toString(10)).toFixed(6), 'balanceUser:', parseFloat(this.balances.get(from).div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'value:', parseFloat(transferValue.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'circulation:', parseFloat(this._totalSupply.minus(this.balances.get(contractAddress)).div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'balanceNAS:', parseFloat(this._balance.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'insureBalance:', parseFloat(this._insureBalance.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2));
-        console.log(this._insureBalance);
-        var burnOrderValue = parseFloat(transferValue.div(new BigNumber(10).pow(18)).toString(10));
-        var burnOrderAmount = parseFloat(amount.div(new BigNumber(10).pow(18)).toString(10));
-        console.log(burnOrderValue / burnOrderAmount);
+        console.log('burn: ', 'token:', parseFloat(amount.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'price:', parseFloat(tokenPrice.div(new BigNumber(10).pow(18)).toString(10)).toFixed(6), 'balanceUser:', parseFloat(this.balances.get(from).div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'value:', parseFloat(transferValue.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'circulation:', parseFloat(this._totalSupply.minus(this.balances.get(contractAddress)).div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'balanceNAS:', parseFloat(this._balance.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2), 'insureBalance:', parseFloat(this._insureBalance.div(new BigNumber(10).pow(18)).toString(10)).toFixed(2));
 
         return transferValue.toString(10);
     }
@@ -346,13 +342,11 @@ Blockchain.transaction.value = new BigNumber(10).pow(18);
 
 var cg = new CapitalGame();
 cg.init();
-//for(var i = 0; i<1350; i++){
-//    cg.buy();
-//    cg.sell(0.01)
-//    cg.burn(0.01)
-//}
-
-
+for(var i = 0; i<1350; i++){
+    cg.buy();
+    cg.sell(0.01)
+    cg.burn(0.01)
+}
 
 //Blockchain.transaction.value = new BigNumber(10).pow(17).mul(2);
 //for(var j = 0; j<3; j++){
@@ -364,9 +358,3 @@ cg.init();
 //cg.buy();
 //cg.buy();
 //cg.buy();
-
-
-var nan = new BigNumber(null);
-
-//cg.sell(nan);
-cg.burn(nan);

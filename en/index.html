@@ -28,10 +28,7 @@
     <!-- <script src="assets/js/nebulas.js"></script> -->
     <!-- <script src="assets/js/nebPay.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/nebulas@0.5.0/dist/nebulas.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/nebpay.js@0.2.1/dist/nebPay.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@fca3cdd31fc56029daa733e369274b5d6c24f3ed/dist/nebPay.min.js"></script>
-    <script src="../assets/js/blockies.min.js"></script>
-    <script src="../assets/js/hqx.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/nebulasio/nebPay@60c65f8a7e26015bb31c56d56f3a638a33ea3c8e/dist/nebPay.min.js"></script>
     <script src="../assets/js/mustache.min.js"></script>
     <script src="../assets/js/bignumber.min.js"></script>
     <script src="../assets/js/config.js"></script>
@@ -48,36 +45,6 @@
     }
 
   </script>
-
-  <style>
-    .highcharts-axis-resizer {
-      stroke: #eee;
-    }
-    .highcharts-axis-resizer:hover {
-      stroke: #ccc;
-    }
-
-    .identicon {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 12px;
-      margin-left: auto;
-      margin-right: auto;
-      background-size: cover;
-      background-repeat: no-repeat;
-      border-radius: 50%;
-      box-shadow: inset rgba(255, 255, 255, 0.6) 0 2px 2px, inset rgba(0, 0, 0, 0.3) 0 -2px 6px;
-      transition: border-radius 2.5s;
-      transition-delay: 3s;
-    }
-
-    .identicon:hover {
-      border-radius: 6.25%;
-      transition-delay: 1s;
-    }
-  </style>
-
   </head>
   <body>
     <div class="be-wrapper be-offcanvas-menu be-fixed-sidebar">
@@ -87,7 +54,7 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img src="../assets/img/avatar0.png" alt="Avatar" id="avatarImg"><span class="user-name">Player #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
                     <div class="user-name"> Player #</div>
@@ -106,7 +73,6 @@
             </ul>
             <div class="page-title"><span>Ready Player One: the Capital Game</span></div>
             <ul class="nav navbar-nav float-right be-icons-nav">
-              <li class="nav-item dropdown"><a href="rank.html" target="_blank" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">Player Rank</a></li>
               <li class="nav-item dropdown"><a href="../index.html?lang=zh" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">中文</a></li>
             </ul>
           </div>
@@ -132,8 +98,6 @@
                       <li><a href="https://github.com/nebulasio/WebExtensionWallet" target="_blank">NasExtWallet</a>
                       </li>
                       <li><a href="https://nano.nebulas.io" target="_blank">NAS nano</a>
-                      </li>
-                      <li><a href="http://nasid.pro/" target="_blank">NasId</a>
                       </li>
                       <li><a href="https://github.com/dabdevelop/capitalgame" target="_blank">GitHub Source</a>
                       </li>
@@ -212,19 +176,18 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="widget widget-fullwidth be-loading">
                 <div class="widget-head">
                 </div>
                 <div class="widget-chart-container">
-                  <!--<div class="widget-chart-info">-->
-                    <!--<ul class="chart-legend-horizontal">-->
-                      <!--<li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>Buy Price (10 ^ -6 NAS)</li>-->
-                    <!--</ul>-->
-                  <!--</div>-->
-                  <!--<div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>-->
-                  <div id="container" style="min-width:300px;height:400px"></div>
+                  <div class="widget-chart-info">
+                    <ul class="chart-legend-horizontal">
+                      <li><span data-color="main-chart-color1" style="background-color: rgb(66, 133, 244);"></span>Buy Price (10 ^ -6 NAS)</li>
+                    </ul>
+                  </div>
+                  <div id="main-chart" style="height: 260px; padding: 0px; position: relative;"><canvas class="flot-base" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas><canvas class="flot-overlay" width="1904" height="520" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 952px; height: 260px;"></canvas></div>
                 </div>
                 <div class="be-spinner">
                   <svg width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -233,15 +196,14 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="card card-border-color card-border-color-infor">
             <div class="widget be-loading">
               <div class="widget-head">
-                <div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(0)"></span></div>
-                <div class="title">Contract NAS</div>
+                <div class="title">Partitions of Contract NAS</div>
               </div>
               <div class="widget-chart-container">
                 <div id="top-sales" style="height: 120px; padding: 0px; position: relative;"><canvas class="flot-base" width="514" height="356" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 257.328px; height: 178px;"></canvas><canvas class="flot-overlay" width="514" height="356" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 257.328px; height: 178px;"></canvas></div>
@@ -273,7 +235,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(1)"></span></div>Burn<span class="card-subtitle" id="burnPrice">Burn Price</span></div>
+              <div class="card-header card-header-divider">Burn<span class="card-subtitle" id="burnPrice">Burn Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="burnAmount" class="col-form-label text-right">Burn Amount</label><br><br>
@@ -288,7 +250,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-success">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(2)"></span></div>Buy<span class="card-subtitle" id="buyPrice">Buy Price</span></div>
+              <div class="card-header card-header-divider">Buy<span class="card-subtitle" id="buyPrice">Buy Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="buyValue" class="col-form-label text-right">Buy Value</label><br><br>
@@ -303,7 +265,7 @@
 
           <div class="col-lg-3">
             <div class="card card-border-color card-border-color-danger">
-              <div class="card-header card-header-divider"><div class="tools dropdown"> <span class="icon mdi mdi-help-outline" onclick="help(3)"></span></div>Sell<span class="card-subtitle" id="sellPrice">Sell Price</span></div>
+              <div class="card-header card-header-divider">Sell<span class="card-subtitle" id="sellPrice">Sell Price</span></div>
               <div class="card-body">
                 <div class="form-group input-group-sm">
                     <label for="sellAmount" class="col-form-label text-right">Sell Amount</label><br><br>
@@ -386,7 +348,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="burnCancel()" id="burnBtnCancel">Cancel</button>
-                <button type="button" data-dismiss="modal" class="btn btn-danger modal-close" disabled="disabled" onclick="burn()" id="burnBtnConfirm">Burn</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="burn()" id="burnBtnConfirm">Confirm</button>
               </div>
             </div>
           </div>
@@ -410,7 +372,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="sellCancel()" id="sellBtnCancel">Cancel</button>
-                <button type="button" data-dismiss="modal" class="btn btn-danger modal-close" disabled="disabled" onclick="sell()" id="sellBtnConfirm">Sell</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="sell()" id="sellBtnConfirm">Confirm</button>
               </div>
             </div>
           </div>
@@ -434,7 +396,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary modal-close" onclick="buyCancel()" id="buyBtnCancel">Cancel</button>
-                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="buy()" id="buyBtnConfirm">Buy</button>
+                <button type="button" data-dismiss="modal" class="btn btn-success modal-close" disabled="disabled" onclick="buy()" id="buyBtnConfirm">Confirm</button>
               </div>
             </div>
           </div>
@@ -444,10 +406,6 @@
     </div>
 
     <script src="../assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="../assets/js/highstock.js"></script>
-    <script src="../assets/js/exporting.js"></script>
-    <script src="../assets/js/highcharts-zh_CN.js"></script>
-    <script src="../assets/js/drag-panes.js"></script>
     <script src="../assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
     <script src="../assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="../assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -496,7 +454,6 @@
       var rpcURL = "https://mainnet.nebulas.io";
       var chainId = 1;
       var dappAddress = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
-      var nasidAddress = 'n1g3dNR43HN62cT8i72wGt747Z55dBYv1im';
 
       if(chainId == 1){
         $("#contract").prop('href','https://explorer.nebulas.io/#/address/'+ dappAddress +'#/').prop('target', '_blank_');
@@ -510,8 +467,6 @@
 
       var needCheckNASWallet = localStorage.getItem('needCheckNASWallet') || '1';
       needCheckNASWallet = parseInt(needCheckNASWallet);
-      var hasNASNano = localStorage.getItem('hasNASNano') || '0';
-      hasNASNano = parseInt(hasNASNano);
       var invoker = null;
 
       function checkNASWallet(_invoker) {
@@ -617,27 +572,11 @@
       }
 
       function innerCall(fun, args, value, callback) {
-        var params = {};
+        let params = {};
         var account = Account.NewAccount();
         account.setPrivateKey(faucets[getRandomInt(0, 100)]);
         params.from = account;
         params.to = dappAddress;
-        params.gasPrice = Utils.toBigNumber(1000000);
-        params.gasLimit = Utils.toBigNumber(20000000);
-        params.value = value;
-        // prepare contract
-        params.contract = {
-          "function": fun,
-          "args": JSON.stringify(args)
-        };
-//        console.log(params.from.getAddressString() + ' call ' + params.to + ' @ ' + fun + ": " + JSON.stringify(args) + ' with value: ' + value);
-        callback(params);
-      }
-
-      function nasidCall(from, fun, args, value, callback){
-        var params = {};
-        params.from = from;
-        params.to = nasidAddress;
         params.gasPrice = Utils.toBigNumber(1000000);
         params.gasLimit = Utils.toBigNumber(20000000);
         params.value = value;
@@ -664,61 +603,10 @@
           class_name: "primary clean"
         });
         address = localStorage.getItem('address') || '';
-        hasNASNano = localStorage.getItem('hasNASNano') || '0';
-        hasNASNano = parseInt(hasNASNano);
         checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
-
-        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-        e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-        n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
-
-        getBuyVolume(function(){
-          getSellVolume(function(){
-            getBurnVolume(function(){
-              setOrder();
-              getBalance(function(_balance){
-                balance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                $("#balance").html(balance);
-                try{
-                  $("#contractBalance").html(' ' + balance + " NAS");
-                } catch (e){
-                  console.log(e)
-                }
-                getInsureBalance(function(_balance) {
-                  try {
-                    insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                    $("#insureBalance").html(insureBalance);
-                    $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
-                    var el = $(".main-content");
-                    el.length && el.removeClass("be-loading-active");
-
-                    $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
-                      label: "Services",
-                      data: balance
-                    }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
-                      series: {
-                        pie: {
-                          radius: .75,
-                          innerRadius: .58,
-                          show: !0,
-                          highlight: {opacity: .1},
-                          label: {show: !1}
-                        }
-                      }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
-                    });
-
-                  } catch (e) {
-                    console.log(e)
-                  }
-                });
-              });
-            });
-          });
-        });
-
       }
 
 
@@ -762,7 +650,6 @@
       var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
       var nebPay = new NebPay();
       var intervalQuery;
-      var stop = false;
 
       function callNebPay(fun, args, value, callback) {
 
@@ -773,16 +660,6 @@
             time: "",
             class_name: "warning clean"
           });
-        }
-
-        if(stop){
-          $.gritter.add({
-            title: "新消息",
-            text: "目前网站正在维护!",
-            time: "",
-            class_name: "primary clean"
-          });
-          return;
         }
 
         var wait;
@@ -803,60 +680,45 @@
         innerCall(fun, args, value, function (params) {
           serialNumber = nebPay.call(params.to, params.value, params.contract.function, params.contract.args, {
             qrcode: {
-              showQRCode: !checkWallet() && !window.mobileAndTabletcheck(),      //是否显示二维码信息
-              container: undefined,    //指定显示二维码的canvas容器，不指定则生成一个默认canvas
-              completeTip: undefined, // 完成支付提示
-              cancelTip: undefined // 取消支付提示
+              showQRCode: false
             },
-            mobile: {
-              showInstallTip: !hasNASNano, //是否支持手机钱包安装提示
-              installTip: undefined // 手机钱包安装提示
-            },
-            gasLimit: 2000000, //2000000
-            callback: NebPay.config.mainnetUrl, //主网
-            listener: function (serialNumber, resp) {
-              if (resp === 'Error: Transaction rejected by user' || resp == false) {
-                $.gritter.add({
-                  title: "New Notice",
-                  text: "You cancelled",
-                  time: "",
-                  class_name: "warning clean"
-                });
-              } else {
-                if(window.mobileAndTabletcheck() || !checkWallet()){
-                  if(!inQuery){
-                    inQuery = true;
-                    retryQueryTime = 10;
-                    $.gritter.add({
-                      title: "New Notice",
-                      text: "Querying the transaction status, please wait for 15 seconds.",
-                      time: "",
-                      class_name: "primary clean"
+            callback:"https://pay.nebulas.io/api/mainnet/pay",
+            listener: function (resp) {
+              if(window.mobileAndTabletcheck()){
+                if(!inQuery){
+                  inQuery = true;
+                  retryQueryTime = 10;
+                  $.gritter.add({
+                    title: "New Notice",
+                    text: "Querying transaction status.",
+                    time: "",
+                    class_name: "primary clean"
+                  });
+                  intervalQuery = setInterval(function () {
+                    recheckMobileTransactionReceipt(serialNumber, function(resp){
+                      if(resp.status == 1){
+                        $.gritter.add({
+                          title: "New Notice",
+                          text: "Transaction succeed.",
+                          time: "",
+                          class_name: "success clean"
+                        });
+                        callback && callback(resp);
+                      } else if(resp.status == 0){
+                        $.gritter.add({
+                          title: "New Notice",
+                          text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount/value (< 1NAS), error message: " + resp.execute_error,
+                          time: "",
+                          class_name: "danger clean"
+                        });
+                        wait = setInterval(clearWait, 2000);
+                      }
                     });
-                    intervalQuery = setInterval(function () {
-                      recheckMobileTransactionReceipt(serialNumber, function(resp){
-                        if(resp.status == 1){
-                          $.gritter.add({
-                            title: "New Notice",
-                            text: "Transaction succeed.",
-                            time: "",
-                            class_name: "success clean"
-                          });
-                          callback && callback(resp);
-                        } else if(resp.status == 0){
-                          $.gritter.add({
-                            title: "New Notice",
-                            text: "Transaction failed, please set GasLimit to 2M wei or reduce the amount/value (< 1NAS), error message: " + resp.execute_error,
-                            time: "",
-                            class_name: "danger clean"
-                          });
-                          wait = setInterval(clearWait, 2000);
-                        }
-                      });
-                    }, 5000);
-                  }
-                  return;
+                  }, 5000);
                 }
+                return;
+              }
+              if (resp !== 'Error: Transaction rejected by user') {
                 $.gritter.add({
                   title: "New Notice",
                   text: "Transaction submitted, querying the transaction status, please wait for 15 seconds.",
@@ -873,7 +735,15 @@
                   });
                   callback && callback(resp);
                 })
+              } else {
+                $.gritter.add({
+                  title: "New Notice",
+                  text: "You cancelled",
+                  time: "",
+                  class_name: "warning clean"
+                });
               }
+
             }
           });
 
@@ -885,7 +755,7 @@
               retryQueryTime = 15;
               $.gritter.add({
                 title: "New Notice",
-                text: "Querying the transaction status, please wait for 15 seconds.",
+                text: "Querying the transaction status.",
                 time: "",
                 class_name: "primary clean"
               });
@@ -981,31 +851,8 @@
 
         });
       }
-      
-      function getPlayerPic(from, callback){
-        var fun = 'get';
-        var args = [];
-        nasidCall(from, fun, args, 0, function(params){
-          neb.api.call(params.from, params.to, params.value, 0, params.gasPrice, params.gasLimit, params.contract).then(function (resp) {
-            // console.log(params.from)
-            var result = resp.result;
-            if(result === 'null' || result === '""'){
-              return;
-            }
-            try{
-              result = JSON.parse(result);
-              callback(result);
-            }catch (err){
-              //result is the error message
-              console.log("error:" + err.message)
-            }
 
-          }).catch(function (err) {
-            console.log("error:" + err.message)
-          });
 
-        });
-      }
 
       function getBuyVolume(callback){
         $.get('https://api.cgplayerone.com/cg/buy-list', function(result){
@@ -1458,8 +1305,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:buyOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
           }
@@ -1477,8 +1324,8 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
-            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:sellOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
+            skeleton = '<tr><td class="user-avatar"> <img src="{{avatarUrl}}" alt="Avatar">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
           }
@@ -1496,7 +1343,6 @@
             var args = [];
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1788,7 +1634,6 @@
             args.push(burnAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1824,7 +1669,6 @@
             var args = [];
             callNebPay(fun, args, value, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1860,7 +1704,6 @@
             args.push(sellAmount);
             callNebPay(fun, args, 0, function (resp) {
               localStorage.setItem('address', resp.from);
-              localStorage.setItem('hasNASNano', 1);
               var wait;
               function clearWait() {
                 clearInterval(wait);
@@ -1941,10 +1784,7 @@
                           try{
                             var player = JSON.parse(result);
                             if(player.account !== ''){
-                               $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
-//                              getPlayerPic(address, function(result){
-//                                $("#avatarImg").prop('src', result.avatar);
-//                              });
+                              $("#avatarImg").prop('src', "../assets/img/avatar" + player.playerId % 7 + ".png");
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
                               $(".user-name").html('New Player');
@@ -1985,120 +1825,6 @@
         }, "*");
       }
 
-
-      function loadKL(){
-        Highcharts.setOptions({
-          lang: {
-            rangeSelectorZoom: ''
-          }
-        });
-        $.getJSON('https://cgplayerone.com/data/kl.json', function (data) {
-          var ohlc = [],
-                  volume = [],
-                  dataLength = data.length,
-          // set the allowed units for data grouping
-                  groupingUnits = [[
-                    'week',                         // unit name
-                    [1]                             // allowed multiples
-                  ], [
-                    'month',
-                    [1, 2, 3, 4, 6]
-                  ]],
-                  i = 0;
-          for (i; i < dataLength; i += 1) {
-            ohlc.push([
-              data[i][0], // the date
-              data[i][1], // open
-              data[i][2], // high
-              data[i][3], // low
-              data[i][4] // close
-            ]);
-            volume.push([
-              data[i][0], // the date
-              data[i][5] // the volume
-            ]);
-          }
-          // create the chart
-          var chart = Highcharts.stockChart('container', {
-            rangeSelector: {
-              selected: 1,
-              inputDateFormat: '%Y-%m-%d'
-            },
-            title: {
-              text: 'CGT History Price'
-            },
-            xAxis: {
-              dateTimeLabelFormats: {
-                millisecond: '%H:%M:%S.%L',
-                second: '%H:%M:%S',
-                minute: '%H:%M',
-                hour: '%H:%M',
-                day: '%m-%d',
-                week: '%m-%d',
-                month: '%y-%m',
-                year: '%Y'
-              }
-            },
-            tooltip: {
-              split: false,
-              shared: true
-            },
-            yAxis: [{
-              labels: {
-                align: 'right',
-                x: -3
-              },
-              title: {
-                text: 'Price'
-              },
-              height: '65%',
-              resize: {
-                enabled: true
-              },
-              lineWidth: 2
-            }, {
-              labels: {
-                align: 'right',
-                x: -3
-              },
-              title: {
-                text: 'Volume'
-              },
-              top: '65%',
-              height: '35%',
-              offset: 0,
-              lineWidth: 2
-            }],
-            series: [{
-              type: 'candlestick',
-              name: 'CGT Price',
-              color: 'red',
-              lineColor: 'red',
-              upColor: 'green',
-              upLineColor: 'green',
-              tooltip: {
-              },
-              navigatorOptions: {
-                color: Highcharts.getOptions().colors[0]
-              },
-              data: ohlc,
-              dataGrouping: {
-                units: groupingUnits
-              },
-              id: 'sz'
-            },{
-              type: 'column',
-              name: 'CGT Volume',
-              data: volume,
-              yAxis: 1,
-              dataGrouping: {
-                units: groupingUnits
-              }
-            }]
-          });
-        });
-      }
-
       var playerNum = 0;
       var circulation = 0;
       var contractTokenBalance = 0;
@@ -2117,58 +1843,17 @@
       var lastSellOrderId = 0;
 
       function load(){
-        var el = $(".main-content");
-        el.length && (el.addClass("be-loading-active"));
-        loadKL();
+        var e = $(".main-content");
+        e.length && (e.addClass("be-loading-active"));
         checkWallet();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
 
-        var e, t, i, a, o, n, r, l, s, c, d, p, u, h, f, g, m, b;
-        e = App.color.primary, t = App.color.warning, i = App.color.success, a = App.color.danger;
-        n = App.color.primary, r = tinycolor(App.color.primary).lighten(13).toString(), l = tinycolor(App.color.primary).lighten(20).toString();
-
         getBuyVolume(function(){
           getSellVolume(function(){
             getBurnVolume(function(){
               setOrder();
-              getBalance(function(_balance){
-                balance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                $("#balance").html(balance);
-                try{
-                  $("#contractBalance").html(' ' + balance + " NAS");
-                } catch (e){
-                  console.log(e)
-                }
-                getInsureBalance(function(_balance) {
-                  try {
-                    insureBalance = parseInt(Unit.fromBasic(_balance, 'nas'));
-                    $("#insureBalance").html(insureBalance);
-                    $("#contractInsureBalance").html(' ' + insureBalance + ' NAS');
-                    var el = $(".main-content");
-                    el.length && el.removeClass("be-loading-active");
-
-                    $('[data-color="main-chart-color1"]').css({"background-color": n}), $('[data-color="main-chart-color2"]').css({"background-color": r}), $('[data-color="main-chart-color3"]').css({"background-color": l}), s = App.color.success, c = App.color.warning, d = App.color.primary, $.plot("#top-sales", [{
-                      label: "Services",
-                      data: balance
-                    }, {label: "Standard Plans", data: insureBalance}, {label: "Services", data: 0}], {
-                      series: {
-                        pie: {
-                          radius: .75,
-                          innerRadius: .58,
-                          show: !0,
-                          highlight: {opacity: .1},
-                          label: {show: !1}
-                        }
-                      }, grid: {hoverable: !0}, legend: {show: !1}, colors: [s, c, d]
-                    });
-
-                  } catch (e) {
-                    console.log(e)
-                  }
-                });
-              });
             });
           });
         });
@@ -2189,7 +1874,7 @@
             getBuyVolume(function(){
               getSellVolume(function(){
                 getBurnVolume(function(){
-                  $("#volume").attr('data-end', parseInt(volume));
+                  $("#volume").attr('data-end', volume);
                   $('#marketCap').attr('data-end', parseInt(price * circulation));
                   getBalance(function(_balance){
                     balance = parseInt(Unit.fromBasic(_balance, 'nas'));
@@ -2315,10 +2000,17 @@
         sellOrder = [];
         burnOrder = [];
 
-        loadKL();
         getPrice();
         loadPlayerAccount();
         getContractTokenBalance();
+
+        getBuyVolume(function(){
+          getSellVolume(function(){
+            getBurnVolume(function(){
+              setOrder();
+            });
+          });
+        });
 
         getPlayerNum(function(result){
           playerNum = parseInt(result);
@@ -2394,36 +2086,13 @@
         });
 
         App.init();
-        if(leaded) {
-//          $.gritter.add({
-//            title: "New Notice",
-//            text: "Take part in the game，share 20% of winner bounty，the exciting experience and huge bounty is waiting for you！",
-//            time: "",
-//            class_name: "clean"
-//          });
-        }
+        $.gritter.add({
+          title: "New Notice",
+          text: "Take part in the game，share 20% of winner bounty，the exciting experience and huge bounty is waiting for you！",
+          time: "",
+          class_name: "clean"
+        });
       });
-
-
-
-      function help(index){
-        if(index == 0){
-          $("#help-0").modal('show');
-        } else if(index == 1){
-          $("#help-1").modal('show');
-        } else if (index == 2){
-          $("#help-2").modal('show');
-        } else if(index == 3){
-          $("#help-3").modal('show');
-        }
-      }
-
-      var roundIcon = document.getElementById('roundIcon');
-      if(Account.isValidAddress(address)){
-        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:address ,size: 8,scale: 1}),4).toDataURL()+')';
-      } else {
-        roundIcon.style.backgroundImage = 'url(' + hqx(blockies.create({ seed:dappAddress ,size: 8,scale: 1}),4).toDataURL()+')';
-      }
 
     </script>
 
@@ -2441,7 +2110,7 @@
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-primary" onclick="setLoginAccount()">Confirm</button>
         </div>
       </div><!-- /.modal-content -->
@@ -2497,93 +2166,7 @@
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
-          <button type="button" data-dismiss="modal" class="btn btn-primary modal-close" onclick="resetPlayerInfo()">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-lead" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Introduction</h4>
-        </div>
-        <div class="modal-body">
-          <p>The Ready Player One: the Capital Game, is a stable and incremental currency issuance model based on an anchored mother currency, and the Capital Game is a Decentralized Autonomous Bank constructed by the community. You are welcome to participate in the game to conduct a small-scale experiment on the economic model.</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-0" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Partitions of Contract NAS</h4>
-        </div>
-        <div class="modal-body">
-          <p>The NAS in the contract is divided into two parts: Reserve NAS and Guarantee NAS. The Reserve NAS is used for CGT trades with players. The Guarantee NAS is used to compensate the players' burned CGT to ensure the floor of the CGT price and ensure that the price of CGT will not turn to zero.</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-1" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Burn</h4>
-        </div>
-        <div class="modal-body">
-          <p>"Burn" refers to destroying CGT and obtaining a share of the Guarantee NAS from the contract. When the player sell CGT in crowd, the selling price continues to decline, the burn price continues to rise, and burn price finally forms a supporting price to prevent the price from falling. The NAS obtained from burning CGT comes from the Guarantee NAS.</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div id="help-2" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Buy</h4>
-        </div>
-        <div class="modal-body">
-          <p>"Buy" refers to buying CGT from contract by paying a certain amount of NAS. When there is CGT remains in the contract, the remaining CGT will be offered priority. When the contract's CGT is sold out, the contract will issue new CGT according to the market price. The NAS used by players to purchase the remaining CGT of the contract will go to the reserves. The NAS used by players to purchase the newly issued CGT will partly enter the Reserve NAS and else enter the Guarantee NAS, which is according to current Reserve Ratio.</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-  <div id="help-3" class="modal fade colored-header colored-header-primary" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Sell</h4>
-        </div>
-        <div class="modal-body">
-          <p>"Sell" refers to selling a certain amount of CGT to the contract and get NAS. Players can earn profits by selling, or wait for a cheaper price to buy again. The NAS comes from the Contract Reserve NAS.</p>
-        </div>
-        <div class="modal-footer"  style="padding-top: 10px">
-          <br>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="button" data-dismiss="modal" class="btn btn-success modal-close" onclick="resetPlayerInfo()">关闭</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -2597,17 +2180,4 @@
       </svg>
     </div>
   </div>
-
-
-  <script>
-    var leaded = localStorage.getItem('leaded') || "0";
-    leaded = parseInt(leaded);
-    function lead(){
-      if(!leaded){
-        localStorage.setItem('leaded', 1);
-        $("#help-lead").modal('show');
-      }
-    }
-    lead();
-  </script>
 </html>
