@@ -23,7 +23,10 @@ var chainID = 1;
 //var chainID = 1001;
 
 // n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2
-var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
+//var sourceAccount = new Account("dbafc4ed12085345ac5f0ad24959c94e421b6c9e27e7de5a2ed1b4072c9f9684");
+
+
+var sourceAccount = new Account("5fdbf63626ef1ad3db9e1e98a57a3b23be56d7875bb5bdac6253fc720a37e239");
 
 // n1TpE5KzBX3gjJgEEAuoRTF68F6FHzxBdgh
 //var sourceAccount = new Account("badfe9a04d91b2656ca5ea22d70b05f2df07929ddebb788e6870b5a155665611");
@@ -36,7 +39,9 @@ var globalParams = {
 var players = [];
 
 var contract = 'n1sr4JA4e9QPB4opLk2Kjmp8NkP6GGoAmnt';
-//var contract = 'n235Bs9WMYYQAuo7w3F8XrhX5DCtWbSQ6cY';
+//var contract = 'n1ePoJyczSdoNf4hET73hjTRxnUAwenYPVY';
+//var contract = 'n1nhxd6C3qpVoWLBUqySdURoQfhPMB1rXBw';
+//var contract = 'n1pq2RpUaCPYbB4HFNVgrBT8MkQe3Lqtvcf';
 console.log(sourceAccount.getAddressString());
 
 function deploy(){
@@ -56,7 +61,6 @@ function deploy(){
                 console.log(err);
             });
     });
-
 }
 
 var batch = false;
@@ -65,7 +69,7 @@ var usePlayer = false;
 
 //deploy();
 //
-//testSell(10);
+testSell(1);
 //testBurn(0.01);
 //testBalance();
 //testGetBuyOrder(0);
@@ -75,6 +79,7 @@ var usePlayer = false;
 //testInsureBalance();
 //testCirculation();
 //testTokenBalance();
+//testBalanceOf("n1HhV62oW2WNhWMA9gddgiR7Vuopjqh1onp");
 //testTotalSupply();
 //
 ////
@@ -97,7 +102,8 @@ var usePlayer = false;
 //testPlayerNum();
 //testPlayer("n1HhV62oW2WNhWMA9gddgiR7Vuopjqh1onp");
 //testPlayer("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2");
-//testTransfer("n1HhV62oW2WNhWMA9gddgiR7Vuopjqh1onp", 1000 * Math.pow(10, 18));
+//var i='NaN';
+//testTransfer("n1aedmxzq8XBb3TUgPE6ms556h5ymCkrtu2", i);
 
 
 //testTransfer("n1N7RTHqYBysTeqNT85akGxk27QRvPz4ctu", 5.555 * Math.pow(10, 18));
@@ -317,11 +323,20 @@ function testPlayerNum(){
     call(fun, args, 0, function(){});
 }
 
+function testBalanceOf(address){
+    var fun = 'balanceOf';
+    var args = [];
+    args.push(address);
+    call(fun, args, 0, function(){});
+}
+
+
 function testTokenBalance(){
     var fun = 'tokenBalance';
     var args = [];
     call(fun, args, 0, function(){});
 }
+
 
 function testTotalSupply(){
     var fun = 'totalSupply';
@@ -374,6 +389,7 @@ function call(fun, args, value, callback){
                 players.push(params.from.getPrivateKeyString());
                 callback();
             }
+            return;
             if(resp.execute_err !== '') return;
             var Transaction = Nebulas.Transaction;
             var tx = new Transaction({
@@ -467,8 +483,8 @@ function innerDeploy(callback){
     params.value = 0;
 
     const fs = require('fs');
-    var source = fs.readFileSync('/Users/taofeng/Github/fundplayerone/contracts/capitalgame.js', "utf-8");
-
+    var source = fs.readFileSync('/Users/taofeng/Github/capitalgame/contracts/capitalgame.js', "utf-8");
+    var args = [];
     // prepare contract
     params.contract = {
         "source": source,
