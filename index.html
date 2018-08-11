@@ -105,10 +105,10 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">用户 #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
-                    <div class="user-name"> Player #</div>
+                    <div class="user-name"> 用户 #</div>
                     <div class="user-position offline" id="showWalletStatus">未检测到星云插件钱包</div>
                   </div>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> 账户NAS余额<b id="accountBalance"></b></a>
@@ -1253,7 +1253,7 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +buyOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">用户 #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
             data = {playerId: buyOrder[i].playerId, account: '"' + buyOrder[i].account.trim() + '"', amount: parseFloat(buyOrder[i].amount).toFixed(2), price: parseFloat(buyOrder[i].price).toFixed(5), time: new Date(buyOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:buyOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL()};
             var html = Mustache.to_html(skeleton, data);
             $("#buyOrder").append(html);
@@ -1271,7 +1271,7 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">用户 #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
             data = {playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:sellOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
@@ -2252,7 +2252,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Player #<b id="playerId"></b> 游戏数据</h4>
+          <h4 class="modal-title">用户 #<b id="playerId"></b> 游戏数据</h4>
         </div>
         <div class="modal-body text-left">
           <div class="card-body table-responsive">
