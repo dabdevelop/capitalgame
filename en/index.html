@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/img/logo-fav.png">
-    <title>Ready Player One: the Capital Game</title>
+    <title>The Player One DEX</title>
     <link rel="stylesheet" type="text/css" href="../assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/lib/material-design-icons/css/material-design-iconic-font.min.css"/>
 
@@ -87,10 +87,10 @@
           </div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">Player #</span></a>
+              <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><img id="roundIcon" class="identicon"><span class="user-name">User #</span></a>
                 <div role="menu" class="dropdown-menu">
                   <div class="user-info">
-                    <div class="user-name"> Player #</div>
+                    <div class="user-name"> User #</div>
                     <div class="user-position offline" id="showWalletStatus">No NasExtWallet</div>
                   </div>
                   <a class="dropdown-item"><span class="icon mdi mdi-money"></span> NAS Balance<b id="accountBalance"></b></a>
@@ -104,9 +104,9 @@
                 </div>
               </li>
             </ul>
-            <div class="page-title"><span>Ready Player One: the Capital Game</span></div>
+            <div class="page-title"><span>The Player One DEX</span></div>
             <ul class="nav navbar-nav float-right be-icons-nav">
-              <li class="nav-item dropdown"><a href="rank.html" target="_blank" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">Player Rank</a></li>
+              <li class="nav-item dropdown"><a href="rank.html" target="_blank" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">User Rank</a></li>
               <li class="nav-item dropdown"><a href="../index.html?lang=zh" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">中文</a></li>
             </ul>
           </div>
@@ -173,7 +173,7 @@
               <div class="widget widget-tile">
                 <div id="spark1" class="chart sparkline"><canvas width="85" height="35" style="display: inline-block; width: 85px; height: 35px; vertical-align: top;"></canvas></div>
                 <div class="data-info">
-                  <div class="desc">Player Number</div>
+                  <div class="desc">User Number</div>
                   <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-start="0" data-end="0" class="number" id="playerNum">0</span>
                   </div>
                 </div>
@@ -327,7 +327,7 @@
                   <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                      <th style="width:30%;">Player</th>
+                      <th style="width:30%;">User</th>
                       <th class="number">Amount</th>
                       <th class="number">Price (NAS)</th>
                       <th style="width:30%;">Time</th>
@@ -350,7 +350,7 @@
                   <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                      <th style="width:30%;">Player</th>
+                      <th style="width:30%;">User</th>
                       <th class="number">Amount</th>
                       <th class="number">Price(NAS)</th>
                       <th style="width:30%;">Time</th>
@@ -1475,7 +1475,7 @@
             } else {
               accountUrl = 'https://explorer.nebulas.io/#/testnet/address/' +sellOrder[i].account;
             }
-            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">Player #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
+            skeleton = '<tr><td class="user-avatar"> <img id="roundIcon" class="identicon" style="background-image: url({{avatarData}}); margin: auto; margin-right: 10px;">User #{{playerId}}</td><td class="number">{{amount}}</td><td class="number">{{price}}</td><td>{{time}}</td><td class="actions"><button type="submit" class="btn btn-rounded btn-secondary md-trigger" data-modal="form-player" onclick="getPlayerInfo({{account}})"><i class="mdi mdi-account"></i></button></td></tr>';
             data = {avatarUrl: avatarUrl, playerId: sellOrder[i].playerId, account: '"' + sellOrder[i].account.trim() + '"', amount: parseFloat(sellOrder[i].amount).toFixed(2), price: parseFloat(sellOrder[i].price).toFixed(5), time: new Date(sellOrder[i].timeSeconds * 1000).toLocaleString(), url: accountUrl, avatarData: hqx(blockies.create({ seed:sellOrder[i].account.trim() ,size: 8,scale: 1}),4).toDataURL() };
             var html = Mustache.to_html(skeleton, data);
             $("#sellOrder").append(html);
@@ -1945,7 +1945,7 @@
 //                              });
                               $(".user-name").html('Player #' + player.playerId);
                             } else {
-                              $(".user-name").html('New Player');
+                              $(".user-name").html('New User');
                             }
                           }catch (err){
                             //result is the error message
@@ -2452,7 +2452,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Player #<b id="playerId"></b> Game Data</h4>
+          <h4 class="modal-title">User #<b id="playerId"></b> Game Data</h4>
         </div>
         <div class="modal-body text-left">
           <div class="card-body table-responsive">
@@ -2508,7 +2508,7 @@
           <h4 class="modal-title">Introduction</h4>
         </div>
         <div class="modal-body">
-          <p>The Ready Player One: the Capital Game, is a stable and incremental currency issuance model based on an anchored mother currency, and the Capital Game is a Decentralized Autonomous Bank constructed by the community. You are welcome to participate in the game to conduct a small-scale experiment on the economic model.</p>
+          <p>The User One DEX, is a decentralized exchange based on blockchain technology.</p>
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
@@ -2577,7 +2577,7 @@
           <h4 class="modal-title">Sell</h4>
         </div>
         <div class="modal-body">
-          <p>"Sell" refers to selling a certain amount of CGT to the contract and get NAS. Players can earn profits by selling, or wait for a cheaper price to buy again. The NAS comes from the Contract Reserve NAS.</p>
+          <p>"Sell" refers to selling a certain amount of CGT to the contract and get NAS. Users can earn profits by selling, or wait for a cheaper price to buy again. The NAS comes from the Contract Reserve NAS.</p>
         </div>
         <div class="modal-footer"  style="padding-top: 10px">
           <br>
