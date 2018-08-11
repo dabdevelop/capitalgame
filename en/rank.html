@@ -7,7 +7,7 @@
        <meta name="description" content="">
        <meta name="author" content="">
        <link rel="shortcut icon" href="../assets/img/logo-fav.png">
-       <title>Ready Player One: the Capital Game</title>
+       <title>The Player One DEX</title>
    </head>
    <body style="height: 100%; margin: 0">
        <div id="container" style="height: 100%"></div>
@@ -50,7 +50,7 @@
                     var selected = {};
                     for (var i = 0; i < playerList.length; i++) {
                         if(playerList[i][1] < 10) continue;
-                        name = 'Player #' + playerList[i][2];
+                        name = 'User #' + playerList[i][2];
                         legendData.push(name);
                         seriesData.push({
                             name: name,
@@ -67,7 +67,7 @@
 
                     option = {
                         title : {
-                            text: 'Player Rank',
+                            text: 'User Rank',
                             subtext: 'According to CGT Shares',
                             x:'center'
                         },
@@ -87,7 +87,7 @@
                         },
                         series : [
                             {
-                                name: 'Player',
+                                name: 'User',
                                 type: 'pie',
                                 radius : '55%',
                                 center: ['40%', '50%'],
